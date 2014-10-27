@@ -24,6 +24,27 @@ class Airline extends MX_Controller {
 		$this->load->view('site/templates/general_page', $data);
 		$this->load->helper('url','file','form');
 		
+		public function add_airline()
+		{
+			$this->load->model('airline_model');	
+				$this->form_validation->set_rules('airline_email', 'Airline', 'required');
+				$this->form_validation->set_rules('airline_phone', 'Phone', 'required');
+				$this->form_validation->set_rules('airline_email', 'Email', 'required');
+				$this->form_validation->set_rules('airline_summary', 'Summary', 'required');
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->register();
+				}
+			else
+				{
+					$this->studentmodel->retrieve();
+					$this->load->view('formsuccess');
+					
+				
+				}
+
+		}
+		
 	}
     
 	/*
@@ -39,6 +60,31 @@ class Airline extends MX_Controller {
 		$data['title'] = 'Sign Up';
 		$this->load->view('site/templates/general_page', $data);
 		$this->load->helper('url','file','form');
+		
+		public function add_visitor()
+		{
+			$this->load->model('visitor_model');	
+				$this->form_validation->set_rules('visitor_first_name', 'First Name', 'required');
+				$this->form_validation->set_rules('visitor_last_name', 'Last Name', 'required');
+				$this->form_validation->set_rules('visitor_email', 'Email', 'required');
+				$this->form_validation->set_rules('visitor_phone', 'Phone', 'required');
+				$this->form_validation->set_rules('visitor_password', 'Password', 'required');
+				$this->form_validation->set_rules('visitor_password', 'Confirm Password', 'required');
+				
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->register();
+				}
+			else
+				{
+					$this->studentmodel->retrieve();
+					$this->load->view('formsuccess');
+					
+				
+				}
+
+		}
+
 		
 	}
     
