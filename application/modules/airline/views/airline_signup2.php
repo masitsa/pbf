@@ -31,19 +31,19 @@
                             	<div class="form-group">
                                     <label for="inputEmail3" class="col-sm-3 control-label">First Name <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="text" class="form-control" id="inputEmail3" placeholder="First Name">
+                                    	<input type="text" class="form-control" name="vistor_first_name" placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3 control-label">Last Name <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="text" class="form-control" id="inputPassword3" placeholder="Last Name">
+                                    	<input type="text" class="form-control" name="visitor_last_name" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3 control-label">Email <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="email" class="form-control" id="inputPassword3" placeholder="Email">
+                                    	<input type="email" class="form-control" name="visitor_email" placeholder="Email">
                                     </div>
                                 </div>
                             </div>
@@ -52,19 +52,19 @@
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3 control-label">Phone <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="text" class="form-control" id="inputPassword3" placeholder="Phone">
+                                    	<input type="text" class="form-control" name="visitor_phone" placeholder="Phone">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3 control-label">Password <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                    	<input type="password" class="form-control" name="visitor_password" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3 control-label">Confirm Password <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="password" class="form-control" id="inputPassword3" placeholder="Confirm Password">
+                                    	<input type="password" class="form-control" name="visitor_password" placeholder="Confirm Password">
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,8 @@ class Airline extends MX_Controller {
 	{
 		parent:: __construct();
 		$this->load->model('airline_model');
+		$this->load->model('visitor_model');
+		$this->load->library('session');
 	}
     
 	/*
@@ -20,6 +22,8 @@ class Airline extends MX_Controller {
 		
 		$data['title'] = 'Sign Up';
 		$this->load->view('site/templates/general_page', $data);
+		$this->load->helper('url','file','form');
+		
 	}
     
 	/*
@@ -34,6 +38,8 @@ class Airline extends MX_Controller {
 		
 		$data['title'] = 'Sign Up';
 		$this->load->view('site/templates/general_page', $data);
+		$this->load->helper('url','file','form');
+		
 	}
     
 	/*
@@ -48,6 +54,7 @@ class Airline extends MX_Controller {
 		
 		$data['title'] = 'Sign Up';
 		$this->load->view('site/templates/general_page', $data);
+		$this->load->helper('url','file','form');
 	}
 }
 ?>
