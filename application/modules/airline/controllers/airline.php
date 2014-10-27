@@ -56,5 +56,19 @@ class Airline extends MX_Controller {
 		$this->load->view('site/templates/general_page', $data);
 		$this->load->helper('url','file','form');
 	}
+    
+	/*
+	*
+	*	Airline Dashboard
+	*
+	*/
+	public function airline_dashboard() 
+	{
+		
+		$data['content'] = $this->load->view('dashboard', '', true);
+		
+		$data['title'] = 'My Account';
+		$this->load->view('account_template', $data);
+	}
 }
 ?>

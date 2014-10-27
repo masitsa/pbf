@@ -15,6 +15,6 @@ class Airline_model extends CI_Model
 					
 			);
 			
-			$this->db->insert->('airline',$data);
+			$this->db->insert('airline',$data);
 		}
 }
