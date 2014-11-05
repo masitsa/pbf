@@ -3,7 +3,11 @@
 <file name="my_account.php" server="148.251.2.43/public_html/clothes/" local="130520570339742430" remote="130520577000000000" Dst="0" />
 <file name="my_details.php" server="148.251.2.43/public_html/clothes/" local="130520548639341238" remote="130520577000000000" Dst="0" />
 <file name="orders_list.php" server="148.251.2.43/public_html/clothes/" local="130520507213101793" remote="130520577000000000" Dst="0" />
+<<<<<<< HEAD
 <file name="my_account.php" server="50.63.197.12" local="130530088413502018" remote="130529729400000000" Dst="0" />
 <file name="orders_list.php" server="50.63.197.12" local="130531752942135967" remote="130562533200000000" Dst="0" />
 <file name="my_details.php" server="50.63.197.12" local="130530767535600999" remote="130530407400000000" Dst="0" />
+=======
+<file name="wishlist.php" server="148.251.2.43/public_html/clothes/" local="130520566778178720" remote="130520577000000000" Dst="0" />
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 </dwsync>

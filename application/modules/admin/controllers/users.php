@@ -8,8 +8,11 @@ class Users extends admin {
 	{
 		parent:: __construct();
 		$this->load->model('users_model');
+<<<<<<< HEAD
 		$this->load->model('schools_model');
 		$this->load->model('user_types_model');
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	}
     
 	/*
@@ -19,8 +22,13 @@ class Users extends admin {
 	*/
 	public function index() 
 	{
+<<<<<<< HEAD
 		$where = 'user.user_type_id = user_type.user_type_id AND user.user_status_id = user_status.user_status_id';
 		$table = 'user, user_type, user_status';
+=======
+		$where = 'user_id > 0';
+		$table = 'users';
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		//pagination
 		$this->load->library('pagination');
 		$config['base_url'] = base_url().'all-users';
@@ -47,8 +55,13 @@ class Users extends admin {
 		$config['prev_link'] = 'Prev';
 		$config['prev_tag_close'] = '</li>';
 		
+<<<<<<< HEAD
 		$config['cur_tag_open'] = '<li class="active"><a href="#">';
 		$config['cur_tag_close'] = '</a></li>';
+=======
+		$config['cur_tag_open'] = '<li class="active">';
+		$config['cur_tag_close'] = '</li>';
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
@@ -67,9 +80,15 @@ class Users extends admin {
 		
 		else
 		{
+<<<<<<< HEAD
 			$data['content'] = 'user does not exist';
 		}
 		$data['title'] = 'All Users';
+=======
+			$data['content'] = '<a href="'.site_url().'add-user" class="btn btn-success pull-right">Add Administrator</a> There are no administrators';
+		}
+		$data['title'] = 'All Administrators';
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		$this->load->view('templates/general_admin', $data);
 	}
@@ -82,6 +101,7 @@ class Users extends admin {
 	public function add_user() 
 	{
 		//form validation rules
+<<<<<<< HEAD
 		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|is_unique[user.email]');
 		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 		$this->form_validation->set_rules('other_names', 'Last Name', 'required|xss_clean');
@@ -94,6 +114,16 @@ class Users extends admin {
 		$this->form_validation->set_rules('post_code', 'Post Code', 'required|xss_clean');
 		$this->form_validation->set_rules('country_id', 'Country', 'required|xss_clean');
 		$this->form_validation->set_rules('city', 'City', 'required|xss_clean');*/
+=======
+		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|is_unique[users.email]|valid_email');
+		$this->form_validation->set_rules('other_names', 'Other Names', 'required|xss_clean');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('phone', 'Phone', 'xss_clean');
+		$this->form_validation->set_rules('address', 'Address', 'xss_clean');
+		$this->form_validation->set_rules('post_code', 'Post Code', 'xss_clean');
+		$this->form_validation->set_rules('city', 'City', 'xss_clean');
+		$this->form_validation->set_rules('activated', 'Activate User', 'xss_clean');
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
@@ -111,6 +141,7 @@ class Users extends admin {
 		}
 		
 		//open the add new user page
+<<<<<<< HEAD
 		$data['title'] = 'Add New User';
 		$v_data['schools'] = $this->schools_model->all_active_schools();
 		$v_data['user_types'] = $this->user_types_model->all_active_user_types();
@@ -124,6 +155,12 @@ class Users extends admin {
 		$v_data['countries'] = $this->users_model->get_all_countries();
 		$this->load->view('users/add_user', $v_data);
 	}
+=======
+		$data['title'] = 'Add New Administrator';
+		$data['content'] = $this->load->view('users/add_user', '', TRUE);
+		$this->load->view('templates/general_admin', $data);
+	}
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
     
 	/*
 	*
@@ -134,11 +171,21 @@ class Users extends admin {
 	public function edit_user($user_id) 
 	{
 		//form validation rules
+<<<<<<< HEAD
 		$this->form_validation->set_rules('password', 'Password', 'xss_clean');
 		$this->form_validation->set_rules('other_names', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('user_type_id', 'User Type', 'required|xss_clean');
 		$this->form_validation->set_rules('school_id', 'School', 'xss_clean');
+=======
+		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|valid_email');
+		$this->form_validation->set_rules('other_names', 'Other Names', 'required|xss_clean');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('phone', 'Phone', 'xss_clean');
+		$this->form_validation->set_rules('address', 'Address', 'xss_clean');
+		$this->form_validation->set_rules('post_code', 'Post Code', 'xss_clean');
+		$this->form_validation->set_rules('city', 'City', 'xss_clean');
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		$this->form_validation->set_rules('activated', 'Activate User', 'xss_clean');
 		
 		//if form has been submitted
@@ -147,6 +194,10 @@ class Users extends admin {
 			//check if user has valid login credentials
 			if($this->users_model->edit_user($user_id))
 			{
+<<<<<<< HEAD
+=======
+				$this->session->set_userdata('success_message', 'User edited successfully');
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 				$pwd_update = $this->input->post('admin_user');
 				if(!empty($pwd_update))
 				{
@@ -166,15 +217,22 @@ class Users extends admin {
 		}
 		
 		//open the add new user page
+<<<<<<< HEAD
 		$data['title'] = 'Edit User';
+=======
+		$data['title'] = 'Edit Administrator';
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		//select the user from the database
 		$query = $this->users_model->get_user($user_id);
 		if ($query->num_rows() > 0)
 		{
 			$v_data['users'] = $query->result();
+<<<<<<< HEAD
 			$v_data['schools'] = $this->schools_model->all_active_schools();
 			$v_data['user_types'] = $this->user_types_model->all_active_user_types();
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 			$data['content'] = $this->load->view('users/edit_user', $v_data, true);
 		}
 		
@@ -194,7 +252,19 @@ class Users extends admin {
 	*/
 	public function delete_user($user_id) 
 	{
+<<<<<<< HEAD
 		$this->users_model->delete_user($user_id);
+=======
+		if($this->users_model->delete_user($user_id))
+		{
+			$this->session->set_userdata('success_message', 'Administrator has been deleted');
+		}
+		
+		else
+		{
+			$this->session->set_userdata('error_message', 'Administrator could not be deleted');
+		}
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		redirect('all-users');
 	}
@@ -207,7 +277,19 @@ class Users extends admin {
 	*/
 	public function activate_user($user_id) 
 	{
+<<<<<<< HEAD
 		$this->users_model->activate_user($user_id);
+=======
+		if($this->users_model->activate_user($user_id))
+		{
+			$this->session->set_userdata('success_message', 'Administrator has been activated');
+		}
+		
+		else
+		{
+			$this->session->set_userdata('error_message', 'Administrator could not be activated');
+		}
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		redirect('all-users');
 	}
@@ -220,7 +302,19 @@ class Users extends admin {
 	*/
 	public function deactivate_user($user_id) 
 	{
+<<<<<<< HEAD
 		$this->users_model->deactivate_user($user_id);
+=======
+		if($this->users_model->deactivate_user($user_id))
+		{
+			$this->session->set_userdata('success_message', 'Administrator has been disabled');
+		}
+		
+		else
+		{
+			$this->session->set_userdata('error_message', 'Administrator could not be disabled');
+		}
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		redirect('all-users');
 	}
@@ -249,7 +343,10 @@ class Users extends admin {
 	{
 		//open the add new user page
 		$data['title'] = 'Edit User';
+<<<<<<< HEAD
 		$v_data['countries'] = $this->users_model->get_all_countries();
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		//select the user from the database
 		$query = $this->users_model->get_user($user_id);

@@ -4,6 +4,7 @@
             if(isset($error)){
                 echo '<div class="alert alert-danger"> Oh snap! Change a few things up and try submitting again. </div>';
             }
+<<<<<<< HEAD
 			$first_name = $users[0]->user_fname;
 			$other_names = $users[0]->user_oname;
 			$email = $users[0]->email;
@@ -11,6 +12,17 @@
 			$user_type_id = $users[0]->user_type_id;
 			$school_id = $users[0]->school_id;
 			$activated = $users[0]->user_status_id;
+=======
+			$first_name = $users[0]->first_name;
+			$other_names = $users[0]->other_names;
+			$email = $users[0]->email;
+			$password = $users[0]->password;
+			$phone = $users[0]->phone;
+			$address = $users[0]->address;
+			$post_code = $users[0]->post_code;
+			$city = $users[0]->city;
+			$activated = $users[0]->activated;
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 			$user_id = $users[0]->user_id;
             
             $validation_errors = validation_errors();
@@ -22,10 +34,35 @@
 				$other_names = set_value('other_names');
 				$email = set_value('email');
 				$password = set_value('password');
+<<<<<<< HEAD
 				$user_type_id = set_value('user_type_id');
 				$school_id = set_value('school_id');
 				$activated = set_value('activated');
             }
+=======
+				$phone = set_value('phone');
+				$address = set_value('address');
+				$post_code = set_value('post_code');
+				$city = set_value('city');
+				$activated = set_value('activated');
+            }
+            
+            $success = $this->session->userdata('success_message');
+            
+            if(!empty($success))
+            {
+                echo '<div class="alert alert-success"> <strong>Success!</strong> '.$success.' </div>';
+				$this->session->unset_userdata('success_message');
+            }
+            
+            $error = $this->session->userdata('error_message');
+            
+            if(!empty($error))
+            {
+                echo '<div class="alert alert-danger"> <strong>Oh snap!</strong> '.$error.' </div>';
+				$this->session->unset_userdata('error_message');
+            }
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
             ?>
             
             <?php echo form_open('edit-user/'.$user_id, array("class" => "form-horizontal", "role" => "form"));?>
@@ -67,6 +104,7 @@
                 </div>                
             </div>
             <?php } ?>
+<<<<<<< HEAD
             
             <!-- State -->
             <div class="form-group">
@@ -119,6 +157,34 @@
                         }
                         ?>
                     </select>
+=======
+            <!-- Phone -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Phone</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="phone" placeholder="Phone" value="<?php echo $phone;?>">
+                </div>
+            </div>
+            <!-- Address -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Address</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="address" placeholder="Address" value="<?php echo $address;?>">
+                </div>
+            </div>
+            <!-- Postal Code -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Postal Code</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="post_code" placeholder="Postal Code" value="<?php echo $post_code;?>">
+                </div>
+            </div>
+            <!-- City -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">City</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="city" placeholder="City" value="<?php echo $city;?>">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </div>
             </div>
             <!-- Activate checkbox -->
@@ -147,7 +213,11 @@
             </div>
             <div class="form-actions center-align">
                 <button class="submit btn btn-primary" type="submit">
+<<<<<<< HEAD
                     Edit User
+=======
+                    Edit Administrator
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </button>
             </div>
             <br />

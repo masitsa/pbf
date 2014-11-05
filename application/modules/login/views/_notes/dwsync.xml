@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="admin_login.php" server="148.251.2.43/public_html/clothes/" local="130495673281415031" remote="130520575200000000" Dst="0" />
+<<<<<<< HEAD
 <file name="admin_login.php" server="50.63.197.12" local="130535131160928115" remote="130534771200000000" Dst="0" />
 <file name="school_signup.php" server="50.63.197.12" local="130562880906206480" remote="130562532600000000" Dst="0" />
 <file name="user_login.php" server="50.63.197.12" local="130530781416474940" remote="130530421200000000" Dst="0" />
 <file name="teacher_signup.php" server="50.63.197.12" local="130562878671818681" remote="130562532600000000" Dst="0" />
 <file name="template.php" server="50.63.197.12" local="130525488510977305" remote="130562532600000000" Dst="0" />
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 </dwsync>

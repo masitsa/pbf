@@ -6,19 +6,30 @@ class Login extends MX_Controller {
 	{
 		parent:: __construct();
 		$this->load->model('login_model');
+<<<<<<< HEAD
 		$this->load->model('site/site_model');
 		$this->load->model('admin/users_model');
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	}
     
 	/*
 	*
+<<<<<<< HEAD
 	*	Login an admin
+=======
+	*	Login a user
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	*
 	*/
 	public function login_admin() 
 	{
 		//form validation rules
+<<<<<<< HEAD
 		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|exists[user.email]');
+=======
+		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|exists[users.email]');
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 		
 		//if form has been submitted
@@ -27,7 +38,12 @@ class Login extends MX_Controller {
 			//check if user has valid login credentials
 			if($this->login_model->validate_user())
 			{
+<<<<<<< HEAD
 				redirect('admin');
+=======
+				//redirect('dashboard');
+				redirect('all-users');
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 			}
 			
 			else
@@ -53,6 +69,7 @@ class Login extends MX_Controller {
 	{
 		$this->session->sess_destroy();
 		$this->session->set_userdata('front_success_message', 'Your have been signed out of your account');
+<<<<<<< HEAD
 		redirect('sign-in');
 	}
     
@@ -96,6 +113,9 @@ class Login extends MX_Controller {
 		}
 		
 		$this->load->view('admin_login');
+=======
+		redirect('checkout');
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	}
 }
 ?>

@@ -10,7 +10,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
+<<<<<<< HEAD
     <a href="index.html" class="navbar-brand"><span class="bold">C</span>MS</a>
+=======
+    <a href="<?php echo site_url().'all-users';?>" class="navbar-brand"><span class="bold">PBF</span> CMS</a>
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 </div>
 <!-- Site name for smallar screens -->
 
@@ -31,7 +35,11 @@
         <!-- Dropdown menu -->
         <ul class="dropdown-menu">
             <li><a href="<?php echo site_url()."admin-profile/".$this->session->userdata('user_id');?>"><i class="icon-user"></i> Profile</a></li>
+<<<<<<< HEAD
             <li><a href="<?php echo site_url()."settings";?>"><i class="icon-cogs"></i> Settings</a></li>
+=======
+            <!--<li><a href="<?php echo site_url()."settings";?>"><i class="icon-cogs"></i> Settings</a></li>-->
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
             <li class="divider"></li>
             <li><a href="<?php echo site_url()."logout-admin";?>"><i class="icon-off"></i> Logout</a></li>
         </ul>

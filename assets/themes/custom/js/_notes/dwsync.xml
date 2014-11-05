@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
 <file name="custom.js" server="50.63.197.12" local="130528303946740560" remote="130527946800000000" Dst="0" />
+=======
+<file name="jquery-2.1.1.min.js" server="23.229.204.232/public_html/development/" local="130523078757642800" remote="130577939400000000" Dst="0" />
+<file name="jquery.nav.js" server="23.229.204.232/public_html/development/" local="130523065380997699" remote="130577939400000000" Dst="0" />
+<file name="jquery.stellar.min.js" server="23.229.204.232/public_html/development/" local="130401371000000000" remote="130577939400000000" Dst="0" />
+<file name="wow.min.js" server="23.229.204.232/public_html/development/" local="130511243840000000" remote="130577939400000000" Dst="0" />
+<file name="retina.min.js" server="23.229.204.232/public_html/development/" local="130416951200000000" remote="130577939400000000" Dst="0" />
+<file name="owl.carousel.min.js" server="23.229.204.232/public_html/development/" local="130444013380000000" remote="130577939400000000" Dst="0" />
+<file name="bind-polyfill.js" server="23.229.204.232/public_html/development/" local="130519658940000000" remote="130577939400000000" Dst="0" />
+<file name="smooth-scroll.js" server="23.229.204.232/public_html/development/" local="130519658940000000" remote="130577939400000000" Dst="0" />
+<file name="custom.js" server="23.229.204.232/public_html/development/" local="130576906923907995" remote="130577939400000000" Dst="0" />
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 </dwsync>

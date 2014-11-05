@@ -11,6 +11,7 @@
 
                 <!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
 
+<<<<<<< HEAD
                 <li><a href="<?php echo base_url()."admin";?>"><i class="icon-desktop"></i> Dashboard</a></li>
 
                 <!-- Start: Admin Menu -->
@@ -24,6 +25,18 @@
                         <!-- <li><a href="<?php echo base_url()."admin/payments";?>">Payment Reports</a></li>
                         <li><a href="<?php echo base_url()."admin/usage";?>">Usage Reports</a></li> -->
                         <li><a href="<?php echo base_url()."all-subscriptions";?>">Subscriptions</a></li>
+=======
+                <!--<li><a href="<?php echo base_url()."admin";?>"><i class="icon-desktop"></i> Dashboard</a></li>-->
+
+                <li class="has_submenu">
+                    <a href="#">
+                        <i class="icon-th"></i> Users
+                    </a>
+                    <ul>
+                        <li><a href="<?php echo base_url()."all-users";?>">Administrators</a></li>
+                        <li><a href="<?php echo base_url()."administration/all-airlines";?>">Airlines</a></li>
+                        <li><a href="<?php echo base_url()."administration/all-visitors";?>">Visitors</a></li>
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                     </ul>
                 </li>
 				<!-- End: Admin Menu -->
@@ -32,6 +45,7 @@
                 <li class="has_submenu">
                     <a href="#">
                         <!-- Menu name with icon -->
+<<<<<<< HEAD
                         <i class="icon-th"></i> School
                         <!-- Icon for dropdown -->
                     </a>
@@ -54,10 +68,20 @@
                     <ul>
                         <li><a href="<?php echo base_url()."all-users";?>">Users</a></li>
                         <li><a href="<?php echo base_url()."all-user_types";?>">User Types</a></li>
+=======
+                        <i class="icon-th"></i> Flight Configuration
+                        <!-- Icon for dropdown -->
+                    </a>
+                    <ul>
+                        <li><a href="<?php echo base_url()."administration/all-airplane-types";?>">Airplane Types</a></li>
+                        <li><a href="<?php echo base_url()."administration/all-airports";?>">Airports</a></li>
+                        <li><a href="<?php echo base_url()."administration/all-flight-types";?>">Flight Types</a></li>
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                     </ul>
                 </li>
 				<!-- End: Products Menu -->
 
+<<<<<<< HEAD
                 <!-- Start: Products Menu -->
                 <li>
                     <a href="<?php echo base_url()."email-campaign";?>">
@@ -68,6 +92,8 @@
                 </li>
 				<!-- End: Products Menu -->
 
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
             </ul>
         </div>
     </div>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
 <file name="Champagne & Limousines Bold.ttf" server="50.63.197.12" local="130473205240000000" remote="130526281800000000" Dst="0" />
 <file name="CaviarDreams.ttf" server="50.63.197.12" local="130473213180000000" remote="130526281800000000" Dst="0" />
 <file name="Capsuula.ttf" server="50.63.197.12" local="130148168760000000" remote="130529577600000000" Dst="0" />
@@ -7,4 +8,10 @@
 <file name="AndBasR.woff" server="50.63.197.12" local="130529978529897036" remote="130529619000000000" Dst="0" />
 <file name="AndBasR.eot" server="50.63.197.12" local="130529977867259135" remote="130529619000000000" Dst="0" />
 <file name="AndBasR.svg" server="50.63.197.12" local="130529973918953305" remote="130529619600000000" Dst="0" />
+=======
+<file name="1105886371.eot" server="23.229.204.232/public_html/development/" local="130579224458327765" remote="130578867600000000" Dst="0" />
+<file name="1105886371.woff" server="23.229.204.232/public_html/development/" local="130579225953513284" remote="130578867600000000" Dst="0" />
+<file name="1105886371.ttf" server="23.229.204.232/public_html/development/" local="130400484840000000" remote="130578867600000000" Dst="0" />
+<file name="1105886371.svg" server="23.229.204.232/public_html/development/" local="130579226246130021" remote="130578867600000000" Dst="0" />
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 </dwsync>

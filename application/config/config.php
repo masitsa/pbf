@@ -14,8 +14,12 @@
 | path to your installation.
 |
 */
+<<<<<<< HEAD
 //$config['base_url']	= 'http://www.awesomemath.net/';
 $config['base_url']	= 'http://localhost/awesomemath/';
+=======
+$config['base_url']	= 'http://localhost/pbf/';
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 
 /*
 |--------------------------------------------------------------------------
@@ -246,6 +250,7 @@ $config['encryption_key'] = 'clothes.com';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
+<<<<<<< HEAD
 $config['sess_expiration']		= 2400;//2400 mins of inactivity
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
@@ -254,6 +259,16 @@ $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= TRUE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update']	= 10;
+=======
+$config['sess_expiration']		= 7200;
+$config['sess_expire_on_close']	= FALSE;
+$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_use_database']	= TRUE;
+$config['sess_table_name']		= 'ci_sessions';
+$config['sess_match_ip']		= FALSE;
+$config['sess_match_useragent']	= TRUE;
+$config['sess_time_to_update']	= 300;
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 
 /*
 |--------------------------------------------------------------------------

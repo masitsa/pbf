@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="container">
 	<div id="home" data-stellar-background-ratio="0.5">
     	<div class="home-content">
@@ -327,3 +328,23 @@
         </div>
     </div>
 </div>
+=======
+
+    	<!-- Slider -->
+        <?php echo $this->load->view('home/slider', '', TRUE); ?>
+        
+    	<!-- New Arrivals -->
+        <?php echo $this->load->view('home/latest', '', TRUE); ?>
+        
+    	<!-- Parallax -->
+        <?php echo $this->load->view('home/paralax', '', TRUE); ?>
+        
+    	<!-- Featured -->
+        <?php echo $this->load->view('home/featured', '', TRUE); ?>
+        
+    	<!-- Parallax 2 -->
+        <?php echo $this->load->view('home/paralax2', '', TRUE); ?>
+
+<!-- include custom script for only homepage  --> 
+<script src="<?php echo base_url().'assets/themes/tshop/';?>js/home.js"></script> 
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd

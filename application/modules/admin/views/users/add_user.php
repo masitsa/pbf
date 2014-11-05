@@ -23,9 +23,15 @@
             </div>
             <!-- Other Names -->
             <div class="form-group">
+<<<<<<< HEAD
                 <label class="col-lg-4 control-label">Last Name</label>
                 <div class="col-lg-4">
                 	<input type="text" class="form-control" name="other_names" placeholder="Last Name" value="<?php echo set_value('other_names');?>">
+=======
+                <label class="col-lg-4 control-label">Other Names</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="other_names" placeholder="Other Names" value="<?php echo set_value('other_names');?>">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </div>
             </div>
             <!-- Email -->
@@ -42,6 +48,7 @@
                 	<input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo set_value('password');?>">
                 </div>                
             </div>
+<<<<<<< HEAD
             <!-- State -->
             <div class="form-group">
                 <label class="col-lg-4 control-label">School</label>
@@ -93,6 +100,34 @@
                         }
                         ?>
                     </select>
+=======
+            <!-- Phone -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Phone</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="phone" placeholder="Phone" value="<?php echo set_value('phone');?>">
+                </div>
+            </div>
+            <!-- Address -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Address</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="address" placeholder="Address" value="<?php echo set_value('address');?>">
+                </div>
+            </div>
+            <!-- Postal Code -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Postal Code</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="post_code" placeholder="Postal Code" value="<?php echo set_value('post_code');?>">
+                </div>
+            </div>
+            <!-- City -->
+            <div class="form-group">
+                <label class="col-lg-4 control-label">City</label>
+                <div class="col-lg-4">
+                	<input type="text" class="form-control" name="city" placeholder="City" value="<?php echo set_value('city');?>">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </div>
             </div>
             <!-- Activate checkbox -->
@@ -115,7 +150,11 @@
             </div>
             <div class="form-actions center-align">
                 <button class="submit btn btn-primary" type="submit">
+<<<<<<< HEAD
                     Add User
+=======
+                    Add Administrator
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </button>
             </div>
             <br />

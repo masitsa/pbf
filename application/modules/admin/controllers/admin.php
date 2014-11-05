@@ -6,8 +6,11 @@ class Admin extends MX_Controller {
 	{
 		parent:: __construct();
 		$this->load->model('login/login_model');
+<<<<<<< HEAD
 		$this->load->model('reports_model');
 		$this->load->model('users_model');
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		//user has logged in
 		if($this->login_model->check_login())
@@ -28,8 +31,14 @@ class Admin extends MX_Controller {
 	*/
 	public function index() 
 	{
+<<<<<<< HEAD
 		//echo "here";
 		redirect('all-subscriptions');
+=======
+		$data['title'] = 'Dashboard';
+		
+		$this->load->view('dashboard', $data);
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	}
     
 	/*
@@ -41,6 +50,7 @@ class Admin extends MX_Controller {
 	{
 		redirect('login/login_admin');
 	}
+<<<<<<< HEAD
     
 	/*
 	*
@@ -99,5 +109,7 @@ class Admin extends MX_Controller {
 		$data['content'] = $this->load->view('send_mail', $data2, true);
 		$this->load->view('templates/general_admin', $data);
 	}
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 }
 ?>

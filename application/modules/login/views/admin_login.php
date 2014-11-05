@@ -12,9 +12,14 @@
 
   <!-- Stylesheets -->
   <link href="<?php echo base_url()."assets/themes/bluish/";?>style/bootstrap.css" rel="stylesheet">
+<<<<<<< HEAD
   <link rel="stylesheet" href="<?php echo base_url()."assets/themes/bluish/";?>style/font-awesome.css">
   <link href="<?php echo base_url()."assets/themes/bluish/";?>style/style.css" rel="stylesheet">
 <link rel="shortcut icon" href="<?php echo base_url()."assets/images/";?>favicon.png">
+=======
+  <link rel="<?php echo base_url()."assets/themes/bluish/";?>stylesheet" href="style/font-awesome.css">
+  <link href="<?php echo base_url()."assets/themes/bluish/";?>style/style.css" rel="stylesheet">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
   
   
   <!-- HTML5 Support for IE -->
@@ -24,7 +29,11 @@
 
 </head>
 
+<<<<<<< HEAD
 <body class="login math">
+=======
+<body class="login">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 
 <!-- Form area -->
 <div class="admin-form">
@@ -33,12 +42,17 @@
     <div class="row">
       <div class="col-md-12">
         <!-- Widget starts -->
+<<<<<<< HEAD
             <div class="logo"><a href="<?php echo site_url();?>" class="navbar-brand">awesomemath.<span class="bold">net</span></a></div>
+=======
+            <div class="logo"><a href="<?php echo site_url();?>" class="navbar-brand"><span class="bold">P</span>BF <span class="bold">A</span>DMINISTRATION</a></div>
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
             <div class="widget">
               <!-- Widget head -->
               <div class="widget-head">
                   Sign In to your Account
               </div>
+<<<<<<< HEAD
               
               <div style="text-align:center; margin-bottom:20px;">
               	Don't have an account?<br/>
@@ -87,6 +101,15 @@
                     }
 					if(isset($error)){
                     	echo '<div class="alert alert-danger">'.$error.'</div>';
+=======
+
+              <div class="widget-content">
+                <div class="padd">
+                	<!-- Login Errors -->
+                    <?php
+					if(isset($error)){
+                    	echo '<div class="alert alert-danger"> Oh snap! Change a few things up and try submitting again. </div>';
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 					}
 					?>
                   <!-- Login form -->
@@ -95,13 +118,22 @@
 				  ?>
                     <!-- Email -->
                     <div class="form-group">
+<<<<<<< HEAD
                         <i class="icon-envelope"></i>
                         <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
+=======
+                        <i class="icon-user"></i>
+                        <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                     </div>
                     <!-- Password -->
                     <div class="form-group">
                         <i class="icon-lock"></i>
+<<<<<<< HEAD
                         <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+=======
+                        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                     </div>
                     <!-- Remember me checkbox and sign in button -->
                       <div class="form-actions">
@@ -126,11 +158,19 @@
               
                 <div class="widget-foot">
                   Forgot Password? <a href="#" class="reset_password">Click here to reset</a>
+<<<<<<< HEAD
                   <form class="form-horizontal hide_section" action="<?php echo site_url()."reset-password";?>" id="forgot_password" method="POST">
                     <!-- Email -->
                     <div class="form-group">
                         <i class="icon-user"></i>
                         <input type="text" class="form-control" id="inputEmail" name="admin_email" placeholder="Email">
+=======
+                  <form class="form-horizontal hide_section" action="<?php echo site_url()."login/forgot_password/1";?>" id="forgot_password">
+                    <!-- Email -->
+                    <div class="form-group">
+                        <i class="icon-user"></i>
+                        <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email">
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
                     </div>
                     <!-- Remember me checkbox and sign in button -->
                       <div class="form-actions">
@@ -143,10 +183,13 @@
                   </form>
                 </div>
             </div>
+<<<<<<< HEAD
               
                 <div class="horizontal-links" style="text-align:center;">
                     <a href="<?php echo site_url();?>">Home</a> | <a href="<?php echo site_url().'#grades';?>">Grades</a> | <a href="<?php echo site_url().'#membership';?>">Membership</a> | <a href="<?php echo site_url().'#contact';?>">Contact Us</a>
                 </div>
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
       </div>
     </div>
   </div> 

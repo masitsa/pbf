@@ -1,7 +1,13 @@
 
+<<<<<<< HEAD
 	//smooth scroll
 	smoothScroll.init();
 $(document).ready(function() {
+=======
+$(document).ready(function() {
+	//smooth scroll
+	smoothScroll.init();
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	
 	//single page navigation
 	$('#nav').onePageNav();
@@ -14,9 +20,12 @@ $(document).ready(function() {
 	//WOW js
 	new WOW().init();
 	
+<<<<<<< HEAD
 	//Fit Vids
 	$(".container").fitVids();
 	
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	//Owl Carousel
 	var owl = $("#owl-carousel");
  
@@ -35,5 +44,27 @@ $(document).ready(function() {
 	$(".prev").click(function(){
 		owl.trigger('owl.prev');
 	})
+<<<<<<< HEAD
+=======
+	
+	//Owl Carousel
+	var owl2 = $("#owl-carousel2");
+ 
+	owl2.owlCarousel({
+		items : 10, //10 items above 1824px browser width
+		itemsDesktop : [1823,5], //5 items between 1823px and 1024px
+		itemsDesktopSmall : [1023,3], // betweem 1023px and 601px
+		itemsTablet: [600,2], //2 items between 600 and 0
+		itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+	});
+	 
+	// Custom Navigation Events
+	$(".next2").click(function(){
+		owl2.trigger('owl.next');
+	})
+	$(".prev2").click(function(){
+		owl2.trigger('owl.prev');
+	})
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 });
 
