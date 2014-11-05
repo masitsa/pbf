@@ -1,4 +1,8 @@
-<div class="row">
+
+
+    <!-- Morris Charts CSS -->
+    <link href="<?php echo base_url();?>assets/themes/sb-admin/css/plugins/morris.css" rel="stylesheet">
+    		<div class="row">
                 <div class="col-lg-8">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -329,3 +333,8 @@
                 <!-- /.col-lg-4 -->
             </div>
             <!-- /.row -->
+
+    <!-- Morris Charts JavaScript -->
+    <script src="<?php echo base_url();?>assets/themes/sb-admin/js/plugins/morris/raphael.min.js"></script>
+    <script src="<?php echo base_url();?>assets/themes/sb-admin/js/plugins/morris/morris.min.js"></script>
+    <script src="<?php echo base_url();?>assets/themes/sb-admin/js/plugins/morris/morris-data.js"></script>

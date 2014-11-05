@@ -120,6 +120,15 @@ $route['administration/activate-flight-type/(:num)/(:num)'] = 'admin/flight_type
 $route['administration/deactivate-flight-type/(:num)/(:num)'] = 'admin/flight_types/deactivate_flight_type/$1/$2';
 $route['administration/delete-flight-type/(:num)/(:num)'] = 'admin/flight_types/delete_flight_type/$1/$2';
 
+/*
+*	Airline Routes
+*/
+$route['airline/sign-in'] = 'airline/sign_in';
+$route['airline/sign-up/airline-details'] = 'airline/airline_signup1';
+$route['airline/sign-up/user-details'] = 'airline/airline_signup2';
+$route['airline/sign-up/review'] = 'airline/airline_signup3';
+$route['airline/account'] = 'airline/account';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

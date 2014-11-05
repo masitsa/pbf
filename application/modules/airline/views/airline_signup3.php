@@ -36,25 +36,25 @@
                                         <div class="row">
                                             <label for="inputEmail3" class="col-sm-3 control-label">Airline</label>
                                             <div class="col-sm-9 review-text">
-                                                Sample Airline
+                                                <?php echo $airline_name;?>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Phone</label>
                                             <div class="col-sm-9 review-text">
-                                                020 222 999
+                                                <?php echo $airline_phone;?>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Email</label>
                                             <div class="col-sm-9 review-text">
-                                                info@airline.com
+                                                <?php echo $airline_email;?>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Summary</label>
                                             <div class="col-sm-9 review-text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel sagittis lectus. Curabitur gravida arcu id metus lobortis tempus. Nulla auctor mattis purus, nec accumsan justo tempor vitae. Nunc purus lectus, placerat non lacus at, porta maximus nulla.</p>
+                                                <p><?php echo $airline_summary;?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Logo</label>
                                             <div class="col-sm-9 review-text">
-                                                <img src="<?php echo base_url();?>assets/images/plane_savannah.jpg" alt="...">
+                                                <img src="<?php echo $airline_logo_location;?>" class="img-responsive" alt="<?php echo $airline_name;?>">
                                             </div>
                                         </div>
                                     </div>
@@ -80,13 +80,13 @@
                                         <div class="row">
                                             <label for="inputEmail3" class="col-sm-3 control-label">First Name</label>
                                             <div class="col-sm-9 review-text">
-                                                John
+                                                <?php echo $airline_user_first_name;?>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Last Name</label>
                                             <div class="col-sm-9 review-text">
-                                                Doe
+                                                <?php echo $airline_user_last_name;?>
                                             </div>
                                         </div>
                                     </div>
@@ -95,13 +95,13 @@
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Email</label>
                                             <div class="col-sm-9 review-text">
-                                                johndoe@airline.com
+                                                <?php echo $airline_user_phone;?>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="inputPassword3" class="col-sm-3 control-label">Phone</label>
                                             <div class="col-sm-9 review-text">
-                                                020 888 333
+                                                <?php echo $airline_user_email;?>
                                             </div>
                                         </div>
                                     </div>
@@ -113,10 +113,10 @@
                         
                     <div class="row center-align">
                         <div class="col-sm-12">
-                            <span class="go-back"><a href="#">Go Back</a></span>
-                            <button type="submit" class="btn btn-red">Register</button>
+                            <span class="go-back"><a href="<?php echo site_url().'airline/sign-up/user-details'?>">Go Back</a></span>
+                           	<a href="<?php echo site_url().'airline/register'?>" class="btn btn-red">Register</a>
                             <p>already have an account?</p>
-                            <a href="#">Sign In</a>
+                            <a href="<?php echo site_url('airline/sign-in');?>">Sign In</a>
                         </div>
                     </div>
                     

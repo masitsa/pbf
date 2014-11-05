@@ -58,11 +58,8 @@
             	</div>
             </div>
         </div>
-        
-        <!-- Jquery  --> 
-        <script type="text/javascript" src="<?php echo base_url();?>assets/themes/custom/js/jquery-2.1.1.min.js"></script>
         <!-- Bootstrap--> 
-        <script type="text/javascript" src="<?php echo base_url();?>assets/themes/bootstrap/js/bootstrap.min.js"></script> 
+        <script type="text/javascript" src="<?php echo base_url();?>assets/themes/bootstrap/js/bootstrap.min.js"></script>
         <!-- Single page navigation --> 
         <script type="text/javascript" src="<?php echo base_url();?>assets/themes/custom/js/jquery.nav.js"></script> 
         <!-- Stellar --> 

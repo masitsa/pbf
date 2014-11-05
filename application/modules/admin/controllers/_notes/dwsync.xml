@@ -8,4 +8,14 @@
 <file name="charts.php" server="148.251.2.43/public_html/clothes/" local="130538222930981243" remote="130538227200000000" Dst="0" />
 <file name="airlines.php" server="23.229.204.232/public_html/development/" local="130571790194051215" remote="130571430000000000" Dst="0" />
 <file name="airplane_types.php" server="23.229.204.232/public_html/development/" local="130571791401320267" remote="130571431200000000" Dst="0" />
+<file name="admin.php" server="23.229.204.232/public_html/development/" local="130538187109142351" remote="130595435400000000" Dst="0" />
+<file name="airports.php" server="23.229.204.232/public_html/development/" local="130571767871004410" remote="130595435400000000" Dst="0" />
+<file name="charts.php" server="23.229.204.232/public_html/development/" local="130538222930981243" remote="130595435400000000" Dst="0" />
+<file name="control.php" server="23.229.204.232/public_html/development/" local="130495605127336840" remote="130595435400000000" Dst="0" />
+<file name="flights.php" server="23.229.204.232/public_html/development/" local="130571769015709884" remote="130595435400000000" Dst="0" />
+<file name="flight_types.php" server="23.229.204.232/public_html/development/" local="130571772475827791" remote="130595435400000000" Dst="0" />
+<file name="orders.php" server="23.229.204.232/public_html/development/" local="130520878878999866" remote="130595435400000000" Dst="0" />
+<file name="settings.php" server="23.229.204.232/public_html/development/" local="130496490181600315" remote="130595435400000000" Dst="0" />
+<file name="users.php" server="23.229.204.232/public_html/development/" local="130571742489742685" remote="130595435400000000" Dst="0" />
+<file name="visitors.php" server="23.229.204.232/public_html/development/" local="130571757232195905" remote="130595435400000000" Dst="0" />
 </dwsync>

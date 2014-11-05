@@ -33,6 +33,7 @@ a:hover, a:visited, a:active{text-decoration:none;color:#5CA0D1;}
 
 /* Form Elements */
 .form-control{border:none; border-radius:0px;border: 2px solid #fff; background-color:transparent; color:#fff;}
+.col-sm-9 .alert-danger{background-color: #F2DEDE; border-color: #EBCCD1; color: #A94442;}
 .form-control::-webkit-input-placeholder {color: #fff;}
  /* Firefox 18- */
 .form-control:-moz-placeholder {color: #fff;}
@@ -40,6 +41,15 @@ a:hover, a:visited, a:active{text-decoration:none;color:#5CA0D1;}
 .form-control::-moz-placeholder {color: #fff;}
 .form-control:-ms-input-placeholder {color: #fff;  }
 .form-control:focus{border-color:#D4D4D4; box-shadow:none;}
+
+.col-sm-9 .alert-danger::-webkit-input-placeholder {color: #A94442;}
+ /* Firefox 18- */
+.col-sm-9 .alert-danger:-moz-placeholder {color: #A94442;}
+/* Firefox 19+ */
+.col-sm-9 .alert-danger::-moz-placeholder {color: #A94442;}
+.col-sm-9 .alert-danger:-ms-input-placeholder {color: #A94442;  }
+.col-sm-9 .alert-danger:focus{box-shadow:none;}
+
 .search-flights textarea{min-height:110px;}
 .form-group span.info{color:#fff; font-style:italic; font-size:0.8em;}
 

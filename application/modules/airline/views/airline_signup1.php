@@ -26,49 +26,115 @@
                         </div>
                     </div>
                     <!-- End: Steps -->
-                    
-                	<form action="#" class="form-horizontal" role="form">
+                    <?php
+                    	$attributes = array(
+										'class' => 'form-horizontal',
+										'role' => 'form',
+									);
+						echo form_open_multipart($this->uri->uri_string(), $attributes);
+					?>
                     	<div class="row">
                         	<div class="col-md-6 first">
                             	<div class="form-group">
-                                    <label for="airline_email" class="col-sm-3 control-label">Airline <span class="info">*</span></label>
+                                    <label for="airline_name" class="col-sm-3 control-label">Airline <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="text" class="form-control" name="airline_email" placeholder="Airline" value="<?php echo set_value('airline_email');?>">
+                                    	<?php
+											//case of an input error
+                                        	if(!empty($airline_name_error))
+											{
+												?>
+                                                <input type="text" class="form-control alert-danger" name="airline_name" placeholder="<?php echo $airline_name_error;?>" onFocus="this.value = '<?php echo $airline_name;?>';">
+                                                <?php
+											}
+											
+											else
+											{
+												?>
+                                                <input type="text" class="form-control" name="airline_name" placeholder="Airline" value="<?php echo $airline_name;?>">
+                                                <?php
+											}
+										?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">Phone <span class="info">*</span></label>
+                                    <label for="airline_phone" class="col-sm-3 control-label">Phone <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="text" class="form-control" name="airline_phone" placeholder="Phone" value="<?php echo set_value('airline_phone')?>">
+                                    	<?php
+											//case of an input error
+                                        	if(!empty($airline_phone_error))
+											{
+												?>
+                                                <input type="text" class="form-control alert-danger" name="airline_phone" placeholder="<?php echo $airline_phone_error;?>" onFocus="this.value = '<?php echo $airline_phone;?>';">
+                                                <?php
+											}
+											
+											else
+											{
+												?>
+                                                <input type="text" class="form-control" name="airline_phone" placeholder="Phone" value="<?php echo $airline_phone;?>">
+                                                <?php
+											}
+										?>
                                         <span class="info">This will be displayed to visitors of your page</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">Email <span class="info">*</span></label>
+                                    <label for="airline_email" class="col-sm-3 control-label">Email <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<input type="email" class="form-control" name="airline_email" placeholder="Email" value="<?php echo set_value('airline_email');?>">
+                                    	<?php
+											//case of an input error
+                                        	if(!empty($airline_email_error))
+											{
+												?>
+                                                <input type="text" class="form-control alert-danger" name="airline_email" placeholder="<?php echo $airline_email_error;?>" onFocus="this.value = '<?php echo $airline_email;?>';">
+                                                <?php
+											}
+											
+											else
+											{
+												?>
+                                                <input type="text" class="form-control" name="airline_email" placeholder="Email" value="<?php echo $airline_email;?>">
+                                                <?php
+											}
+										?>
                                         <span class="info">This will be displayed to visitors of your page</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">Summary
+                                    <label for="airline_summary" class="col-sm-3 control-label">Summary
                                         <span class="info">*</span></label>
                                     <div class="col-sm-9">
-                                    	<textarea class="form-control" name="airline_summary" placeholder="Summary"value="<?php echo set_url('airline_summary')?>"></textarea>
+                                    	<?php
+											//case of an input error
+                                        	if(!empty($airline_summary_error))
+											{
+												?>
+                                                <textarea class="form-control alert-danger" name="airline_summary" onFocus="this.value = '<?php echo $airline_summary;?>';" placeholder="<?php echo $airline_summary_error;?>"></textarea>
+                                                <?php
+											}
+											
+											else
+											{
+												?>
+                                                <textarea class="form-control" name="airline_summary" placeholder="Summary"><?php echo $airline_summary;?></textarea>
+                                                <?php
+											}
+										?>
                                     </div>
                                 </div>
                             </div>
                             
                         	<div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">Logo</label>
+                                    <label for="airline_logo" class="col-sm-3 control-label">Logo</label>
+                                    <?php echo $airline_logo_error;?>
                                     <div class="col-sm-9">
                                     	<div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="">
-                                                <img src="http://placehold.it/300x300">
+                                                <img src="<?php echo $airline_logo_location;?>" class="img-responsive">
                                             </div>
                                             <div>
-                                                <span class="btn btn-file btn-grey"><span class="fileinput-new">Default Image</span><span class="fileinput-exists">Change</span><input type="file" name="product_image" required></span>
+                                                <span class="btn btn-file btn-grey"><span class="fileinput-new">Default Image</span><span class="fileinput-exists">Change</span><input type="file" name="airline_logo" ></span>
                                                 <a href="#" class="btn btn-grey fileinput-exists" data-dismiss="fileinput">Remove</a>
                                             </div>
                                         </div>
@@ -81,10 +147,10 @@
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-red">Continue</button>
                                 <p>already have an account?</p>
-                                <a href="#">Sign In</a>
+                                <a href="<?php echo site_url('airline/sign-in');?>">Sign In</a>
                             </div>
                         </div>
-                    </form>
+                    <?php echo form_close();?>
                 </div>
             </div>
         </div>
