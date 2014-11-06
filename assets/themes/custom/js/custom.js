@@ -1,7 +1,13 @@
 
+<<<<<<< HEAD
+	//smooth scroll
+	smoothScroll.init();
+$(document).ready(function() {
+=======
 $(document).ready(function() {
 	//smooth scroll
 	smoothScroll.init();
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	
 	//single page navigation
 	$('#nav').onePageNav();
@@ -14,6 +20,12 @@ $(document).ready(function() {
 	//WOW js
 	new WOW().init();
 	
+<<<<<<< HEAD
+	//Fit Vids
+	$(".container").fitVids();
+	
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	//Owl Carousel
 	var owl = $("#owl-carousel");
  
@@ -32,6 +44,8 @@ $(document).ready(function() {
 	$(".prev").click(function(){
 		owl.trigger('owl.prev');
 	})
+<<<<<<< HEAD
+=======
 	
 	//Owl Carousel
 	var owl2 = $("#owl-carousel2");
@@ -51,6 +65,7 @@ $(document).ready(function() {
 	$(".prev2").click(function(){
 		owl2.trigger('owl.prev');
 	})
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 });
 
 $("input.alert-danger").change(function() {

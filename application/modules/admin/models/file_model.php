@@ -73,7 +73,10 @@ class File_model extends CI_Model
 			}
 		}
 		
+<<<<<<< HEAD
+=======
         unset($_FILES[$field_name]);
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		return $response;
 	}
 	
@@ -148,7 +151,10 @@ class File_model extends CI_Model
 			}
 		}
 		
+<<<<<<< HEAD
+=======
         unset($_FILES[$field_name]);
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		return $response;
 	}
 	
@@ -191,11 +197,15 @@ class File_model extends CI_Model
 	*/
 	public function delete_file($file_path)
 	{
+<<<<<<< HEAD
+		unlink($file_path);
+=======
 		
 		if (file_exists($file_path)) 
 		{
 			unlink($file_path);
 		}
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		
 		return TRUE;
 	}
@@ -228,6 +238,10 @@ class File_model extends CI_Model
             }
         }
         // Unset the useless one ;)
+<<<<<<< HEAD
+        unset($_FILES['product_image']);
+=======
+>>>>>>> 440b632956276893c42653c41e62545e66db29dd
         unset($_FILES['gallery']);
     
         // Put each errors and upload data to an array
