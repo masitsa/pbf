@@ -8,18 +8,14 @@ class Account extends MX_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('login/login_model');
+		$this->load->model('airline_model');
+		$this->load->model('admin/file_model');
 		
-		//user has logged in
-		if($this->login_model->check_login())
-		{
-		}
+		$this->load->library('image_lib');
 		
-		//user has not logged in
-		else
-		{
-			//redirect('login-airline');
-		}
+		//path to image directory
+		$this->airlines_path = realpath(APPPATH . '../assets/images/airlines');
+		$this->airlines_location = base_url().'assets/images/airlines/';
 	}
     
 	/*

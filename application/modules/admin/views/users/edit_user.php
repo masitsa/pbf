@@ -4,15 +4,6 @@
             if(isset($error)){
                 echo '<div class="alert alert-danger"> Oh snap! Change a few things up and try submitting again. </div>';
             }
-<<<<<<< HEAD
-			$first_name = $users[0]->user_fname;
-			$other_names = $users[0]->user_oname;
-			$email = $users[0]->email;
-			$password = $users[0]->password;
-			$user_type_id = $users[0]->user_type_id;
-			$school_id = $users[0]->school_id;
-			$activated = $users[0]->user_status_id;
-=======
 			$first_name = $users[0]->first_name;
 			$other_names = $users[0]->other_names;
 			$email = $users[0]->email;
@@ -22,7 +13,6 @@
 			$post_code = $users[0]->post_code;
 			$city = $users[0]->city;
 			$activated = $users[0]->activated;
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 			$user_id = $users[0]->user_id;
             
             $validation_errors = validation_errors();
@@ -34,12 +24,6 @@
 				$other_names = set_value('other_names');
 				$email = set_value('email');
 				$password = set_value('password');
-<<<<<<< HEAD
-				$user_type_id = set_value('user_type_id');
-				$school_id = set_value('school_id');
-				$activated = set_value('activated');
-            }
-=======
 				$phone = set_value('phone');
 				$address = set_value('address');
 				$post_code = set_value('post_code');
@@ -62,7 +46,6 @@
                 echo '<div class="alert alert-danger"> <strong>Oh snap!</strong> '.$error.' </div>';
 				$this->session->unset_userdata('error_message');
             }
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
             ?>
             
             <?php echo form_open('edit-user/'.$user_id, array("class" => "form-horizontal", "role" => "form"));?>
@@ -104,60 +87,6 @@
                 </div>                
             </div>
             <?php } ?>
-<<<<<<< HEAD
-            
-            <!-- State -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">School</label>
-                <div class="col-lg-4">
-                    <select name="school_id" id="school_id" class="form-control" required>
-                        <?php
-                        if($schools->num_rows() > 0)
-                        {
-                            $result = $schools->result();
-                            
-                            foreach($result as $res)
-                            {
-                                if($res->school_id == $school_id)
-                                {
-                                    echo '<option value="'.$res->school_id.'" selected>'.$res->school_name.'</option>';
-                                }
-                                else
-                                {
-                                    echo '<option value="'.$res->school_id.'">'.$res->school_name.'</option>';
-                                }
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div> 
-            <!-- User Level -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">User Type</label>
-                <div class="col-lg-4">
-                    <select name="user_type_id" class="form-control">
-                        <option value="0">Administrator</option>
-						<?php
-                        if($user_types->num_rows() > 0)
-                        {
-                            $result = $user_types->result();
-                            
-                            foreach($result as $res)
-                            {
-                                if($res->user_type_id == $user_type_id)
-                                {
-                                    echo '<option value="'.$res->user_type_id.'" selected>'.$res->user_type_name.'</option>';
-                                }
-                                else
-                                {
-                                    echo '<option value="'.$res->user_type_id.'">'.$res->user_type_name.'</option>';
-                                }
-                            }
-                        }
-                        ?>
-                    </select>
-=======
             <!-- Phone -->
             <div class="form-group">
                 <label class="col-lg-4 control-label">Phone</label>
@@ -184,7 +113,6 @@
                 <label class="col-lg-4 control-label">City</label>
                 <div class="col-lg-4">
                 	<input type="text" class="form-control" name="city" placeholder="City" value="<?php echo $city;?>">
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </div>
             </div>
             <!-- Activate checkbox -->
@@ -213,11 +141,7 @@
             </div>
             <div class="form-actions center-align">
                 <button class="submit btn btn-primary" type="submit">
-<<<<<<< HEAD
-                    Edit User
-=======
                     Edit Administrator
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
                 </button>
             </div>
             <br />

@@ -19,9 +19,9 @@
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/themes/sb-admin/css/sb-admin-2.css" rel="stylesheet">
-    
-    <!-- DataTables CSS -->
-    <link href="<?php echo base_url();?>assets/themes/sb-admin/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="<?php echo base_url();?>assets/themes/sb-admin/css/plugins/morris.css" rel="stylesheet">
     
     <!-- Admin Custom -->
     <link href="<?php echo base_url();?>assets/themes/custom/css/admin_style.css" rel="stylesheet">
@@ -35,5 +35,3 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- jQuery Version 1.11.0 -->
-    <script src="<?php echo base_url();?>assets/themes/sb-admin/js/jquery-1.11.0.js"></script>

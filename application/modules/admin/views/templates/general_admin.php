@@ -12,11 +12,7 @@
         
         <!-- Main bar -->
         <div class="mainbar">
-<<<<<<< HEAD
-            <?php //echo modules::run('admin/control/crumbs'); ?>
-=======
             <?php echo modules::run('admin/control/crumbs'); ?>
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
             
             <!-- Matter -->
             

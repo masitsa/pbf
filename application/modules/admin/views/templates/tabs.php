@@ -96,11 +96,7 @@
     </div>
     <!-- Content ends -->
     
-<<<<<<< HEAD
-<?php echo modules::run('admin/control/notifications'); ?>
-=======
 <?php //echo modules::run('admin/control/notifications'); ?>
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 
 <?php echo modules::run('admin/control/admin_footer'); ?>
 

@@ -24,11 +24,7 @@
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/bootstrap-switch.min.js"></script> <!-- Bootstrap Toggle -->
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/filter.js"></script> <!-- Filter for support page -->
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/custom.js"></script> <!-- Custom codes -->
-<<<<<<< HEAD
-<script src="<?php echo base_url()."assets/themes/bluish";?>/js/charts.js"></script> <!-- Custom chart codes -->
-=======
  <!--<script src="<?php echo base_url()."assets/themes/bluish";?>/js/charts.js"></script> Custom chart codes -->
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.mousewheel.js"></script> <!-- Mouse Wheel -->
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.horizontal.scroll.js"></script> <!-- horizontall scroll with mouse wheel -->
 <script type="text/javascript" src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.slimscroll.min.js"></script> <!-- vertical scroll with mouse wheel -->

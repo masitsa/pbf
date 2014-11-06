@@ -6,30 +6,17 @@ class Login extends MX_Controller {
 	{
 		parent:: __construct();
 		$this->load->model('login_model');
-<<<<<<< HEAD
-		$this->load->model('site/site_model');
-		$this->load->model('admin/users_model');
-=======
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	}
     
 	/*
 	*
-<<<<<<< HEAD
-	*	Login an admin
-=======
 	*	Login a user
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	*
 	*/
 	public function login_admin() 
 	{
 		//form validation rules
-<<<<<<< HEAD
-		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|exists[user.email]');
-=======
 		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|exists[users.email]');
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 		
 		//if form has been submitted
@@ -38,12 +25,8 @@ class Login extends MX_Controller {
 			//check if user has valid login credentials
 			if($this->login_model->validate_user())
 			{
-<<<<<<< HEAD
-				redirect('admin');
-=======
 				//redirect('dashboard');
 				redirect('all-users');
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 			}
 			
 			else
@@ -69,53 +52,7 @@ class Login extends MX_Controller {
 	{
 		$this->session->sess_destroy();
 		$this->session->set_userdata('front_success_message', 'Your have been signed out of your account');
-<<<<<<< HEAD
-		redirect('sign-in');
-	}
-    
-	/*
-	*
-	*	Action of a forgotten password
-	*
-	*/
-	public function forgot_password()
-	{
-		//form validation rules
-		$this->form_validation->set_rules('admin_email', 'Email', 'required|xss_clean|exists[user.email]');
-		$this->form_validation->set_message('exists', 'That email does not exist. Are you trying to sign up?');
-		
-		//if form has been submitted
-		if ($this->form_validation->run())
-		{
-			$this->load->model('site/email_model');
-			
-			//reset password
-			if($this->users_model->reset_password($this->input->post('admin_email')))
-			{
-				$this->session->set_userdata('success_message', 'Your password has been reset and mailed to '.$this->input->post('admin_email').'. Please use that password to sign in here');
-				
-				redirect('login-admin');
-			}
-			
-			else
-			{
-				$this->session->set_userdata('error_message', 'Could not reset your password. Please try again.');
-				
-				redirect('login-admin');
-			}
-		}
-		
-		else
-		{
-			$this->session->set_userdata('error_message', validation_errors());
-				
-			redirect('login-admin');
-		}
-		
-		$this->load->view('admin_login');
-=======
 		redirect('checkout');
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 	}
 }
 ?>

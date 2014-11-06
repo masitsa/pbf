@@ -2,11 +2,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <!-- Title and other stuffs -->
-<<<<<<< HEAD
-    <title>AwesomeMath</title>
-=======
     <title>Private Bush Flights</title>
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -50,10 +46,6 @@
   <![endif]-->
 
   <!-- Favicon -->
-<<<<<<< HEAD
-   <link rel="shortcut icon" href="<?php echo base_url()."assets/images/";?>favicon.png">
-=======
    <link rel="shortcut icon" href="<?php echo base_url()."assets/themes/bluish";?>img/favicon/favicon.png">
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.js"></script>
 </head>
