@@ -51,11 +51,7 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
-<<<<<<< HEAD
-$db['default']['database'] = 'amazingmath';
-=======
 $db['default']['database'] = 'pbf';
->>>>>>> 440b632956276893c42653c41e62545e66db29dd
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
