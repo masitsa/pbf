@@ -55,6 +55,7 @@
 							$flight_status = $row->flight_status;
 							$created = $row->created;
 							$last_modified = $row->last_modified;
+							$airline_thumb = $row->airline_thumb;
 							
 							//get source & destination names
 							if($airports_query->num_rows() > 0)
@@ -80,7 +81,7 @@
 							echo
 							'
 								<li>
-									<a class="cbp-vm-image airline-logo" href="#"><img src="assets/images/airline_logos/air_canada.png"></a>
+									<a class="cbp-vm-image airline-logo" href="#"><img src="'.$airline_logo_location.$airline_thumb.'"></a>
 									<h3 class="cbp-vm-title">'.$source.' - '.$destination.'</h3>
 									<div class="cbp-vm-price">$'.$price.'</div>
 									<div class="cbp-vm-details">

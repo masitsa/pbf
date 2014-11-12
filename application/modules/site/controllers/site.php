@@ -1,6 +1,8 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Site extends MX_Controller {
+class Site extends MX_Controller 
+{
+	var $airlines_location;
 	
 	function __construct()
 	{
@@ -12,6 +14,7 @@ class Site extends MX_Controller {
 		$this->load->model('site_model');
 		
 		$this->load->library('cart');
+		$this->airlines_location = base_url().'assets/images/airlines/';
 	}
     
 	/*
@@ -267,6 +270,7 @@ class Site extends MX_Controller {
 		}
 		$v_data['products'] = $this->flights_model->get_all_flights($table, $where, $config["per_page"], $page, $limit, $order_by, $order_method);
 		$v_data['airports_query'] = $this->airports_model->all_active_airports();
+		$v_data['airline_logo_location'] = $this->airlines_location;
 		
 		$data['content'] = $this->load->view('products/products', $v_data, true);
 		

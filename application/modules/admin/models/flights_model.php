@@ -37,7 +37,7 @@ class Flights_model extends CI_Model
 	{
 		//retrieve all users
 		$this->db->from($table);
-		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airplane_type.airplane_type_name');
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
 		$this->db->where($where);
 		$this->db->order_by('flight_date, source, destination, flight_departure_time, flight_arrival_time');
 		$query = $this->db->get('', $per_page, $page);
