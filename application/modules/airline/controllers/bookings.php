@@ -1,8 +1,8 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once "./application/modules/admin/controllers/admin.php";
+require_once "./application/modules/airline/controllers/account.php";
 
-class Orders extends admin {
+class Bookings extends account {
 	
 	function __construct()
 	{

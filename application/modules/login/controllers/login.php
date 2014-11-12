@@ -1,5 +1,7 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
+
 class Login extends MX_Controller {
 	
 	function __construct()
@@ -42,6 +44,9 @@ class Login extends MX_Controller {
 		}
 	}
 	
+
+
+
 	public function logout_admin()
 	{
 		$this->session->sess_destroy();
@@ -54,5 +59,48 @@ class Login extends MX_Controller {
 		$this->session->set_userdata('front_success_message', 'Your have been signed out of your account');
 		redirect('checkout');
 	}
+
+	// start of the airline login
+
+	public function login_airline() 
+	{
+		//form validation rules
+		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|exists[airline.airline_user_email]');
+		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
+		$this->form_validation->set_message('exists', 'This email has not been registered. Please sign up');
+	
+		//if form has been submitted
+		if ($this->form_validation->run()==FALSE)
+		{
+			$this->load->view('airline_login');
+		}
+		
+		else
+		{
+			
+			//check if user has valid login credentials
+			if($this->login_model->validate_airline())
+			{
+				//redirect('dashboard');
+				
+				redirect('airline/account');
+			}
+			
+			else
+			{
+				
+				$data['error'] = 'The email or password provided is incorrect. Please try again';
+				$this->load->view('airline_login', $data);
+			}
+		}
+	}
+	public function logout_airline()
+	{
+		$this->session->sess_destroy();
+		redirect('airline-login');
+	}
+	
+	
+	// end of the airline login
 }
 ?>

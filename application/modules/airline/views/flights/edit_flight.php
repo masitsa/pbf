@@ -1,20 +1,39 @@
-          <link href="<?php echo base_url()."assets/themes/jasny/css/jasny-bootstrap.css"?>" rel="stylesheet"/>
-          <div class="padd">
+<?php
+// get flight details
+     if(count($flight) > 0)
+     {
+       // $flight_result = $flight->result();
+                            
+        foreach($flight as $flight_res):
+            $flight_id = $flight_res->flight_id;
+            $flight_date  = $flight_res->flight_date;   
+            $flight_departure_time  = $flight_res->flight_departure_time;   
+            $source  = $flight_res->source;    
+            $destination  = $flight_res->destination;   
+            $airplane_type_idd  = $flight_res->airplane_type_id;   
+            $trip_type_idd  = $flight_res->trip_type_id;   
+            $flight_type_idd  = $flight_res->flight_type_id;   
+            $flight_status = $flight_res->flight_status;
+            $flight_arrival_time = $flight_res->flight_arrival_time;
+            $flight_price = $flight_res->flight_price;
+        endforeach;
+
+     }
+//  end of getting the flight details
+
+?>
+<div class="col-lg-12" style="margin-bottom:5px;">
+    <a href="<?php echo site_url()?>airline/all-flights" class="btn btn-primary pull-right">Back to Flight List</a>
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Edit Flight Details
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
             <!-- Adding Errors -->
             <?php
-            if(isset($error)){
-                echo '<div class="alert alert-danger"> Oh snap! Change a few things up and try submitting again. </div>';
-            }
-			
-			//the visitor details
-			$visitor_id = $visitor[0]->visitor_id;
-			$visitor_first_name = $visitor[0]->visitor_first_name;
-			$visitor_last_name = $visitor[0]->visitor_last_name;
-			$visitor_name = $visitor[0]->visitor_phone;
-			$visitor_name = $visitor[0]->visitor_email;
-			$visitor_status = $visitor[0]->visitor_status;
-			$visitor_type_id = $visitor[0]->visitor_type_id;
-            
             if(isset($error)){
                 echo '<div class="alert alert-danger">'.$error.'</div>';
             }
@@ -24,13 +43,6 @@
             if(!empty($validation_errors))
             {
                 echo '<div class="alert alert-danger"> <strong>Oh snap!</strong> '.$validation_errors.' </div>';
-				
-				$visitor_first_name = set_value('visitor_first_name');
-				$visitor_last_name = set_value('visitor_last_name');
-				$visitor_name = set_value('visitor_phone');
-				$visitor_name = set_value('visitor_email');
-				$visitor_status = set_value('visitor_status');
-				$visitor_type_id = set_value('visitor_type_id');
             }
             
             $success = $this->session->userdata('success_message');
@@ -38,7 +50,7 @@
             if(!empty($success))
             {
                 echo '<div class="alert alert-success"> <strong>Success!</strong> '.$success.' </div>';
-				$this->session->unset_userdata('success_message');
+                $this->session->unset_userdata('success_message');
             }
             
             $error = $this->session->userdata('error_message');
@@ -46,94 +58,227 @@
             if(!empty($error))
             {
                 echo '<div class="alert alert-danger"> <strong>Oh snap!</strong> '.$error.' </div>';
-				$this->session->unset_userdata('error_message');
+                $this->session->unset_userdata('error_message');
             }
             ?>
             
-            <?php echo form_open_multipart($this->uri->uri_string(), array("class" => "form-horizontal", "role" => "form"));?>
-            <!-- visitor Name -->
-            <div class="form-group col-lg-4">
-                <label class="col-lg-4 control-label">Visitor Type</label>
-                <div class="col-lg-7">
-                    <select name="visitor_type_id" id="visitor_type_id" class="form-control" required>
-                        <?php
-                        if($visitor_types->num_rows() > 0)
-                        {
-                            $result = $visitor_types->result();
+            <?php echo form_open($this->uri->uri_string(), array("class" => "form-horizontal", "role" => "form"));?>
+             <div class="row">
+            <!-- start of left -->
+                <div class="col-lg-6">
+                        <!-- flight type -->
+                        <!-- flight type -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Flight Type</label>
+                            <div class="col-lg-6">
+                                <select name="flight_type_id" id="flight_type_id" class="form-control" required>
+                                    <?php
+                                    if($flight_type_query->num_rows() > 0)
+                                    {
+                                        $result = $flight_type_query->result();
+                                        
+                                        foreach($result as $res)
+                                        {
+                                            if($res->flight_type_id == $flight_type_idd)
+                                            {
+                                                echo '<option value="'.$res->flight_type_id.'" selected="selected">'.$res->flight_type_name.'</option>';
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="'.$res->flight_type_id.'">'.$res->flight_type_name.'</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div> 
+                        <!-- airplane type -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Airplane Type</label>
+                            <div class="col-lg-6">
+                                <select name="airplane_type_id" id="airplane_type_id" class="form-control" required>
+                                    <?php
+                                    if($airplane_type_query->num_rows() > 0)
+                                    {
+                                        $result = $airplane_type_query->result();
+                                        
+                                        foreach($result as $res)
+                                        {
+                                            if($res->airplane_type_id == $airplane_type_idd)
+                                            {
+                                                echo '<option value="'.$res->airplane_type_id.'" selected="selected">'.$res->airplane_type_name.'</option>';
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="'.$res->airplane_type_id.'">'.$res->airplane_type_name.'</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div> 
+                        <!-- source -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Source</label>
+                            <div class="col-lg-6">
                             
-                            foreach($result as $res)
-                            {
-                                if($res->visitor_type_id == $visitor_type_id)
+                                <select name="source" id="source" class="form-control" required>
+                                    <?php
+                                    var_dump($airports_query->result());
+                                    if($airports_query->num_rows() > 0)
+                                    {
+                                         $source_result = $airports_query->result();
+                                        
+                                        foreach($source_result as $source_res)
+                                        {
+                                            if($source_res->airport_id == $source)
+                                            {
+                                                echo '<option value="'.$source_res->airport_id.'" selected="selected">'.$source_res->airport_name.'</option>';
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="'.$source_res->airport_id.'">'.$source_res->airport_name.'</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div> 
+                        <!-- destination -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Destination</label>
+                            <div class="col-lg-6">
+                                <select name="destination" id="destination" class="form-control" required>
+                                    <?php
+                                    if($airports_query->num_rows() > 0)
+                                    {
+                                        $result = $airports_query->result();
+                                        
+                                        foreach($result as $res)
+                                        {
+                                            if($res->airport_id == $destination)
+                                            {
+                                                echo '<option value="'.$res->airport_id.'" selected="selected">'.$res->airport_name.'</option>';
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="'.$res->airport_id.'">'.$res->airport_name.'</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Trip Type</label>
+                            <div class="col-lg-6">
+                                <select name="trip_type" id="destination" class="form-control" required>
+                                    <?php
+                                    if($trip_type_query->num_rows() > 0)
+                                    {
+                                        $trip_result = $trip_type_query->result();
+                                        
+                                        foreach($trip_result as $res)
+                                        {
+                                            if($res->trip_type_id == $trip_type_idd)
+                                            {
+                                                echo '<option value="'.$res->trip_type_id.'" selected="selected">'.$res->trip_type_name.'</option>';
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="'.$res->trip_type_id.'">'.$res->trip_type_name.'</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div> 
+                        <!-- flight Name -->
+                    </div>
+                <!-- end of left -->
+                <!-- start of right -->
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">Flight Date</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="flight_date" placeholder="Flight Date" value="<?php echo $flight_date ;?>" required>
+                        </div>
+                    </div>
+                    <!-- flight Name -->
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">Departure Time</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="flight_departure_time" placeholder="Departure Time" value="<?php echo $flight_departure_time;?>" required>
+                        </div>
+                    </div>
+                    <!-- flight Name -->
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">Arrival Time</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="flight_arrival_time" placeholder="Arrival Time" value="<?php echo $flight_arrival_time;?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">Flight Price</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="flight_price" placeholder="Flight Price" value="<?php echo $flight_price;?>" required>
+                        </div>
+                    </div>
+                    <!-- Activate checkbox -->
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">Activate Flight?</label>
+                        <div class="col-lg-6">
+                            <?php
+                              
+                                if($flight_status == '1')
                                 {
-                                    echo '<option value="'.$res->visitor_type_id.'" selected="selected">'.$res->visitor_type_name.'</option>';
+                                    $yes = 'checked';
+                                    $no = '';
                                 }
+                                
                                 else
                                 {
-                                    echo '<option value="'.$res->visitor_type_id.'">'.$res->visitor_type_name.'</option>';
+                                    $yes = '';
+                                    $no = 'checked';
                                 }
-                            }
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div> 
-            <!-- visitor Name -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">First Name</label>
-                <div class="col-lg-4">
-                	<input type="text" class="form-control" name="visitor_first_name" placeholder="First Name" value="<?php echo $visitor_first_name;?>" required>
-                </div>
-            </div>
-            <!-- visitor Name -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Last Name</label>
-                <div class="col-lg-4">
-                	<input type="text" class="form-control" name="visitor_last_name" placeholder="Last Name" value="<?php echo $visitor_last_name;?>" required>
-                </div>
-            </div>
-            <!-- visitor Name -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Email</label>
-                <div class="col-lg-4">
-                	<input type="text" class="form-control" name="visitor_email" placeholder="Email" value="<?php echo $visitor_email;?>" required>
-                </div>
-            </div>
-            <!-- visitor Name -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Phone</label>
-                <div class="col-lg-4">
-                	<input type="text" class="form-control" name="visitor_phone" placeholder="Phone" value="<?php echo $visitor_phone;?>" required>
-                </div>
-            </div>
-            <!-- Activate checkbox -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Activate visitor?</label>
-                <div class="col-lg-4">
-                    <div class="radio">
-                        <label>
-                        	<?php
-                            if($visitor_status == 1){echo '<input id="optionsRadios1" type="radio" checked value="1" name="visitor_status">';}
-							else{echo '<input id="optionsRadios1" type="radio" value="1" name="visitor_status">';}
-							?>
-                            Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                        	<?php
-                            if($visitor_status == 0){echo '<input id="optionsRadios1" type="radio" checked value="0" name="visitor_status">';}
-							else{echo '<input id="optionsRadios1" type="radio" value="0" name="visitor_status">';}
-							?>
-                            No
-                        </label>
+                            ?>
+                            <div class="radio">
+                                <label>
+                                    <input id="optionsRadios1" type="radio" <?php echo $yes;?> value="1" name="flight_status">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input id="optionsRadios2" type="radio" <?php echo $no;?> value="0" name="flight_status">
+                                    No
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- end of right -->
             </div>
-            <div class="form-actions center-align">
-                <button class="submit btn btn-primary" type="submit">
-                    Edit visitor
-                </button>
+            <div class="row">
+                <div class="form-actions center-align">
+                    <button class="submit btn btn-success" type="submit">
+                        Update Flight Details
+                    </button>
+                </div>
             </div>
             <br />
             <?php echo form_close();?>
-		</div>
+                            
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

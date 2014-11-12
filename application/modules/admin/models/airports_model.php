@@ -13,6 +13,14 @@ class Airports_model extends CI_Model
 		
 		return $query;
 	}
+
+	public function all_trip_type_query()
+	{
+		$this->db->where('trip_type_status = 1');
+		$query = $this->db->get('trip_type');
+		
+		return $query;
+	}
 	/*
 	*	Retrieve all active airports
 	*

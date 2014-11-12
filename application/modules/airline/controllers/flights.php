@@ -1,8 +1,8 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once "./application/modules/airline/controllers/airline.php";
+require_once "./application/modules/airline/controllers/account.php";
 
-class Flights extends airline 
+class Flights extends account 
 {
 	function __construct()
 	{
@@ -65,13 +65,14 @@ class Flights extends airline
 		{
 			$v_data['query'] = $query;
 			$v_data['page'] = $page;
+			$v_data['title'] = 'All Flights';
 			$v_data['airports_query'] = $this->airports_model->all_airports();
 			$data['content'] = $this->load->view('flights/all_flights', $v_data, true);
 		}
 		
 		else
 		{
-			$data['content'] = '<a href="'.site_url().'airline/add-flight" class="btn btn-success pull-right">Add Flight</a>There are no flights';
+			$data['content'] = 'There are no flights';
 		}
 		$data['title'] = 'All Flight Types';
 		
@@ -94,7 +95,8 @@ class Flights extends airline
 		$this->form_validation->set_rules('destination', 'Destination', 'required|xss_clean');
 		$this->form_validation->set_rules('airplane_type_id', 'Airplane Type', 'required|xss_clean');
 		$this->form_validation->set_rules('flight_status', 'Status', 'required|xss_clean');
-		
+		$this->form_validation->set_rules('trip_type', 'Trip Type', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_price', 'Flight Price', 'required|xss_clean');
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{	
@@ -114,6 +116,7 @@ class Flights extends airline
 		$data['title'] = 'Add New Flight';
 		$v_data['title'] = 'Add New Flight';
 		$v_data['airports_query'] = $this->airports_model->all_active_airports();
+		$v_data['trip_type_query'] = $this->airports_model->all_trip_type_query();
 		$v_data['flight_type_query'] = $this->flight_types_model->all_active_flight_types();
 		$v_data['airplane_type_query'] = $this->airplane_types_model->all_active_airplane_types();
 		$data['content'] = $this->load->view('flights/add_flight', $v_data, true);
@@ -129,9 +132,16 @@ class Flights extends airline
 	public function edit_flight($flight_id) 
 	{
 		//form validation rules
-		$this->form_validation->set_rules('flight_name', 'Flight Type Name', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_date', 'Departure Date', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_departure_time', 'Departure Time', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_arrival_time', 'Arrival Time', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_type_id', 'Flight Type', 'required|xss_clean');
+		$this->form_validation->set_rules('source', 'Source', 'required|xss_clean');
+		$this->form_validation->set_rules('destination', 'Destination', 'required|xss_clean');
+		$this->form_validation->set_rules('airplane_type_id', 'Airplane Type', 'required|xss_clean');
 		$this->form_validation->set_rules('flight_status', 'Status', 'required|xss_clean');
-		
+		$this->form_validation->set_rules('trip_type', 'Trip Type', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_price', 'Flight Price', 'required|xss_clean');
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{
@@ -157,6 +167,13 @@ class Flights extends airline
 		if ($query->num_rows() > 0)
 		{
 			$v_data['flight'] = $query->result();
+
+			$data['title'] = 'Add New Flight';
+			$v_data['title'] = 'Add New Flight';
+			$v_data['airports_query'] = $this->airports_model->all_active_airports();
+			$v_data['trip_type_query'] = $this->airports_model->all_trip_type_query();
+			$v_data['flight_type_query'] = $this->flight_types_model->all_active_flight_types();
+			$v_data['airplane_type_query'] = $this->airplane_types_model->all_active_airplane_types();
 			
 			$data['content'] = $this->load->view('flights/edit_flight', $v_data, true);
 		}

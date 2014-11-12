@@ -12,11 +12,16 @@ class Airline_model extends CI_Model
 		{
 			if(is_uploaded_file($_FILES['airline_logo']['tmp_name']))
 			{
-				//delete any other uploaded image
-				$this->file_model->delete_file($airlines_path."\\".$this->session->userdata('airline_logo_file_name'));
-				
-				//delete any other uploaded thumbnail
-				$this->file_model->delete_file($airlines_path."\\thumbnail_".$this->session->userdata('airline_logo_file_name'));
+				$logo = $this->session->userdata('airline_logo_file_name');
+
+				if(!empty($logo))
+				{
+					//delete any other uploaded image
+					$this->file_model->delete_file($airlines_path."\\".$this->session->userdata('airline_logo_file_name'));
+					
+					//delete any other uploaded thumbnail
+					$this->file_model->delete_file($airlines_path."\\thumbnail_".$this->session->userdata('airline_logo_file_name'));
+				}
 				//Upload image
 				$response = $this->file_model->upload_file($airlines_path, 'airline_logo', $resize);
 				if($response['check'])
@@ -92,7 +97,7 @@ class Airline_model extends CI_Model
 				'airline_user_last_name' => $this->session->userdata('airline_user_last_name'),
 				'airline_user_email' => $this->session->userdata('airline_user_email'),
 				'airline_user_phone' => $this->session->userdata('airline_user_phone'),
-				'airline_user_password' => $this->session->userdata('airline_user_password'),
+				'airline_user_password' => md5($this->session->userdata('airline_user_password')),
 				'airline_logo' => $this->session->userdata('airline_logo_file_name'),
 				'airline_thumb' => $this->session->userdata('airline_logo_thumb_name')
 		);

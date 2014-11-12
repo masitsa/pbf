@@ -1,22 +1,14 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends MX_Controller {
+require_once "./application/modules/auth/controllers/admin_auth.php";
+class Admin extends admin_auth {
 	
 	function __construct()
 	{
 		parent:: __construct();
 		$this->load->model('login/login_model');
 		
-		//user has logged in
-		if($this->login_model->check_login())
-		{
-		}
 		
-		//user has not logged in
-		else
-		{
-			redirect('login-admin');
-		}
 	}
     
 	/*

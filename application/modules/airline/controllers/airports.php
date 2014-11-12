@@ -1,8 +1,8 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once "./application/modules/airline/controllers/airline.php";
+require_once "./application/modules/airline/controllers/account.php";
 
-class Airports extends airline 
+class Airports extends account 
 {
 	function __construct()
 	{

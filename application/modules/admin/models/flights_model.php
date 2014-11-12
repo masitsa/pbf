@@ -50,7 +50,7 @@ class Flights_model extends CI_Model
 	*	@param string $image_name
 	*
 	*/
-	public function add_flight($flight_logo, $flight_thumb)
+	public function add_flight()
 	{
 		$data = array(
 				'flight_date'=>$this->input->post('flight_date'),
@@ -58,13 +58,16 @@ class Flights_model extends CI_Model
 				'flight_arrival_time'=>$this->input->post('flight_arrival_time'),
 				'source'=>$this->input->post('source'),
 				'destination'=>$this->input->post('destination'),
+				'airline_id'=>$this->session->userdata('airline_id'),
 				'airplane_type_id'=>$this->input->post('airplane_type_id'),
 				'flight_status'=>$this->input->post('flight_status'),
 				'flight_type_id'=>$this->input->post('flight_type_id'),
+				'trip_type_id'=>$this->input->post('trip_type'),
 				'created'=>date('Y-m-d H:i:s'),
-				'created_by'=>$this->session->userdata('user_id'),
+				'created_by'=>$this->session->userdata('airline_id'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),
-				'modified_by'=>$this->session->userdata('user_id')
+				'flight_price'=>$this->input->post('flight_price'),
+				'modified_by'=>$this->session->userdata('airline_id')
 			);
 			
 		if($this->db->insert('flight', $data))
@@ -85,12 +88,21 @@ class Flights_model extends CI_Model
 	public function update_flight($flight_id)
 	{
 		$data = array(
-				'flight_first_name'=>ucwords(strtolower($this->input->post('flight_first_name'))),
-				'flight_last_name'=>ucwords(strtolower($this->input->post('flight_last_name'))),
-				'flight_phone'=>$this->input->post('flight_phone'),
-				'flight_email'=>$this->input->post('flight_email'),
+				'flight_date'=>$this->input->post('flight_date'),
+				'flight_departure_time'=>$this->input->post('flight_departure_time'),
+				'flight_arrival_time'=>$this->input->post('flight_arrival_time'),
+				'source'=>$this->input->post('source'),
+				'destination'=>$this->input->post('destination'),
+				'airline_id'=>$this->session->userdata('airline_id'),
+				'airplane_type_id'=>$this->input->post('airplane_type_id'),
 				'flight_status'=>$this->input->post('flight_status'),
-				'flight_type_id'=>$this->input->post('flight_type_id')
+				'flight_type_id'=>$this->input->post('flight_type_id'),
+				'trip_type_id'=>$this->input->post('trip_type'),
+				'created'=>date('Y-m-d H:i:s'),
+				'created_by'=>$this->session->userdata('airline_id'),
+				'user_type_id'=>$this->session->userdata('user_type_id'),
+				'flight_price'=>$this->input->post('flight_price'),
+				'modified_by'=>$this->session->userdata('airline_id')
 			);
 			
 		$this->db->where('flight_id', $flight_id);
