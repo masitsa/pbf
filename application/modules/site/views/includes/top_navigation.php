@@ -28,7 +28,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="<?php echo site_url().'home';?>">Home</a></li>
                                 <li><a href="<?php echo site_url().'flights';?>">Flights</a></li>
-                                <li><a href="#">Airlines</a></li>
+                                <li><a href="<?php echo site_url().'airline/sign-up/airline-details';?>">Airlines</a></li>
                                 <li><a href="#">Charter Quotes</a></li>
                                 <li><a href="#">Contact</a></li>
                                 <li><a href="#">About</a></li>

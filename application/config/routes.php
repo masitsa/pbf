@@ -160,13 +160,11 @@ $route['airline/delete-flight/(:num)/(:num)'] = 'airline/flights/delete_flight/$
 /*
 *	Airline Routes
 */
-$route['airline/sign-in'] = 'airline/sign_in';
+$route['airline/sign-in'] = 'login/login_airline';
 $route['airline/sign-up/airline-details'] = 'airline/airline_signup1';
 $route['airline/sign-up/user-details'] = 'airline/airline_signup2';
 $route['airline/sign-up/review'] = 'airline/airline_signup3';
 $route['airline/account'] = 'airline/account';
-
-
 $route['airline-login'] = 'login/login_airline';
 
 /* End of file routes.php */

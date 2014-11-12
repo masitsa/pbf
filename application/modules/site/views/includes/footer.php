@@ -22,9 +22,9 @@
                     <div class="col-md-4">
                         <h3>Get Started</h3>
                         <ul>
-                            <li><a href="#">Airline Sign Up</a></li>
-                            <li><a href="#">Airline Sign In</a></li>
-                            <li><a href="#">My Account</a></li>
+                            <li><a href="<?php echo site_url().'airline/sign-up/airline-details';?>">Airline Sign Up</a></li>
+                            <li><a href="<?php echo site_url().'airline/sign-in';?>">Airline Sign In</a></li>
+                            <li><a href="<?php echo site_url().'airline/account';?>">My Account</a></li>
                         </ul>
                     </div><!-- End Quick Links -->
                 

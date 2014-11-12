@@ -64,20 +64,15 @@ class Login extends MX_Controller {
 
 	public function login_airline() 
 	{
+		$v_data['error2'] = '';
 		//form validation rules
 		$this->form_validation->set_rules('email', 'Email', 'required|xss_clean|exists[airline.airline_user_email]');
 		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 		$this->form_validation->set_message('exists', 'This email has not been registered. Please sign up');
 	
 		//if form has been submitted
-		if ($this->form_validation->run()==FALSE)
+		if ($this->form_validation->run())
 		{
-			$this->load->view('airline_login');
-		}
-		
-		else
-		{
-			
 			//check if user has valid login credentials
 			if($this->login_model->validate_airline())
 			{
@@ -88,11 +83,13 @@ class Login extends MX_Controller {
 			
 			else
 			{
-				
-				$data['error'] = 'The email or password provided is incorrect. Please try again';
-				$this->load->view('airline_login', $data);
+				$v_data['error2'] = 'The email or password provided is incorrect. Please try again';
 			}
 		}
+		
+		$data['content'] = $this->load->view('airline_login', $v_data, true);
+		$data['title'] = 'Sign In';
+		$this->load->view('site/templates/general_page', $data);
 	}
 	public function logout_airline()
 	{

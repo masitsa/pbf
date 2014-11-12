@@ -117,7 +117,7 @@
                 <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
                           <input type="text" name="search" class="form-control col-md-8" placeholder="Search">
-                          <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                          <button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
                 </div>
             </div>
