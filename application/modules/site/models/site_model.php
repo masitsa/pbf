@@ -176,7 +176,7 @@ class Site_model extends CI_Model
 	
 	function generate_price_range()
 	{
-		$max_price = $this->products_model->get_max_product_price();
+		$max_price = $this->flights_model->get_max_flight_price();
 		//$min_price = $this->products_model->get_min_product_price();
 		
 		$interval = $max_price/5;

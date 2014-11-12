@@ -5,15 +5,11 @@ class Site extends MX_Controller {
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('admin/products_model');
-		$this->load->model('admin/categories_model');
-		$this->load->model('admin/features_model');
-		$this->load->model('admin/brands_model');
 		$this->load->model('admin/users_model');
+		$this->load->model('admin/airports_model');
+		$this->load->model('admin/flights_model');
+		$this->load->model('admin/airports_model');
 		$this->load->model('site_model');
-		$this->load->model('cart_model');
-		$this->load->model('admin/users_model');
-		$this->load->model('login/login_model');
 		
 		$this->load->library('cart');
 	}
@@ -25,8 +21,7 @@ class Site extends MX_Controller {
 	*/
 	public function index() 
 	{
-		echo 'here';
-		//redirect('home');
+		redirect('home');
 	}
     
 	/*
@@ -37,12 +32,12 @@ class Site extends MX_Controller {
 	public function home_page() 
 	{
 		//get page data
-		$v_data['latest'] = $this->products_model->get_latest_products();
+		/*$v_data['latest'] = $this->products_model->get_latest_products();
 		$v_data['featured'] = $this->products_model->get_featured_products();
 		$v_data['brands'] = $this->brands_model->all_active_brands();
 		$v_data['all_children'] = $this->categories_model->all_child_categories();
-		$v_data['parent_categories'] = $this->categories_model->all_parent_categories();
-		$data['content'] = $this->load->view('home/home', $v_data, true);
+		$v_data['parent_categories'] = $this->categories_model->all_parent_categories();*/
+		$data['content'] = $this->load->view('home/home', '', true);
 		
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);
@@ -88,20 +83,21 @@ class Site extends MX_Controller {
     
 	/*
 	*
-	*	Products Page
+	*	Flights Page
 	*
 	*/
-	public function products($search = '__', $category_id = 0, $brand_id = 0, $order_by = 'created', $new_products = 0, $new_categories = 0, $new_brands = 0, $price_range = '__', $filter_brands = '__') 
+	public function flights($search = '__', $category_id = 0, $brand_id = 0, $order_by = 'created', $new_products = 0, $new_categories = 0, $new_brands = 0, $price_range = '__', $filter_brands = '__') 
 	{
 		$v_data['crumbs'] = $this->site_model->get_crumbs();
-		$v_data['brands'] = $this->brands_model->all_active_brands();
-		$v_data['product_sub_categories'] = $this->categories_model->get_sub_categories($category_id);
-		$v_data['all_children'] = $this->categories_model->all_child_categories();
-		$v_data['parent_categories'] = $this->categories_model->all_parent_categories();
+		//$v_data['brands'] = $this->brands_model->all_active_brands();
+		//$v_data['product_sub_categories'] = $this->categories_model->get_sub_categories($category_id);
+		//$v_data['all_children'] = $this->categories_model->all_child_categories();
+		//$v_data['parent_categories'] = $this->categories_model->all_parent_categories();
 		$v_data['price_range'] = $this->site_model->generate_price_range();
 		
-		$where = 'product.category_id = category.category_id AND product.brand_id = brand.brand_id AND product_status = 1 AND category_status = 1 AND brand_status = 1';
-		$table = 'product, category, brand';
+		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1';
+		$table = 'flight, airline, flight_type, airplane_type';
+		
 		$limit = NULL;
 		
 		//ordering products
@@ -213,14 +209,14 @@ class Site extends MX_Controller {
 		
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'site/products';
+		$config['base_url'] = base_url().'flights';
 		$config['total_rows'] = $this->users_model->count_items($table, $where, $limit);
 		$config['uri_segment'] = 5;
 		$config['per_page'] = 21;
 		$config['num_links'] = 5;
 		
 		
-		$config['full_tag_open'] = '<ul class="pagination no-margin-top">';
+		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		
 		$config['first_tag_open'] = '<li>';
@@ -230,11 +226,11 @@ class Site extends MX_Controller {
 		$config['last_tag_close'] = '</li>';
 		
 		$config['next_tag_open'] = '<li>';
-		$config['next_link'] = '»';
+		$config['next_link'] = '&raquo;';
 		$config['next_tag_close'] = '</span>';
 		
 		$config['prev_tag_open'] = '<li>';
-		$config['prev_link'] = '«';
+		$config['prev_link'] = '&laquo;';
 		$config['prev_tag_close'] = '</li>';
 		
 		$config['cur_tag_open'] = '<li class="active"><a href="#">';
@@ -269,7 +265,8 @@ class Site extends MX_Controller {
 			$v_data["total"] = $config['total_rows'];
 			$v_data["last"] = $config['total_rows'];
 		}
-		$v_data['products'] = $this->products_model->get_all_products($table, $where, $config["per_page"], $page, $limit, $order_by, $order_method);
+		$v_data['products'] = $this->flights_model->get_all_flights($table, $where, $config["per_page"], $page, $limit, $order_by, $order_method);
+		$v_data['airports_query'] = $this->airports_model->all_active_airports();
 		
 		$data['content'] = $this->load->view('products/products', $v_data, true);
 		

@@ -190,5 +190,22 @@ class Flights_model extends CI_Model
 		
 		return $query;
 	}
+	
+	public function get_max_flight_price()
+	{
+		//retrieve all users
+		$this->db->from('flight');
+		$this->db->select('MAX(flight_price) AS max_price');
+		$query = $this->db->get();
+		
+		$max_price = 0;
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$max_price = $row->max_price;
+		}
+		
+		return $max_price;
+	}
 }
 ?>
