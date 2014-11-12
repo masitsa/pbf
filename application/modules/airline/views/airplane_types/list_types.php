@@ -1,6 +1,9 @@
+<div class="col-lg-12" style="margin-bottom:5px;">
+    <a href="<?php echo site_url()?>airline/add-airplane-type" class="btn btn-primary pull-right">Add Airplane Type</a>
+</div>
 <?php
 		
-		$result = '<a href="'.site_url().'airline/add-airplane-type" class="btn btn-success">Add Airplane Type</a>';
+		$result = '';
             
 		$success = $this->session->userdata('success_message');
 		
@@ -133,10 +136,8 @@
 			$result .= "There are no airplane_types";
 		}
 ?>
-
-            <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <?php echo $title;?>
                         </div>
@@ -171,6 +172,6 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
+         
             <!-- /.row -->
             

@@ -1,6 +1,9 @@
+<div class="col-lg-12" style="margin-bottom:5px;">
+    <a href="<?php echo site_url()?>airline/add-flight-type" class="btn btn-primary pull-right">Add Flight Type</a>
+</div>
 <?php
 		
-		$result = '<a href="'.site_url().'airline/add-flight-type" class="btn btn-success">Add Flight Type</a>';
+		$result = '';
             
 		$success = $this->session->userdata('success_message');
 		
@@ -115,9 +118,9 @@
 			$result .= "There are no flight types";
 		}
 ?>
-			<div class="row">
+		
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <?php echo $title;?>
                         </div>
@@ -152,5 +155,5 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
+      
             <!-- /.row -->

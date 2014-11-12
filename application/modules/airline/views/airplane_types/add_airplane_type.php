@@ -1,6 +1,10 @@
-<link href="<?php echo base_url()."assets/themes/jasny/css/jasny-bootstrap.css"?>" rel="stylesheet"/><div class="row">
+
+<link href="<?php echo base_url()."assets/themes/jasny/css/jasny-bootstrap.css"?>" rel="stylesheet"/>
+<div class="col-lg-12" style="margin-bottom:5px;">
+    <a href="<?php echo site_url()?>airline/all-airplane-types" class="btn btn-primary pull-right">Back to Airplane Types</a>
+</div>
 <div class="col-lg-12">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <?php echo $title;?>
         </div>

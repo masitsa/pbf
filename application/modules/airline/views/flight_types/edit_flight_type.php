@@ -1,5 +1,8 @@
+<div class="col-lg-12" style="margin-bottom:5px;">
+    <a href="<?php echo site_url()?>airline/all-flight-types" class="btn btn-primary pull-right">Back to Flight Type List</a>
+</div>
 <div class="col-lg-12">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <?php echo $title;?>
         </div>
