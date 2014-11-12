@@ -104,16 +104,16 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Flight Configuration<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Airplane Types</a>
+                                    <a href="<?php echo site_url().'airline/all-airplane-types';?>">Airplane Types</a>
                                 </li>
                                 <li>
-                                    <a href="#">Airports</a>
+                                    <a href="<?php echo site_url().'airline/all-airports';?>">Airports</a>
                                 </li>
                                 <li>
-                                    <a href="#">Flight Types</a>
+                                    <a href="<?php echo site_url().'airline/all-flight-types';?>">Flight Types</a>
                                 </li>
                                 <li>
-                                    <a href="#">Flights</a>
+                                    <a href="<?php echo site_url().'airline/all-flights';?>">Flights</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

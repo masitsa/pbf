@@ -1,14 +1,14 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once "./application/modules/admin/controllers/admin.php";
+require_once "./application/modules/airline/controllers/airline.php";
 
-class Flight_types extends admin 
+class Flight_types extends airline 
 {
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('users_model');
-		$this->load->model('flight_types_model');
+		$this->load->model('admin/users_model');
+		$this->load->model('admin/flight_types_model');
 	}
     
 	/*
@@ -23,7 +23,7 @@ class Flight_types extends admin
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'administration/all-flight-types';
+		$config['base_url'] = base_url().'airline/all-flight-types';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 20;
@@ -57,22 +57,23 @@ class Flight_types extends admin
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
         $data["links"] = $this->pagination->create_links();
 		$query = $this->flight_types_model->get_all_flight_types($table, $where, $config["per_page"], $page);
+		$v_data['title'] = 'All Flight Types';
 		
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;
 			$v_data['page'] = $page;
-			$this->load->model('airlines_model');
+			$this->load->model('admin/airlines_model');
 			$data['content'] = $this->load->view('flight_types/all_flight_types', $v_data, true);
 		}
 		
 		else
 		{
-			$data['content'] = '<a href="'.site_url().'administration/add-flight-type" class="btn btn-success pull-right">Add Flight Type</a>There are no flight_types';
+			$data['content'] = '<a href="'.site_url().'airline/add-flight-type" class="btn btn-success pull-right">Add Flight Type</a>There are no flight types';
 		}
 		$data['title'] = 'All Flight Types';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -92,7 +93,7 @@ class Flight_types extends admin
 			if($this->flight_types_model->add_flight_type())
 			{
 				$this->session->set_userdata('success_message', 'Flight type added successfully');
-				redirect('administration/add-flight-type');
+				redirect('airline/add-flight-type');
 			}
 			
 			else
@@ -103,8 +104,9 @@ class Flight_types extends admin
 		
 		//open the add new flight_type
 		$data['title'] = 'Add New Flight Type';
-		$data['content'] = $this->load->view('flight_types/add_flight_type', '', true);
-		$this->load->view('templates/general_admin', $data);
+		$v_data['title'] = 'Add New Flight Type';
+		$data['content'] = $this->load->view('flight_types/add_flight_type', $v_data, true);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -126,7 +128,7 @@ class Flight_types extends admin
 			if($this->flight_types_model->update_flight_type($flight_type_id))
 			{
 				$this->session->set_userdata('success_message', 'Flight type edited successfully');
-				redirect('administration/edit-flight-type/'.$flight_type_id);
+				redirect('airline/edit-flight-type/'.$flight_type_id);
 			}
 			
 			else
@@ -137,6 +139,7 @@ class Flight_types extends admin
 		
 		//open the add new flight_type
 		$data['title'] = 'Edit Flight Type';
+		$v_data['title'] = 'Edit Flight Type';
 		
 		//select the flight_type from the database
 		$query = $this->flight_types_model->get_flight_type($flight_type_id);
@@ -153,7 +156,7 @@ class Flight_types extends admin
 			$data['content'] = 'Flight type does not exist';
 		}
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -173,7 +176,7 @@ class Flight_types extends admin
 		{
 			$this->session->set_userdata('error_message', 'Flight Type could not be deleted');
 		}
-		redirect('administration/all-flight-types/'.$page);
+		redirect('airline/all-flight-types/'.$page);
 	}
     
 	/*
@@ -193,7 +196,7 @@ class Flight_types extends admin
 		{
 			$this->session->set_userdata('error_message', 'Flight Type could not be activated');
 		}
-		redirect('administration/all-flight-types/'.$page);
+		redirect('airline/all-flight-types/'.$page);
 	}
     
 	/*
@@ -213,7 +216,7 @@ class Flight_types extends admin
 		{
 			$this->session->set_userdata('error_message', 'Flight Type could not be disabled');
 		}
-		redirect('administration/all-flight-types/'.$page);
+		redirect('airline/all-flight-types/'.$page);
 	}
 }
 ?>

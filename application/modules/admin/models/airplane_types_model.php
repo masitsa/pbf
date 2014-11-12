@@ -50,12 +50,13 @@ class Airplane_types_model extends CI_Model
 	*	@param string $image_name
 	*
 	*/
-	public function add_airplane_type($airplane_type_logo, $airplane_type_thumb)
+	public function add_airplane_type($airplane_type_image, $airplane_type_thumb)
 	{
 		$data = array(
 				'airplane_type_name'=>$this->input->post('airplane_type_name'),
-				'airplane_type_image'=>$airplane_type_logo,
+				'airplane_type_image'=>$airplane_type_image,
 				'airplane_type_thumb'=>$airplane_type_thumb,
+				'airplane_type_status'=>$this->input->post('airplane_type_status'),
 				'created'=>date('Y-m-d H:i:s'),
 				'created_by'=>$this->session->userdata('user_id'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),
@@ -77,12 +78,13 @@ class Airplane_types_model extends CI_Model
 	*	@param int $airplane_type_id
 	*
 	*/
-	public function update_airplane_type($airplane_type_logo, $airplane_type_thumb, $airplane_type_id)
+	public function update_airplane_type($airplane_type_image, $airplane_type_thumb, $airplane_type_id)
 	{
 		$data = array(
 				'airplane_type_name'=>$this->input->post('airplane_type_name'),
-				'airplane_type_image'=>$airplane_type_logo,
+				'airplane_type_image'=>$airplane_type_image,
 				'airplane_type_thumb'=>$airplane_type_thumb,
+				'airplane_type_status'=>$this->input->post('airplane_type_status'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),
 				'modified_by'=>$this->session->userdata('user_id')
 			);
@@ -183,6 +185,61 @@ class Airplane_types_model extends CI_Model
 		$query = $this->db->get();
 		
 		return $query;
+	}
+	public function upload_airplane_type_image($airplane_types_path)
+	{
+		//upload product's gallery images
+		$resize['width'] = 600;
+		$resize['height'] = 800;
+		
+		if(isset($_FILES['airplane_type_image']['tmp_name']))
+		{
+			if(is_uploaded_file($_FILES['airplane_type_image']['tmp_name']))
+			{
+				$image = $this->session->userdata('airplane_type_image_file_name');
+			
+				if(!empty($image))
+				{
+					//delete any other uploaded image
+					$this->file_model->delete_file($airplane_types_path."\\".$this->session->userdata('airplane_type_image_file_name'));
+					
+					//delete any other uploaded thumbnail
+					$this->file_model->delete_file($airplane_types_path."\\thumbnail_".$this->session->userdata('airplane_type_image_file_name'));
+				}
+				
+				//Upload image
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image', $resize);
+				if($response['check'])
+				{
+					$file_name = $response['file_name'];
+					$thumb_name = $response['thumb_name'];
+					
+					//Set sessions for the image details
+					$this->session->set_userdata('airplane_type_image_file_name', $file_name);
+					$this->session->set_userdata('airplane_type_image_thumb_name', $thumb_name);
+					
+					return TRUE;
+				}
+			
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					return FALSE;
+				}
+			}
+			
+			else{
+				$this->session->set_userdata('error_message', '');
+				return FALSE;
+			}
+		}
+		
+		else
+		{
+			$this->session->set_userdata('airplane_type_image_error_message', '');
+			return FALSE;
+		}
 	}
 }
 ?>

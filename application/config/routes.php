@@ -93,7 +93,7 @@ $route['administration/activate-visitor/(:num)/(:num)'] = 'admin/visitors/activa
 $route['administration/deactivate-visitor/(:num)/(:num)'] = 'admin/visitors/deactivate_visitor/$1/$2';
 $route['administration/delete-visitor/(:num)/(:num)'] = 'admin/visitors/delete_visitor/$1/$2';
 
-//airplane types
+//airplane types: admin
 $route['administration/all-airplane-types'] = 'admin/airplane_types/index';
 $route['administration/all-airplane-types/(:num)'] = 'admin/airplane_types/index/$1';//with a page number
 $route['administration/add-airplane-type'] = 'admin/airplane_types/add_airplane_type';
@@ -101,6 +101,15 @@ $route['administration/edit-airplane-type/(:num)'] = 'admin/airplane_types/edit_
 $route['administration/activate-airplane-type/(:num)/(:num)'] = 'admin/airplane_types/activate_airplane_type/$1/$2';
 $route['administration/deactivate-airplane-type/(:num)/(:num)'] = 'admin/airplane_types/deactivate_airplane_type/$1/$2';
 $route['administration/delete-airplane-type/(:num)/(:num)'] = 'admin/airplane_types/delete_airplane_type/$1/$2';
+
+//airplane types: airline
+$route['airline/all-airplane-types'] = 'airline/airplane_types/index';
+$route['airline/all-airplane-types/(:num)'] = 'airline/airplane_types/index/$1';//with a page number
+$route['airline/add-airplane-type'] = 'airline/airplane_types/add_airplane_type';
+$route['airline/edit-airplane-type/(:num)'] = 'airline/airplane_types/edit_airplane_type/$1';
+$route['airline/activate-airplane-type/(:num)/(:num)'] = 'airline/airplane_types/activate_airplane_type/$1/$2';
+$route['airline/deactivate-airplane-type/(:num)/(:num)'] = 'airline/airplane_types/deactivate_airplane_type/$1/$2';
+$route['airline/delete-airplane-type/(:num)/(:num)'] = 'airline/airplane_types/delete_airplane_type/$1/$2';
 
 //airports
 $route['administration/all-airports'] = 'admin/airports/index';
@@ -111,6 +120,15 @@ $route['administration/activate-airport/(:num)/(:num)'] = 'admin/airports/activa
 $route['administration/deactivate-airport/(:num)/(:num)'] = 'admin/airports/deactivate_airport/$1/$2';
 $route['administration/delete-airport/(:num)/(:num)'] = 'admin/airports/delete_airport/$1/$2';
 
+//airports: airline
+$route['airline/all-airports'] = 'airline/airports/index';
+$route['airline/all-airports/(:num)'] = 'airline/airports/index/$1';//with a page number
+$route['airline/add-airport'] = 'airline/airports/add_airport';
+$route['airline/edit-airport/(:num)'] = 'airline/airports/edit_airport/$1';
+$route['airline/activate-airport/(:num)/(:num)'] = 'airline/airports/activate_airport/$1/$2';
+$route['airline/deactivate-airport/(:num)/(:num)'] = 'airline/airports/deactivate_airport/$1/$2';
+$route['airline/delete-airport/(:num)/(:num)'] = 'airline/airports/delete_airport/$1/$2';
+
 //flight types
 $route['administration/all-flight-types'] = 'admin/flight_types/index';
 $route['administration/all-flight-types/(:num)'] = 'admin/flight_types/index/$1';//with a page number
@@ -119,6 +137,24 @@ $route['administration/edit-flight-type/(:num)'] = 'admin/flight_types/edit_flig
 $route['administration/activate-flight-type/(:num)/(:num)'] = 'admin/flight_types/activate_flight_type/$1/$2';
 $route['administration/deactivate-flight-type/(:num)/(:num)'] = 'admin/flight_types/deactivate_flight_type/$1/$2';
 $route['administration/delete-flight-type/(:num)/(:num)'] = 'admin/flight_types/delete_flight_type/$1/$2';
+
+//flight types: airline
+$route['airline/all-flight-types'] = 'airline/flight_types/index';
+$route['airline/all-flight-types/(:num)'] = 'airline/flight_types/index/$1';//with a page number
+$route['airline/add-flight-type'] = 'airline/flight_types/add_flight_type';
+$route['airline/edit-flight-type/(:num)'] = 'airline/flight_types/edit_flight_type/$1';
+$route['airline/activate-flight-type/(:num)/(:num)'] = 'airline/flight_types/activate_flight_type/$1/$2';
+$route['airline/deactivate-flight-type/(:num)/(:num)'] = 'airline/flight_types/deactivate_flight_type/$1/$2';
+$route['airline/delete-flight-type/(:num)/(:num)'] = 'airline/flight_types/delete_flight_type/$1/$2';
+
+//flight: airline
+$route['airline/all-flights'] = 'airline/flights/index';
+$route['airline/all-flights/(:num)'] = 'airline/flights/index/$1';//with a page number
+$route['airline/add-flight'] = 'airline/flights/add_flight';
+$route['airline/edit-flight/(:num)'] = 'airline/flights/edit_flight/$1';
+$route['airline/activate-flight/(:num)/(:num)'] = 'airline/flights/activate_flight/$1/$2';
+$route['airline/deactivate-flight/(:num)/(:num)'] = 'airline/flights/deactivate_flight/$1/$2';
+$route['airline/delete-flight/(:num)/(:num)'] = 'airline/flights/delete_flight/$1/$2';
 
 /*
 *	Airline Routes

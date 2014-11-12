@@ -64,7 +64,7 @@
 					$creators = $this->users_model->get_user($created_by);
 				}
 				//airline
-				if($user_type_id == 2)
+				else
 				{
 					$creators = $this->airlines_model->get_airline($created_by);
 				}

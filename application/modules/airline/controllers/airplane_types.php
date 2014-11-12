@@ -5,7 +5,7 @@ require_once "./application/modules/airline/controllers/account.php";
 class Airplane_types extends account 
 {
 	var $airplane_types_path;
-	var $airplane_types_logo_path;
+	var $airplane_types_image_path;
 	
 	function __construct()
 	{
@@ -18,7 +18,7 @@ class Airplane_types extends account
 		
 		//path to image directory
 		$this->airplane_types_path = realpath(APPPATH . '../assets/images/airplane_types');
-		$this->airplane_types_logo_path = base_url().'/assets/images/airplane_types/';
+		$this->airplane_types_image_path = base_url().'/assets/images/airplane_types/';
 	}
     
 	/*
@@ -33,8 +33,8 @@ class Airplane_types extends account
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$this->load->model('admin/airlines_model');
-		$config['base_url'] = base_url().'administration/all-airplane-types';
+		$this->load->model('admin/airplane_types_model');
+		$config['base_url'] = base_url().'airplane_type/all-airplane-types';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 20;
@@ -72,13 +72,14 @@ class Airplane_types extends account
 		{
 			$v_data['query'] = $query;
 			$v_data['page'] = $page;
-			$v_data['airplane_types_logo_path'] = $this->airplane_types_logo_path;
+			$v_data['title'] = 'Airplane Types';
+			$v_data['airplane_types_image_path'] = $this->airplane_types_image_path;
 			$data['content'] = $this->load->view('airplane_types/list_types', $v_data, true);
 		}
 		
 		else
 		{
-			$data['content'] = '<a href="'.site_url().'administration/add-airplane-type" class="btn btn-success pull-right">Add Airplane Type</a>There are no airplane_types';
+			$data['content'] = '<a href="'.site_url().'airplane_type/add-airplane-type" class="btn btn-success pull-right">Add Airplane Type</a>There are no airplane types';
 		}
 		$data['title'] = 'All Airplane Types';
 		
@@ -92,52 +93,34 @@ class Airplane_types extends account
 	*/
 	public function add_airplane_type() 
 	{
+		$v_data['airplane_type_image'] = 'http://placehold.it/300x300';
+		$v_data['airplane_type_name_error'] = '';
+		$v_data['airplane_type_status_error'] = '';
+		
+		//upload image if exists
+		if($this->airplane_types_model->upload_airplane_type_image($this->airplane_types_path))
+		{
+			$v_data['airplane_type_image'] = $this->airplane_types_image_path.$this->session->userdata('airplane_type_image_file_name');
+		}
+		
 		//form validation rules
-		$this->form_validation->set_rules('airplane_type_name', 'Airplane Type Name', 'required|is_unique[airplane_type.airplane_type_name]|xss_clean');
+		$this->form_validation->set_rules('airplane_type_name', 'Airplane Type', 'required|is_unique[airplane_type.airplane_type_name]|xss_clean');
 		$this->form_validation->set_rules('airplane_type_image', 'Airplane Type Image', 'xss_clean');
 		$this->form_validation->set_rules('airplane_type_status', 'Airplane Type Status', 'required|xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{
-			//upload product's gallery images
-			$resize['width'] = 600;
-			$resize['height'] = 800;
-			
-			if(is_uploaded_file($_FILES['airplane_type_image']['tmp_name']))
-			{
-				$airplane_types_path = $this->airplane_types_path;
-				/*
-					-----------------------------------------------------------------------------------------
-					Upload image
-					-----------------------------------------------------------------------------------------
-				*/
-				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image', $resize);
-				if($response['check'])
-				{
-					$file_name = $response['file_name'];
-					$thumb_name = $response['thumb_name'];
-				}
-			
-				else
-				{
-					$this->session->set_userdata('error_message', $response['error']);
-					
-					$data['title'] = 'Add New Airplane Type';
-					$data['content'] = $this->load->view('airplane_types/add_airplane_type', $v_data, true);
-					$this->load->view('templates/general_admin', $data);
-					break;
-				}
-			}
-			
-			else{
-				$file_name = '';
-			}
+			$file_name = $this->session->userdata('airplane_type_image_file_name');
+			$thumb_name = $this->session->userdata('airplane_type_image_thumb_name');
 			
 			if($this->airplane_types_model->add_airplane_type($file_name, $thumb_name))
 			{
+				$this->session->unset_userdata('airplane_type_image_file_name');
+				$this->session->unset_userdata('airplane_type_image_thumb_name');
+				
 				$this->session->set_userdata('success_message', 'Airplane type added successfully');
-				redirect('administration/add-airplane-type');
+				redirect('airline/all-airplane-types');
 			}
 			
 			else
@@ -145,11 +128,41 @@ class Airplane_types extends account
 				$this->session->set_userdata('error_message', 'Could not add airplane type. Please try again');
 			}
 		}
+		else
+		{
+			$image = $this->session->userdata('airplane_type_image_file_name');
+			
+			if(!empty($image))
+			{
+				$v_data['airplane_type_image'] = $this->airplane_types_image_path.$image;
+			}
+			$validation_errors = validation_errors();
+			
+			//repopulate form data if validation errors are present
+			if(!empty($validation_errors))
+			{
+				//create errors
+				$v_data['airplane_type_name_error'] = form_error('airplane_type_name');
+				$v_data['airplane_type_status_error'] = form_error('airplane_type_status');
+				
+				//repopulate fields
+				$v_data['airplane_type_name'] = set_value('airplane_type_name');
+				$v_data['airplane_type_status'] = set_value('airplane_type_status');
+			}
+			
+			//populate form data on initial load of page
+			else
+			{
+				$v_data['airplane_type_name'] = '';
+				$v_data['airplane_type_status'] = '';
+			}
+		}
 		
 		//open the add new airplane_type
 		$data['title'] = 'Add New Airplane Type';
-		$data['content'] = $this->load->view('airplane_types/add_airplane_type', '', true);
-		$this->load->view('templates/general_admin', $data);
+		$v_data['title'] = 'Add New Airplane Type';
+		$data['content'] = $this->load->view('airplane_types/add_airplane_type', $v_data, true);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -160,98 +173,123 @@ class Airplane_types extends account
 	*/
 	public function edit_airplane_type($airplane_type_id) 
 	{
+		//select the airplane_type from the database
+		$query = $this->airplane_types_model->get_airplane_type($airplane_type_id);
+		
+		$v_data['airplane_type_image'] = 'http://placehold.it/300x300';
+		$v_data['airplane_type_name_error'] = '';
+		$v_data['airplane_type_status_error'] = '';
+		
+		//upload image if exists
+		if($this->airplane_types_model->upload_airplane_type_image($this->airplane_types_path))
+		{
+			$v_data['airplane_type_image'] = $this->airplane_types_image_path.$this->session->userdata('airplane_type_image_file_name');
+		}
+		
 		//form validation rules
-		$this->form_validation->set_rules('airplane_type_name', 'Airplane Type Name', 'required|is_unique[airplane_type.airplane_type_name]|xss_clean');
+		$this->form_validation->set_rules('airplane_type_name', 'Airplane Type', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('airplane_type_image', 'Airplane Type Image', 'xss_clean');
 		$this->form_validation->set_rules('airplane_type_status', 'Airplane Type Status', 'required|xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{
-			//upload product's gallery images
-			$resize['width'] = 600;
-			$resize['height'] = 800;
+			$image = $this->session->userdata('airplane_type_image_file_name');
 			
-			if(is_uploaded_file($_FILES['airplane_type_image']['tmp_name']))
+			if(!empty($image))
 			{
-				$airplane_types_path = $this->airplane_types_path;
-				
-				//delete original image
-				$this->file_model->delete_file($airplane_types_path."\\".$this->input->post('current_image'));
-				
-				//delete original thumbnail
-				$this->file_model->delete_file($airplane_types_path."\\thumbnail_".$this->input->post('current_image'));
-				
-				/*
-					-----------------------------------------------------------------------------------------
-					Upload image
-					-----------------------------------------------------------------------------------------
-				*/
-				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image', $resize);
-				if($response['check'])
-				{
-					$file_name = $response['file_name'];
-					$thumb_name = $response['thumb_name'];
-				}
-			
-				else
-				{
-					$this->session->set_userdata('error_message', $response['error']);
-					
-					$data['title'] = 'Edit Airplane Type';
-					$query = $this->airplane_types_model->get_airplane_type($airplane_type_id);
-					if ($query->num_rows() > 0)
-					{
-						$v_data['airplane_type'] = $query->result();
-						$v_data['image_location'] = $this->airplane_types_logo_path;
-						$data['content'] = $this->load->view('airplane_types/edit_airplane_type', $v_data, true);
-					}
-					
-					else
-					{
-						$data['content'] = 'Airplane Type does not exist';
-					}
-					
-					$this->load->view('templates/general_admin', $data);
-					break;
-				}
+				$file_name = $image;
+				$thumb_name = $this->session->userdata('airplane_type_image_thumb_name');
 			}
-			
-			else{
+			else
+			{
 				$file_name = $this->input->post('current_image');
+				$thumb_name = 'thumbnail_'.$this->input->post('current_image');
 			}
-			//update airplane_type
+			
 			if($this->airplane_types_model->update_airplane_type($file_name, $thumb_name, $airplane_type_id))
 			{
-				$this->session->set_userdata('success_message', 'Airplane Type edited successfully');
-				redirect('administration/edit-airplane-type/'.$airplane_type_id);
+				$this->session->unset_userdata('airplane_type_image_file_name');
+				$this->session->unset_userdata('airplane_type_image_thumb_name');
+				
+				$this->session->set_userdata('success_message', 'Airplane type updated successfully');
+				redirect('airline/all-airplane-types');
 			}
 			
 			else
 			{
-				$this->session->set_userdata('error_message', 'Could not edit airplane_type. Please try again');
+				$this->session->set_userdata('error_message', 'Could not update airplane type. Please try again');
+			}
+		}
+		else
+		{
+			$validation_errors = validation_errors();
+			
+			//repopulate form data if validation errors are present
+			if(!empty($validation_errors))
+			{
+				//create errors
+				$v_data['airplane_type_name_error'] = form_error('airplane_type_name');
+				$v_data['airplane_type_status_error'] = form_error('airplane_type_status');
+				
+				//repopulate fields
+				$v_data['airplane_type_name'] = set_value('airplane_type_name');
+				$v_data['airplane_type_status'] = set_value('airplane_type_status');
+				
+				if ($query->num_rows() > 0)
+				{
+					$airplane_type = $query->row();
+					
+					$image = $this->session->userdata('airplane_type_image_file_name');
+					
+					if(!empty($image))
+					{
+						$v_data['airplane_type_image'] = $this->airplane_types_image_path.$image;
+						$v_data['image'] = $airplane_type->airplane_type_image;
+					}
+					else
+					{
+						$v_data['airplane_type_image'] = $this->airplane_types_image_path.$airplane_type->airplane_type_image;
+						$v_data['image'] = $airplane_type->airplane_type_image;
+					}
+				}
+			}
+			
+			//populate form data on initial load of page
+			else
+			{
+				if ($query->num_rows() > 0)
+				{
+					$airplane_type = $query->row();
+					$v_data['airplane_type_name'] = $airplane_type->airplane_type_name;
+					$v_data['airplane_type_status'] = $airplane_type->airplane_type_status;
+					
+					$image = $this->session->userdata('airplane_type_image_file_name');
+					
+					if(!empty($image))
+					{
+						$v_data['airplane_type_image'] = $this->airplane_types_image_path.$image;
+						$v_data['image'] = $airplane_type->airplane_type_image;
+					}
+					else
+					{
+						$v_data['airplane_type_image'] = $this->airplane_types_image_path.$airplane_type->airplane_type_image;
+						$v_data['image'] = $airplane_type->airplane_type_image;
+					}
+				}
+				
+				else
+				{
+					$data['content'] = 'Airplane Type does not exist';
+				}
 			}
 		}
 		
 		//open the add new airplane_type
 		$data['title'] = 'Edit Airplane Type';
-		
-		//select the airplane_type from the database
-		$query = $this->airplane_types_model->get_airplane_type($airplane_type_id);
-		
-		if ($query->num_rows() > 0)
-		{
-			$v_data['airplane_type'] = $query->result();
-			$v_data['image_location'] = $this->airplane_types_logo_path;
-			
-			$data['content'] = $this->load->view('airplane_types/edit_airplane_type', $v_data, true);
-		}
-		
-		else
-		{
-			$data['content'] = 'Airplane Type does not exist';
-		}
-		
-		$this->load->view('templates/general_admin', $data);
+		$v_data['title'] = 'Edit Airplane Type';
+		$data['content'] = $this->load->view('airplane_types/edit_airplane_type', $v_data, true);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -262,7 +300,7 @@ class Airplane_types extends account
 	*/
 	public function delete_airplane_type($airplane_type_id, $page)
 	{
-		//delete airline image
+		//delete airplane_type image
 		$query = $this->airplane_types_model->get_airplane_type($airplane_type_id);
 		
 		if ($query->num_rows() > 0)
@@ -288,7 +326,7 @@ class Airplane_types extends account
 		{
 			$this->session->set_userdata('error_message', 'Airplane Type could not be deleted');
 		}
-		redirect('administration/all-airplane-types/'.$page);
+		redirect('airline/all-airplane-types/'.$page);
 	}
     
 	/*
@@ -308,7 +346,7 @@ class Airplane_types extends account
 		{
 			$this->session->set_userdata('error_message', 'Airplane Type could not be activated');
 		}
-		redirect('administration/all-airplane-types/'.$page);
+		redirect('airline/all-airplane-types/'.$page);
 	}
     
 	/*
@@ -328,7 +366,7 @@ class Airplane_types extends account
 		{
 			$this->session->set_userdata('error_message', 'Airplane Type could not be disabled');
 		}
-		redirect('administration/all-airplane-types/'.$page);
+		redirect('airline/all-airplane-types/'.$page);
 	}
 }
 ?>

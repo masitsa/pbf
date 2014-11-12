@@ -37,15 +37,14 @@
     <link href="<?php echo base_url()."assets/themes/bluish";?>/style/widgets.css" rel="stylesheet">
     <!-- Slim slidebar stylesheet -->
     <link href="<?php echo base_url()."assets/themes/bluish";?>/style/slim_style.css" rel="stylesheet">
-<style type="text/css">.center-align{margin:0 auto; text-align:center;}</style>
-  
-  
-  <!-- HTML5 Support for IE -->
-  <!--[if lt IE 9]>
-  <script src="<?php echo base_url()."assets/themes/bluish";?>js/html5shim.js"></script>
-  <![endif]-->
-
-  <!-- Favicon -->
-   <link rel="shortcut icon" href="<?php echo base_url()."assets/themes/bluish";?>img/favicon/favicon.png">
-<script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.js"></script>
+	<style type="text/css">.center-align{margin:0 auto; text-align:center;}</style>
+	
+    <!-- HTML5 Support for IE -->
+    <!--[if lt IE 9]>
+    <script src="<?php echo base_url()."assets/themes/bluish";?>js/html5shim.js"></script>
+    <![endif]-->
+    
+    <!-- Favicon -->
+   	<link rel="shortcut icon" href="<?php echo base_url()."assets/themes/bluish";?>img/favicon/favicon.png">
+	<script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.js"></script>
 </head>

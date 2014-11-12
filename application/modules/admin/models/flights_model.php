@@ -1,68 +1,73 @@
 <?php
 
-class Visitors_model extends CI_Model 
+class Flights_model extends CI_Model 
 {	
 	/*
-	*	Retrieve all active visitors
+	*	Retrieve all active flights
 	*
 	*/
-	public function all_active_visitors()
+	public function all_active_flights()
 	{
-		$this->db->where('visitor_status = 1');
-		$query = $this->db->get('visitor');
+		$this->db->where('flight_status = 1');
+		$query = $this->db->get('flight');
 		
 		return $query;
 	}
 	
 	/*
-	*	Retrieve latest visitor
+	*	Retrieve latest flight
 	*
 	*/
-	public function latest_visitor()
+	public function latest_flight()
 	{
 		$this->db->limit(1);
 		$this->db->order_by('created', 'DESC');
-		$query = $this->db->get('visitor');
+		$query = $this->db->get('flight');
 		
 		return $query;
 	}
 	
 	/*
-	*	Retrieve all visitors
+	*	Retrieve all flights
 	*	@param string $table
 	* 	@param string $where
 	*
 	*/
-	public function get_all_visitors($table, $where, $per_page, $page)
+	public function get_all_flights($table, $where, $per_page, $page)
 	{
 		//retrieve all users
 		$this->db->from($table);
-		$this->db->select('visitor.*, visitor_type.visitor_type_name');
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airplane_type.airplane_type_name');
 		$this->db->where($where);
-		$this->db->order_by('visitor_first_name, visitor_last_name');
+		$this->db->order_by('flight_date, source, destination, flight_departure_time, flight_arrival_time');
 		$query = $this->db->get('', $per_page, $page);
 		
 		return $query;
 	}
 	
 	/*
-	*	Add a new visitor
+	*	Add a new flight
 	*	@param string $image_name
 	*
 	*/
-	public function add_visitor($visitor_logo, $visitor_thumb)
+	public function add_flight($flight_logo, $flight_thumb)
 	{
 		$data = array(
-				'visitor_first_name'=>ucwords(strtolower($this->input->post('visitor_first_name'))),
-				'visitor_last_name'=>ucwords(strtolower($this->input->post('visitor_last_name'))),
-				'visitor_phone'=>$this->input->post('visitor_phone'),
-				'visitor_email'=>$this->input->post('visitor_email'),
-				'visitor_status'=>$this->input->post('visitor_status'),
-				'visitor_type_id'=>$this->input->post('visitor_type_id'),
-				'created'=>date('Y-m-d H:i:s')
+				'flight_date'=>$this->input->post('flight_date'),
+				'flight_departure_time'=>$this->input->post('flight_departure_time'),
+				'flight_arrival_time'=>$this->input->post('flight_arrival_time'),
+				'source'=>$this->input->post('source'),
+				'destination'=>$this->input->post('destination'),
+				'airplane_type_id'=>$this->input->post('airplane_type_id'),
+				'flight_status'=>$this->input->post('flight_status'),
+				'flight_type_id'=>$this->input->post('flight_type_id'),
+				'created'=>date('Y-m-d H:i:s'),
+				'created_by'=>$this->session->userdata('user_id'),
+				'user_type_id'=>$this->session->userdata('user_type_id'),
+				'modified_by'=>$this->session->userdata('user_id')
 			);
 			
-		if($this->db->insert('visitor', $data))
+		if($this->db->insert('flight', $data))
 		{
 			return TRUE;
 		}
@@ -72,24 +77,24 @@ class Visitors_model extends CI_Model
 	}
 	
 	/*
-	*	Update an existing visitor
+	*	Update an existing flight
 	*	@param string $image_name
-	*	@param int $visitor_id
+	*	@param int $flight_id
 	*
 	*/
-	public function update_visitor($visitor_id)
+	public function update_flight($flight_id)
 	{
 		$data = array(
-				'visitor_first_name'=>ucwords(strtolower($this->input->post('visitor_first_name'))),
-				'visitor_last_name'=>ucwords(strtolower($this->input->post('visitor_last_name'))),
-				'visitor_phone'=>$this->input->post('visitor_phone'),
-				'visitor_email'=>$this->input->post('visitor_email'),
-				'visitor_status'=>$this->input->post('visitor_status'),
-				'visitor_type_id'=>$this->input->post('visitor_type_id')
+				'flight_first_name'=>ucwords(strtolower($this->input->post('flight_first_name'))),
+				'flight_last_name'=>ucwords(strtolower($this->input->post('flight_last_name'))),
+				'flight_phone'=>$this->input->post('flight_phone'),
+				'flight_email'=>$this->input->post('flight_email'),
+				'flight_status'=>$this->input->post('flight_status'),
+				'flight_type_id'=>$this->input->post('flight_type_id')
 			);
 			
-		$this->db->where('visitor_id', $visitor_id);
-		if($this->db->update('visitor', $data))
+		$this->db->where('flight_id', $flight_id);
+		if($this->db->update('flight', $data))
 		{
 			return TRUE;
 		}
@@ -99,29 +104,29 @@ class Visitors_model extends CI_Model
 	}
 	
 	/*
-	*	get a single visitor's details
-	*	@param int $visitor_id
+	*	get a single flight's details
+	*	@param int $flight_id
 	*
 	*/
-	public function get_visitor($visitor_id)
+	public function get_flight($flight_id)
 	{
 		//retrieve all users
-		$this->db->from('visitor');
+		$this->db->from('flight');
 		$this->db->select('*');
-		$this->db->where('visitor_id = '.$visitor_id);
+		$this->db->where('flight_id = '.$flight_id);
 		$query = $this->db->get();
 		
 		return $query;
 	}
 	
 	/*
-	*	Delete an existing visitor
-	*	@param int $visitor_id
+	*	Delete an existing flight
+	*	@param int $flight_id
 	*
 	*/
-	public function delete_visitor($visitor_id)
+	public function delete_flight($flight_id)
 	{
-		if($this->db->delete('visitor', array('visitor_id' => $visitor_id)))
+		if($this->db->delete('flight', array('flight_id' => $flight_id)))
 		{
 			return TRUE;
 		}
@@ -131,39 +136,18 @@ class Visitors_model extends CI_Model
 	}
 	
 	/*
-	*	Activate a deactivated visitor
-	*	@param int $visitor_id
+	*	Activate a deactivated flight
+	*	@param int $flight_id
 	*
 	*/
-	public function activate_visitor($visitor_id)
-	{
-		$data = array(
-				'visitor_status' => 1
-			);
-		$this->db->where('visitor_id', $visitor_id);
-		
-		if($this->db->update('visitor', $data))
-		{
-			return TRUE;
-		}
-		else{
-			return FALSE;
-		}
-	}
-	
-	/*
-	*	Deactivate an activated visitor
-	*	@param int $visitor_id
-	*
-	*/
-	public function deactivate_visitor($visitor_id)
+	public function activate_flight($flight_id)
 	{
 		$data = array(
-				'visitor_status' => 0
+				'flight_status' => 1
 			);
-		$this->db->where('visitor_id', $visitor_id);
+		$this->db->where('flight_id', $flight_id);
 		
-		if($this->db->update('visitor', $data))
+		if($this->db->update('flight', $data))
 		{
 			return TRUE;
 		}
@@ -173,13 +157,34 @@ class Visitors_model extends CI_Model
 	}
 	
 	/*
-	*	get all visitor types
+	*	Deactivate an activated flight
+	*	@param int $flight_id
 	*
 	*/
-	public function get_visitor_types()
+	public function deactivate_flight($flight_id)
+	{
+		$data = array(
+				'flight_status' => 0
+			);
+		$this->db->where('flight_id', $flight_id);
+		
+		if($this->db->update('flight', $data))
+		{
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	
+	/*
+	*	get all flight types
+	*
+	*/
+	public function get_flight_types()
 	{
 		//retrieve all users
-		$this->db->from('get_visitor_type');
+		$this->db->from('get_flight_type');
 		$this->db->select('*');
 		$query = $this->db->get();
 		

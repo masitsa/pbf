@@ -13,6 +13,16 @@ class Airports_model extends CI_Model
 		
 		return $query;
 	}
+	/*
+	*	Retrieve all active airports
+	*
+	*/
+	public function all_airports()
+	{
+		$query = $this->db->get('airport');
+		
+		return $query;
+	}
 	
 	/*
 	*	Retrieve latest airport

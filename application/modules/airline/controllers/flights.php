@@ -1,29 +1,32 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once "./application/modules/admin/controllers/admin.php";
+require_once "./application/modules/airline/controllers/airline.php";
 
-class Flight_types extends admin 
+class Flights extends airline 
 {
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('users_model');
-		$this->load->model('flight_types_model');
+		$this->load->model('admin/users_model');
+		$this->load->model('admin/flights_model');
+		$this->load->model('admin/airplane_types_model');
+		$this->load->model('admin/flight_types_model');
+		$this->load->model('admin/airports_model');
 	}
     
 	/*
 	*
-	*	Default action is to show all the registered flight_types
+	*	Default action is to show all the registered flights
 	*
 	*/
 	public function index() 
 	{
-		$where = 'flight_type_id > 0';
-		$table = 'flight_type';
+		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id';
+		$table = 'flight, airline, flight_type, airplane_type';
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$config['base_url'] = base_url().'administration/all-flight-types';
+		$config['base_url'] = base_url().'airline/all-flights';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 20;
@@ -56,95 +59,106 @@ class Flight_types extends admin
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
         $data["links"] = $this->pagination->create_links();
-		$query = $this->flight_types_model->get_all_flight_types($table, $where, $config["per_page"], $page);
+		$query = $this->flights_model->get_all_flights($table, $where, $config["per_page"], $page);
 		
 		if ($query->num_rows() > 0)
 		{
 			$v_data['query'] = $query;
 			$v_data['page'] = $page;
-			$data['content'] = $this->load->view('flight_types/all_flight_types', $v_data, true);
+			$v_data['airports_query'] = $this->airports_model->all_airports();
+			$data['content'] = $this->load->view('flights/all_flights', $v_data, true);
 		}
 		
 		else
 		{
-			$data['content'] = '<a href="'.site_url().'administration/add-flight_type" class="btn btn-success pull-right">Add Flight Type</a>There are no flight_types';
+			$data['content'] = '<a href="'.site_url().'airline/add-flight" class="btn btn-success pull-right">Add Flight</a>There are no flights';
 		}
 		$data['title'] = 'All Flight Types';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
 	*
-	*	Add a new flight_type
+	*	Add a new flight
 	*
 	*/
-	public function add_flight_type() 
+	public function add_flight() 
 	{
 		//form validation rules
-		$this->form_validation->set_rules('flight_type_name', 'Flight Type Name', 'required|xss_clean');
-		$this->form_validation->set_rules('flight_type_status', 'Status', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_date', 'Departure Date', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_departure_time', 'Departure Time', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_arrival_time', 'Arrival Time', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_type_id', 'Flight Type', 'required|xss_clean');
+		$this->form_validation->set_rules('source', 'Source', 'required|xss_clean');
+		$this->form_validation->set_rules('destination', 'Destination', 'required|xss_clean');
+		$this->form_validation->set_rules('airplane_type_id', 'Airplane Type', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_status', 'Status', 'required|xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{	
-			if($this->flight_types_model->add_flight_type())
+			if($this->flights_model->add_flight())
 			{
-				$this->session->set_userdata('success_message', 'Flight type added successfully');
-				redirect('administration/add-flight-type');
+				$this->session->set_userdata('success_message', 'Flight added successfully');
+				redirect('airline/add-flight');
 			}
 			
 			else
 			{
-				$this->session->set_userdata('error_message', 'Could not add flight type. Please try again');
+				$this->session->set_userdata('error_message', 'Could not add flight. Please try again');
 			}
 		}
 		
-		//open the add new flight_type
-		$data['title'] = 'Add New Flight Type';
-		$data['content'] = $this->load->view('flight_types/add_flight_type', $v_data, true);
-		$this->load->view('templates/general_admin', $data);
+		//open the add new flight
+		$data['title'] = 'Add New Flight';
+		$v_data['title'] = 'Add New Flight';
+		$v_data['airports_query'] = $this->airports_model->all_active_airports();
+		$v_data['flight_type_query'] = $this->flight_types_model->all_active_flight_types();
+		$v_data['airplane_type_query'] = $this->airplane_types_model->all_active_airplane_types();
+		$data['content'] = $this->load->view('flights/add_flight', $v_data, true);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
 	*
-	*	Edit an existing flight_type
-	*	@param int $flight_type_id
+	*	Edit an existing flight
+	*	@param int $flight_id
 	*
 	*/
-	public function edit_flight_type($flight_type_id) 
+	public function edit_flight($flight_id) 
 	{
 		//form validation rules
-		$this->form_validation->set_rules('flight_type_name', 'Flight Type Name', 'required|xss_clean');
-		$this->form_validation->set_rules('flight_type_status', 'Status', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_name', 'Flight Type Name', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_status', 'Status', 'required|xss_clean');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{
-			//update flight_type
-			if($this->flight_types_model->update_flight_type($flight_type_id))
+			//update flight
+			if($this->flights_model->update_flight($flight_id))
 			{
 				$this->session->set_userdata('success_message', 'Flight type edited successfully');
-				redirect('administration/edit-flight-type/'.$flight_type_id);
+				redirect('airline/edit-flight/'.$flight_id);
 			}
 			
 			else
 			{
-				$this->session->set_userdata('error_message', 'Could not edit flight_type. Please try again');
+				$this->session->set_userdata('error_message', 'Could not edit flight. Please try again');
 			}
 		}
 		
-		//open the add new flight_type
+		//open the add new flight
 		$data['title'] = 'Edit Flight Type';
 		
-		//select the flight_type from the database
-		$query = $this->flight_types_model->get_flight_type($flight_type_id);
+		//select the flight from the database
+		$query = $this->flights_model->get_flight($flight_id);
 		
 		if ($query->num_rows() > 0)
 		{
-			$v_data['flight_type'] = $query->result();
+			$v_data['flight'] = $query->result();
 			
-			$data['content'] = $this->load->view('flight_types/edit_flight_type', $v_data, true);
+			$data['content'] = $this->load->view('flights/edit_flight', $v_data, true);
 		}
 		
 		else
@@ -152,18 +166,18 @@ class Flight_types extends admin
 			$data['content'] = 'Flight type does not exist';
 		}
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
 	*
-	*	Delete an existing flight_type
-	*	@param int $flight_type_id
+	*	Delete an existing flight
+	*	@param int $flight_id
 	*
 	*/
-	public function delete_flight_type($flight_type_id, $page)
+	public function delete_flight($flight_id, $page)
 	{
-		if($this->flight_types_model->delete_flight_type($flight_type_id))
+		if($this->flights_model->delete_flight($flight_id))
 		{
 			$this->session->set_userdata('success_message', 'Flight Type has been deleted');
 		}
@@ -172,18 +186,18 @@ class Flight_types extends admin
 		{
 			$this->session->set_userdata('error_message', 'Flight Type could not be deleted');
 		}
-		redirect('administration/all-flight-types/'.$page);
+		redirect('airline/all-flights/'.$page);
 	}
     
 	/*
 	*
-	*	Activate an existing flight_type
-	*	@param int $flight_type_id
+	*	Activate an existing flight
+	*	@param int $flight_id
 	*
 	*/
-	public function activate_flight_type($flight_type_id, $page)
+	public function activate_flight($flight_id, $page)
 	{
-		if($this->flight_types_model->activate_flight_type($flight_type_id))
+		if($this->flights_model->activate_flight($flight_id))
 		{
 			$this->session->set_userdata('success_message', 'Flight Type has been activated');
 		}
@@ -192,18 +206,18 @@ class Flight_types extends admin
 		{
 			$this->session->set_userdata('error_message', 'Flight Type could not be activated');
 		}
-		redirect('administration/all-flight-types/'.$page);
+		redirect('airline/all-flights/'.$page);
 	}
     
 	/*
 	*
-	*	Deactivate an existing flight_type
-	*	@param int $flight_type_id
+	*	Deactivate an existing flight
+	*	@param int $flight_id
 	*
 	*/
-	public function deactivate_flight_type($flight_type_id, $page)
+	public function deactivate_flight($flight_id, $page)
 	{
-		if($this->flight_types_model->deactivate_flight_type($flight_type_id))
+		if($this->flights_model->deactivate_flight($flight_id))
 		{
 			$this->session->set_userdata('success_message', 'Flight Type has been disabled');
 		}
@@ -212,7 +226,7 @@ class Flight_types extends admin
 		{
 			$this->session->set_userdata('error_message', 'Flight Type could not be disabled');
 		}
-		redirect('administration/all-flight-types/'.$page);
+		redirect('airline/all-flights/'.$page);
 	}
 }
 ?>

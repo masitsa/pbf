@@ -1,14 +1,14 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once "./application/modules/admin/controllers/admin.php";
+require_once "./application/modules/airline/controllers/airline.php";
 
-class Airports extends admin 
+class Airports extends airline 
 {
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('users_model');
-		$this->load->model('airports_model');
+		$this->load->model('admin/users_model');
+		$this->load->model('admin/airports_model');
 	}
     
 	/*
@@ -23,13 +23,12 @@ class Airports extends admin
 		$segment = 3;
 		//pagination
 		$this->load->library('pagination');
-		$this->load->model('airlines_model');
-		$config['base_url'] = base_url().'administration/all-airports';
+		$this->load->model('admin/airlines_model');
+		$config['base_url'] = base_url().'airline/all-airports';
 		$config['total_rows'] = $this->users_model->count_items($table, $where);
 		$config['uri_segment'] = $segment;
 		$config['per_page'] = 20;
 		$config['num_links'] = 5;
-		
 		
 		$config['full_tag_open'] = '<ul class="pagination pull-right">';
 		$config['full_tag_close'] = '</ul>';
@@ -54,6 +53,7 @@ class Airports extends admin
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$this->pagination->initialize($config);
+		$v_data['title'] = 'All Airports';
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
         $data["links"] = $this->pagination->create_links();
@@ -68,11 +68,11 @@ class Airports extends admin
 		
 		else
 		{
-			$data['content'] = '<a href="'.site_url().'administration/add-airport" class="btn btn-success pull-right">Add Airport</a>There are no airports';
+			$data['content'] = '<a href="'.site_url().'airline/add-airport" class="btn btn-success pull-right">Add Airport</a>There are no airports';
 		}
 		$data['title'] = 'All Airports';
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -93,7 +93,7 @@ class Airports extends admin
 			if($this->airports_model->add_airport())
 			{
 				$this->session->set_userdata('success_message', 'Airport added successfully');
-				redirect('administration/add-airport');
+				redirect('airline/add-airport');
 			}
 			
 			else
@@ -104,8 +104,9 @@ class Airports extends admin
 		
 		//open the add new airport
 		$data['title'] = 'Add New Airport';
-		$data['content'] = $this->load->view('airports/add_airport', '', true);
-		$this->load->view('templates/general_admin', $data);
+		$v_data['title'] = 'Add New Airport';
+		$data['content'] = $this->load->view('airports/add_airport', $v_data, true);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -128,7 +129,7 @@ class Airports extends admin
 			if($this->airports_model->update_airport($airport_id))
 			{
 				$this->session->set_userdata('success_message', 'Airport edited successfully');
-				redirect('administration/edit-airport/'.$airport_id);
+				redirect('airline/edit-airport/'.$airport_id);
 			}
 			
 			else
@@ -139,6 +140,7 @@ class Airports extends admin
 		
 		//open the add new airport
 		$data['title'] = 'Edit Airport';
+		$v_data['title'] = 'Edit Airport';
 		
 		//select the airport from the database
 		$query = $this->airports_model->get_airport($airport_id);
@@ -155,7 +157,7 @@ class Airports extends admin
 			$data['content'] = 'Airport does not exist';
 		}
 		
-		$this->load->view('templates/general_admin', $data);
+		$this->load->view('account_template', $data);
 	}
     
 	/*
@@ -175,7 +177,7 @@ class Airports extends admin
 		{
 			$this->session->set_userdata('error_message', 'Airport could not be deleted');
 		}
-		redirect('administration/all-airports/'.$page);
+		redirect('airline/all-airports/'.$page);
 	}
     
 	/*
@@ -195,7 +197,7 @@ class Airports extends admin
 		{
 			$this->session->set_userdata('error_message', 'Airport could not be activated');
 		}
-		redirect('administration/all-airports/'.$page);
+		redirect('airline/all-airports/'.$page);
 	}
     
 	/*
@@ -215,7 +217,7 @@ class Airports extends admin
 		{
 			$this->session->set_userdata('error_message', 'Airport could not be disabled');
 		}
-		redirect('administration/all-airports/'.$page);
+		redirect('airline/all-airports/'.$page);
 	}
 }
 ?>
