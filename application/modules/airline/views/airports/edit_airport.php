@@ -1,5 +1,8 @@
+<div class="col-lg-12" style="margin-bottom:5px;">
+    <a href="<?php echo site_url()?>airline/all-airports" class="btn btn-primary pull-right">Back to Airpot List</a>
+</div>
 <div class="col-lg-12">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <?php echo $title;?>
         </div>
@@ -89,8 +92,8 @@
                 </div>
             </div>
             <div class="form-actions center-align">
-                <button class="submit btn btn-primary" type="submit">
-                    Edit Airport
+                <button class="submit btn btn-success" type="submit">
+                    Update Airport Details
                 </button>
             </div>
             <br />
