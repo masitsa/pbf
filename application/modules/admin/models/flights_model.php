@@ -37,7 +37,7 @@ class Flights_model extends CI_Model
 	{
 		//retrieve all users
 		$this->db->from($table);
-		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airplane_type.airplane_type_name');
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
 		$this->db->where($where);
 		$this->db->order_by('flight_date, source, destination, flight_departure_time, flight_arrival_time');
 		$query = $this->db->get('', $per_page, $page);
@@ -201,6 +201,23 @@ class Flights_model extends CI_Model
 		$query = $this->db->get();
 		
 		return $query;
+	}
+	
+	public function get_max_flight_price()
+	{
+		//retrieve all users
+		$this->db->from('flight');
+		$this->db->select('MAX(flight_price) AS max_price');
+		$query = $this->db->get();
+		
+		$max_price = 0;
+		if($query->num_rows() > 0)
+		{
+			$row = $query->row();
+			$max_price = $row->max_price;
+		}
+		
+		return $max_price;
 	}
 }
 ?>

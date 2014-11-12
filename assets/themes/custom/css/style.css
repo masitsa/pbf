@@ -153,6 +153,19 @@ fieldset img{max-width:300px;}
 legend{border-bottom: medium none; margin-bottom: 0; padding: 0 0.1em; text-align: left !important; width: auto; color: #fff; font-size: 1.5em; font-weight:bold; text-transform:capitalize;}
 fieldset .review-text{color:#fff;}
 
+/* product list */
+.glyphicon { margin-right:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+.panel-body .badge{float: right; background-color:#cecece;}
+.panel-default > .panel-heading {background-color: #5CA0D1; border:none; border-radius:0px; color: #fff;}
+.panel-title a:hover, .panel-title a:visited, .panel-title a:active{text-decoration:none;color:#fff;}
+.panel-body a{text-decoration:none;color:#E7302A;}
+.panel-body a:hover, .panel-title a:visited, .panel-title a:active{text-decoration:none;color:#5CA0D1;}
+.cbp-vm-options p{text-align: left;}
+.breadcrumbDiv{padding: 0;}
+
 /* Footer */
 .footer { background: none repeat scroll 0 0 #edeff1;border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}
 .footer ul{list-style:none;}
