@@ -175,6 +175,14 @@ fieldset .review-text{color:#fff;}
 .cbp-vm-view-list .flight_departure {width: 40%;}
 .cbp-vm-view-list .divider-line{display: none;}
 
+.left-search{margin-bottom: 10px;}
+.left-search .form-control{width: 78%;}
+.left-search .btn{width: 20%;}
+.left-search .btn .glyphicon{margin:0 auto; text-align:center;}
+
+form#filter_price, form#filter_custom_price{padding-left: 5%;}
+form#filter_custom_price .form-control{width: 40%; margin-bottom: 2%;}
+
 /* Footer */
 .footer { background: none repeat scroll 0 0 #edeff1;border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}
 .footer ul{list-style:none;}

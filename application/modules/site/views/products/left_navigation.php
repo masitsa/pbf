@@ -1,3 +1,78 @@
+<?php
+	//airlines
+	$active_airlines = $this->airlines_model->all_active_airlines();
+	$active_flights = $this->flights_model->all_active_flights();
+	$airlines = '';
+	
+	if($active_airlines->num_rows() > 0)
+	{
+		foreach($active_airlines->result() as $airline)
+		{
+			$airline_id = $airline->airline_id;
+			$airline_name = $airline->airline_name;
+			
+			$flights = 0;
+			
+			//count flights for airline
+			if($active_flights->num_rows() > 0)
+			{
+				foreach($active_flights->result() as $flight)
+				{
+					$flight_airline_id = $flight->airline_id;
+					
+					if($flight_airline_id == $airline_id)
+					{
+						$flights++;
+					}
+				}
+			}
+			
+			$airlines .= '<tr>
+                                <td>
+                                    <a href="'.base_url().'flights/airline/'.$airline_id.'">'.$airline_name.'</a>
+                                    <span class="badge">'.$flights.'</span>
+                                </td>
+                            </tr>';
+		}
+	}
+	
+	//destinations
+	$active_airlines = $this->airports_model->all_active_airports();
+	$active_flights = $this->flights_model->all_active_flights();
+	$destinations = '';
+	
+	if($active_airlines->num_rows() > 0)
+	{
+		foreach($active_airlines->result() as $destination)
+		{
+			$airport_id = $destination->airport_id;
+			$airport_name = $destination->airport_name;
+			
+			$flights = 0;
+			
+			//count flights for airline
+			if($active_flights->num_rows() > 0)
+			{
+				foreach($active_flights->result() as $flight)
+				{
+					$destination_id = $flight->destination;
+					
+					if($destination_id == $airport_id)
+					{
+						$flights++;
+					}
+				}
+			}
+			
+			$destinations .= '<tr>
+                                <td>
+                                    <a href="'.base_url().'flights/destination/'.$airport_id.'">'.$airport_name.'</a>
+                                    <span class="badge">'.$flights.'</span>
+                                </td>
+                            </tr>';
+		}
+	}
+?>
 <style type="text/css">
 	div.brand-checkbox input[type="checkbox"] {
 		display: none;
@@ -6,6 +81,21 @@
 </style>
 	<!--left column-->
     <div class="col-sm-3 col-md-3">
+    	<?php
+        	$validation_errors = validation_errors();
+			
+			if(!empty($validation_errors))
+			{
+				echo
+				'
+					<div class="alert alert-danger center-align">'.$validation_errors.'</div>
+				';
+			}
+		?>
+        <form class="form-inline left-search" role="form" action="<?php echo site_url().'flights/search-flights';?>" method="post">
+            <input type="text" class="form-control" placeholder="Search" name="search_item">
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </form>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -17,54 +107,7 @@
                 <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <table class="table">
-                            <tr>
-                                <td>
-                                    <a href="#">Air Canada</a>
-                                    <span class="badge">3</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">China Air</a>
-                                    <span class="badge">9</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Emirates</a>
-                                    <span class="badge">6</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">KLM</a>
-                                    <span class="badge">1</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Quantas</a>
-                                    <span class="badge">2</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Swiss Air</a>
-                                    <span class="badge">6</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Turkish Airlines</a>
-                                    <span class="badge">2</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">United Airlines</a>
-                                    <span class="badge">7</span>
-                                </td>
-                            </tr>
+                            <?php echo $airlines;?>
                         </table>
                     </div>
                 </div>
@@ -79,45 +122,8 @@
                 <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
                         <table class="table">
-                            <tr>
-                                <td>
-                                    <a href="#">Nairobi</a>
-                                    <span class="badge">7</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Mara</a>
-                                    <span class="badge">3</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Mombasa</a>
-                                    <span class="badge">2</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Serengeti</a>
-                                    <span class="badge">3</span>
-                                </td>
-                            </tr>
+                            <?php echo $destinations;?>
                         </table>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        </span>Other</a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                          <input type="text" name="search" class="form-control col-md-8" placeholder="Search">
-                          <button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
                 </div>
             </div>
@@ -132,21 +138,21 @@
                 <div id="collapsePrice" class="panel-collapse collapse">
                     <div class="panel-body">
                         <!-- -->
-                        <form action="<?php echo site_url().'products/price_range';?>" id="filter_price">
+                        <form action="<?php echo site_url().'products/price_range';?>" class="form-horizontal" id="filter_price" method="post">
                             <?php echo $price_range;?>
-                            <button type="submit" class="btn btn-default">Filter Price</button>
+                            <div class="center-align">
+                            	<button type="submit" class="btn btn-primary">Filter Price</button>
+                            </div>
                         </form>
                         <hr>
-                        <p>Enter a Price range </p>
+                        <h5>Enter a Price range </h5>
                         <form class="form-inline price_range" role="form" action="<?php echo site_url().'products/price_range';?>" id="filter_custom_price">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="start_price" placeholder="2000">
+                            <input type="text" class="form-control" name="start_price" placeholder="200"> - 
+                            <input type="text" class="form-control" name="end_price" placeholder="300">
+                            
+                            <div class="center-align">
+                            	<button type="submit" class="btn btn-primary">Filter</button>
                             </div>
-                            <div class="form-group sp"> - </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="end_price" placeholder="3000">
-                            </div>
-                            <button type="submit" class="btn btn-default pull-right">Filter</button>
                         </form>
                     </div>
                 </div>
@@ -164,7 +170,7 @@ $(document).on("submit","form#filter_price",function(e)
 	
 	var range = $('input[name="agree"]:checked').val();
 	
-	window.location.href = '<?php echo site_url();?>products/price-range/'+range;
+	window.location.href = '<?php echo site_url();?>flights/price-range/'+range;
 });
 
 //Sort by custom price range
@@ -175,6 +181,6 @@ $(document).on("submit","form#filter_custom_price",function(e)
 	var start = $('input[name="start_price"]').val();
 	var end = $('input[name="end_price"]').val();
 	
-	window.location.href = '<?php echo site_url();?>products/price-range/'+start+'-'+end;
+	window.location.href = '<?php echo site_url();?>flights/price-range/'+start+'-'+end;
 });
 </script>
