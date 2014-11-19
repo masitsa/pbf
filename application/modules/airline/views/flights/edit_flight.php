@@ -16,12 +16,18 @@
             $flight_status = $flight_res->flight_status;
             $flight_arrival_time = $flight_res->flight_arrival_time;
             $flight_price = $flight_res->flight_price;
+            $flight_seats = $flight_res->flight_seats;
         endforeach;
 
      }
 //  end of getting the flight details
 
 ?>
+
+<link rel="stylesheet" href="<?php echo base_url().'assets/themes/pickadate/';?>lib/themes/default.css" id="theme_base">
+<link rel="stylesheet" href="<?php echo base_url().'assets/themes/pickadate/';?>lib/themes/default.date.css" id="theme_date">
+<link rel="stylesheet" href="<?php echo base_url().'assets/themes/pickadate/';?>lib/themes/default.time.css" id="theme_time">
+
 <div class="col-lg-12" style="margin-bottom:5px;">
     <a href="<?php echo site_url()?>airline/all-flights" class="btn btn-primary pull-right">Back to Flight List</a>
 </div>
@@ -206,27 +212,33 @@
                     <div class="form-group">
                         <label class="col-lg-6 control-label">Flight Date</label>
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" name="flight_date" placeholder="Flight Date" value="<?php echo $flight_date ;?>" required>
+                            <input type="text" class="form-control fieldset__input js__datepicker" name="flight_date" placeholder="Flight Date" value="<?php echo $flight_date ;?>" required>
                         </div>
                     </div>
                     <!-- flight Name -->
                     <div class="form-group">
                         <label class="col-lg-6 control-label">Departure Time</label>
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" name="flight_departure_time" placeholder="Departure Time" value="<?php echo $flight_departure_time;?>" required>
+                            <input type="text" class="form-control fieldset__input js__timepicker" name="flight_departure_time" placeholder="Departure Time" value="<?php echo $flight_departure_time;?>" required>
                         </div>
                     </div>
                     <!-- flight Name -->
                     <div class="form-group">
                         <label class="col-lg-6 control-label">Arrival Time</label>
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" name="flight_arrival_time" placeholder="Arrival Time" value="<?php echo $flight_arrival_time;?>" required>
+                            <input type="text" class="form-control fieldset__input js__timepicker" name="flight_arrival_time" placeholder="Arrival Time" value="<?php echo $flight_arrival_time;?>" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-6 control-label">Flight Price</label>
+                        <label class="col-lg-6 control-label">Flight Price ($)</label>
                         <div class="col-lg-6">
                             <input type="text" class="form-control" name="flight_price" placeholder="Flight Price" value="<?php echo $flight_price;?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">Seats Available</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="flight_seats" placeholder="Seats Available" value="<?php echo $flight_seats;?>" required>
                         </div>
                     </div>
                     <!-- Activate checkbox -->
@@ -282,3 +294,8 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+
+<script src="<?php echo base_url().'assets/themes/pickadate/';?>lib/picker.js"></script>
+<script src="<?php echo base_url().'assets/themes/pickadate/';?>lib/picker.date.js"></script>
+<script src="<?php echo base_url().'assets/themes/pickadate/';?>lib/picker.time.js"></script>
+<script src="<?php echo base_url().'assets/themes/pickadate/';?>demo/scripts/demo.js"></script>

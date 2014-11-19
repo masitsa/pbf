@@ -97,6 +97,7 @@ class Flights extends account
 		$this->form_validation->set_rules('flight_status', 'Status', 'required|xss_clean');
 		$this->form_validation->set_rules('trip_type', 'Trip Type', 'required|xss_clean');
 		$this->form_validation->set_rules('flight_price', 'Flight Price', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_seats', 'Seats Available', 'numeric|required|xss_clean');
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{	
@@ -142,6 +143,7 @@ class Flights extends account
 		$this->form_validation->set_rules('flight_status', 'Status', 'required|xss_clean');
 		$this->form_validation->set_rules('trip_type', 'Trip Type', 'required|xss_clean');
 		$this->form_validation->set_rules('flight_price', 'Flight Price', 'required|xss_clean');
+		$this->form_validation->set_rules('flight_seats', 'Seats Available', 'numeric|required|xss_clean');
 		//if form has been submitted
 		if ($this->form_validation->run())
 		{

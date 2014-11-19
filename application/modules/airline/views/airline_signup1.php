@@ -1,4 +1,6 @@
-		
+
+        <!-- Jasny -->
+        <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">		
         <script type="text/javascript" src="<?php echo base_url();?>assets/jasny/jasny-bootstrap.js"></script> 
         <!-- Join  -->
         <div class="grey-background">

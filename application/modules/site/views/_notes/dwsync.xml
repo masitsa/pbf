@@ -6,4 +6,10 @@
 <file name="marketing.php" server="50.63.197.12" local="130529242902031966" remote="130528882800000000" Dst="0" />
 <file name="reset_password.php" server="50.63.197.12" local="130530780182684371" remote="130530420000000000" Dst="0" />
 <file name="not_found.php" server="50.63.197.12" local="130531764028250056" remote="130562533200000000" Dst="0" />
+<file name="marketing.php" server="23.229.204.232/public_html/development/" local="130597418405688040" remote="130602397800000000" Dst="0" />
+<file name="membership.php" server="23.229.204.232/public_html/development/" local="130597418405698040" remote="130602397800000000" Dst="0" />
+<file name="not_found.php" server="23.229.204.232/public_html/development/" local="130597418405718042" remote="130602397800000000" Dst="0" />
+<file name="payment_error.php" server="23.229.204.232/public_html/development/" local="130597418405728042" remote="130602397800000000" Dst="0" />
+<file name="reset_password.php" server="23.229.204.232/public_html/development/" local="130597418405738043" remote="130602398400000000" Dst="0" />
+<file name="thankyou.php" server="23.229.204.232/public_html/development/" local="130597418405898052" remote="130602398400000000" Dst="0" />
 </dwsync>

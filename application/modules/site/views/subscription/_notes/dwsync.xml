@@ -3,4 +3,7 @@
 <file name="school.php" server="50.63.197.12" local="130562871416303689" remote="130562533200000000" Dst="0" />
 <file name="student.php" server="50.63.197.12" local="130562875301535911" remote="130562533200000000" Dst="0" />
 <file name="teacher.php" server="50.63.197.12" local="130562873827011573" remote="130562533200000000" Dst="0" />
+<file name="school.php" server="23.229.204.232/public_html/development/" local="130597418405788046" remote="130602398400000000" Dst="0" />
+<file name="student.php" server="23.229.204.232/public_html/development/" local="130597418405798046" remote="130602398400000000" Dst="0" />
+<file name="teacher.php" server="23.229.204.232/public_html/development/" local="130597418405818047" remote="130602398400000000" Dst="0" />
 </dwsync>
