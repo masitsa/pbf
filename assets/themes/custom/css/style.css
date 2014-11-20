@@ -87,7 +87,7 @@ h2{font-size:1.5em;}
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {background-color: #e7302a;color: #fff;}
 .navbar-default .navbar-nav > li > a { color: #fff; font-weight:bold;}
 .navbar-default .navbar-nav > li > a:hover { background-color: #e7302a;color: #fff;}
-.navbar-nav > li {padding-right:10px;}
+.navbar-nav > li {padding:4px;}
 .navbar-nav > li::before {content: ''; border-left: thin solid #fff; position: absolute; height: 50%; left: 0; top: 25%;}
 .navbar-nav > li:first-child {border-left:none;}
 .navbar-default .navbar-toggle{background-color:#e7302a; color:#fff; border:none;}
