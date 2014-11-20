@@ -167,5 +167,15 @@ $route['airline/sign-up/review'] = 'airline/airline_signup3';
 $route['airline/account'] = 'airline/account';
 $route['airline-login'] = 'login/login_airline';
 
+/*
+*	Flights Routes
+*/
+$route['flights/search-flights'] = 'site/search';
+$route['flights/search/(:any)'] = 'site/flights/$1';
+$route['flights/airline/(:num)'] = 'site/flights/__/$1';
+$route['flights/search'] = 'site/flights';
+$route['flights/price-range/(:any)'] = 'site/flights/__/0/0/created/$1';
+$route['flights/destination/(:num)'] = 'site/flights/__/0/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -16,8 +16,6 @@
 /* options/select wrapper with switch anchors */
 .cbp-vm-options {
 	text-align: right;
-	padding-bottom: 10px;
-	border-bottom: 3px solid #47a3da;
 }
 
 .cbp-vm-options a {
@@ -87,7 +85,7 @@
 }
 
 .cbp-vm-price {
-	color: #c0c0c0;
+	color: #373737;
 }
 
 .cbp-vm-add {
@@ -150,7 +148,7 @@
 }
 
 .cbp-vm-view-grid .cbp-vm-title {
-	font-size: 1.1em;
+	font-size: 0.9em;
 }
 
 .cbp-vm-view-grid .cbp-vm-details {
@@ -188,7 +186,8 @@
 	font-size: 1.3em;
 	padding: 0 10px;
 	white-space: normal;
-	width: 23%;
+	text-align: center;
+	font-size:0.9em;
 }
 
 .cbp-vm-view-list .cbp-vm-price {
@@ -197,7 +196,7 @@
 }
 
 .cbp-vm-view-list .cbp-vm-details {
-	width: 40%;
+	width: 56.6%;
 	padding: 0 15px;
 	overflow: hidden;
 	white-space: normal;

@@ -9,8 +9,6 @@
         <link href="<?php echo base_url();?>assets/themes/custom/css/animate.css" rel="stylesheet">
         <!-- Custom -->
         <link href="<?php echo base_url();?>assets/themes/custom/css/owl.carousel.css" rel="stylesheet">
-        <!-- Jasny -->
-        <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">
         <!-- Custom -->
         <link href="<?php echo base_url();?>assets/themes/custom/css/style.css" rel="stylesheet">
         

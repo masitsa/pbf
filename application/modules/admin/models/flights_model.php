@@ -53,9 +53,9 @@ class Flights_model extends CI_Model
 	public function add_flight()
 	{
 		$data = array(
-				'flight_date'=>$this->input->post('flight_date'),
-				'flight_departure_time'=>$this->input->post('flight_departure_time'),
-				'flight_arrival_time'=>$this->input->post('flight_arrival_time'),
+				'flight_date'=> date('Y-m-d', strtotime($this->input->post('flight_date'))),
+				'flight_departure_time'=>date('H:i', strtotime($this->input->post('flight_departure_time'))),
+				'flight_arrival_time'=>date('H:i', strtotime($this->input->post('flight_arrival_time'))),
 				'source'=>$this->input->post('source'),
 				'destination'=>$this->input->post('destination'),
 				'airline_id'=>$this->session->userdata('airline_id'),
@@ -63,6 +63,7 @@ class Flights_model extends CI_Model
 				'flight_status'=>$this->input->post('flight_status'),
 				'flight_type_id'=>$this->input->post('flight_type_id'),
 				'trip_type_id'=>$this->input->post('trip_type'),
+				'flight_seats'=>$this->input->post('flight_seats'),
 				'created'=>date('Y-m-d H:i:s'),
 				'created_by'=>$this->session->userdata('airline_id'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),
@@ -88,9 +89,9 @@ class Flights_model extends CI_Model
 	public function update_flight($flight_id)
 	{
 		$data = array(
-				'flight_date'=>$this->input->post('flight_date'),
-				'flight_departure_time'=>$this->input->post('flight_departure_time'),
-				'flight_arrival_time'=>$this->input->post('flight_arrival_time'),
+				'flight_date'=> date('Y-m-d', strtotime($this->input->post('flight_date'))),
+				'flight_departure_time'=>date('H:i', strtotime($this->input->post('flight_departure_time'))),
+				'flight_arrival_time'=>date('H:i', strtotime($this->input->post('flight_arrival_time'))),
 				'source'=>$this->input->post('source'),
 				'destination'=>$this->input->post('destination'),
 				'airline_id'=>$this->session->userdata('airline_id'),
@@ -98,6 +99,7 @@ class Flights_model extends CI_Model
 				'flight_status'=>$this->input->post('flight_status'),
 				'flight_type_id'=>$this->input->post('flight_type_id'),
 				'trip_type_id'=>$this->input->post('trip_type'),
+				'flight_seats'=>$this->input->post('flight_seats'),
 				'created'=>date('Y-m-d H:i:s'),
 				'created_by'=>$this->session->userdata('airline_id'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),

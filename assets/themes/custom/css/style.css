@@ -165,6 +165,23 @@ fieldset .review-text{color:#fff;}
 .panel-body a:hover, .panel-title a:visited, .panel-title a:active{text-decoration:none;color:#5CA0D1;}
 .cbp-vm-options p{text-align: left;}
 .breadcrumbDiv{padding: 0;}
+.full-width{width: 100%;}
+.flight_departure .full-width{color:#373737;}
+
+.flight-airport, .flight-date, .flight-time{width: 100%;}
+
+.flight_departure{min-height:80px;}
+.cbp-vm-view-list .flight_departure {float: left;}
+.cbp-vm-view-list .flight_departure {width: 40%;}
+.cbp-vm-view-list .divider-line{display: none;}
+
+.left-search{margin-bottom: 10px;}
+.left-search .form-control{width: 78%;}
+.left-search .btn{width: 20%;}
+.left-search .btn .glyphicon{margin:0 auto; text-align:center;}
+
+form#filter_price, form#filter_custom_price{padding-left: 5%;}
+form#filter_custom_price .form-control{width: 40%; margin-bottom: 2%;}
 
 /* Footer */
 .footer { background: none repeat scroll 0 0 #edeff1;border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}

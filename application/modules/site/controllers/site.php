@@ -10,7 +10,7 @@ class Site extends MX_Controller
 		$this->load->model('admin/users_model');
 		$this->load->model('admin/airports_model');
 		$this->load->model('admin/flights_model');
-		$this->load->model('admin/airports_model');
+		$this->load->model('admin/airlines_model');
 		$this->load->model('site_model');
 		
 		$this->load->library('cart');
@@ -25,6 +25,10 @@ class Site extends MX_Controller
 	public function index() 
 	{
 		redirect('home');
+	}
+	public function left_navigation() 
+	{
+		$this->load->view('products/left_navigation');
 	}
     
 	/*
@@ -89,13 +93,9 @@ class Site extends MX_Controller
 	*	Flights Page
 	*
 	*/
-	public function flights($search = '__', $category_id = 0, $brand_id = 0, $order_by = 'created', $new_products = 0, $new_categories = 0, $new_brands = 0, $price_range = '__', $filter_brands = '__') 
+	public function flights($search = '__', $airline_id = 0, $airport_id = 0, $order_by = 'created', $price_range = '__') 
 	{
 		$v_data['crumbs'] = $this->site_model->get_crumbs();
-		//$v_data['brands'] = $this->brands_model->all_active_brands();
-		//$v_data['product_sub_categories'] = $this->categories_model->get_sub_categories($category_id);
-		//$v_data['all_children'] = $this->categories_model->all_child_categories();
-		//$v_data['parent_categories'] = $this->categories_model->all_parent_categories();
 		$v_data['price_range'] = $this->site_model->generate_price_range();
 		
 		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1';
@@ -119,31 +119,6 @@ class Site extends MX_Controller
 			break;
 		}
 		
-		//case of filter_brands
-		if($filter_brands != '__')
-		{
-			$brands = explode("-", $filter_brands);
-			$total = count($brands);
-			
-			if($total > 0)
-			{
-				$where .= ' AND (';
-				for($r = 0; $r < $total; $r++)
-				{
-					if($r ==0)
-					{
-						$where .= 'product.brand_id = '.$brands[$r];
-					}
-					
-					else
-					{
-						$where .= ' OR product.brand_id = '.$brands[$r];
-					}
-				}
-				$where .= ')';
-			}
-		}
-		
 		//case of price_range
 		if($price_range != '__')
 		{
@@ -154,60 +129,27 @@ class Site extends MX_Controller
 			{
 				$start = $range[0];
 				$end = $range[1];
-				$where .= " AND (product.product_selling_price BETWEEN ".$start." AND ".$end.")";
+				$where .= " AND (flight.flight_price BETWEEN ".$start." AND ".$end.")";
 			}
 		}
 		
 		//case of search
 		if($search != '__')
 		{
-			$where .= " AND (product.product_name LIKE '%".$search."%' OR category.category_name LIKE '%".$search."%' OR brand.brand_name LIKE '%".$search."%')";
+			$table .= ', airport';
+			$where .= " AND flight.destination = airport.airport_id AND (airport.airport_name LIKE '%".$search."%' OR airline.airline_name LIKE '%".$search."%')";
 		}
 		
-		//case of category
-		if($category_id > 0)
+		//case of airline
+		if($airline_id > 0)
 		{
-			$where .= ' AND (category.category_id = '.$category_id.' OR category.category_parent = '.$category_id.')';
+			$where .= ' AND (airline.airline_id = '.$airline_id.')';
 		}
 		
-		//case of brand
-		if($brand_id > 0)
+		//case of airport
+		if($airport_id > 0)
 		{
-			$where .= ' AND brand.brand_id = '.$brand_id;
-		}
-		
-		//case of latest products
-		if($new_products == 1)
-		{
-			$limit = 30;
-		}
-		
-		//case of latest category
-		if($new_categories == 1)
-		{
-			$query = $this->categories_model->latest_category();
-			
-			if($query->num_rows() > 0)
-			{
-				$category = $query->row();
-				$latest_category_id = $category->category_id;
-				
-				$where .= ' AND category.category_id = '.$latest_category_id;
-			}
-		}
-		
-		//case of latest brand
-		if($new_brands == 1)
-		{
-			$query = $this->brands_model->latest_brand();
-			
-			if($query->num_rows() > 0)
-			{
-				$brand = $query->row();
-				$latest_brand_id = $brand->brand_id;
-				
-				$where .= ' AND brand.brand_id = '.$latest_brand_id;
-			}
+			$where .= ' AND flight.destination = '.$airport_id;
 		}
 		
 		//pagination
@@ -285,16 +227,19 @@ class Site extends MX_Controller
 	*/
 	public function search()
 	{
-		$search = $this->input->post('search_item');
+		$this->form_validation->set_rules('search_item', 'Search Criteria', 'required|xss_clean');
 		
-		if(!empty($search))
+		//if form has been submitted
+		if ($this->form_validation->run() == FALSE)
 		{
-			redirect('products/search/'.$search);
+			$this->flights();
 		}
 		
 		else
 		{
-			redirect('products/all-products');
+			$search = $this->input->post('search_item');
+			
+			redirect('flights/search/'.$search);
 		}
 	}
     
