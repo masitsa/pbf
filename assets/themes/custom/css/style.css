@@ -23,6 +23,8 @@ body {font-family: 'Century Gothic', sans-serif; font-size:1.5em;}
 a{color:#e7302a;}
 a:hover, a:visited, a:active{text-decoration:none;color:#5CA0D1;}
 .div-head{padding:45px 0 20px 0;}
+p, li{text-align:justify;}
+strong{color:#e7302a;}
 
 /* Backgrounds */
 .grey-background{background-color:#F9F8F8;}
@@ -32,7 +34,9 @@ a:hover, a:visited, a:active{text-decoration:none;color:#5CA0D1;}
 .blue-background h3{color:#fff;}
 
 /* Form Elements */
-.form-control{border:none; border-radius:0px;border: 2px solid #fff; background-color:transparent; color:#fff;}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control, .form-control{ background-color:transparent; color:#fff; border:none; border-radius:0px;border: 2px solid #fff;}
+select.form-control { background-color: #fff; color: #5CA0D1; font-weight: bold;}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{cursor: pointer;}
 .col-sm-9 .alert-danger{background-color: #F2DEDE; border-color: #EBCCD1; color: #A94442;}
 .form-control::-webkit-input-placeholder {color: #fff;}
  /* Firefox 18- */
@@ -112,6 +116,9 @@ h2{font-size:1.5em;}
 .flight-types > ul > li:before {content: ''; border-left: thin solid #fff; height: 60%; left: 0; top: 25%; margin-right: 30%;}
 .flight-types > ul > li:first-child:before {border-left:none;}
 
+/* Thumbnails */
+.caption{text-align: center;}
+
 /* Carousel */
 .section{padding: 20px;}
 .thumbnail .caption .btn{float:right;}
@@ -182,6 +189,8 @@ fieldset .review-text{color:#fff;}
 
 form#filter_price, form#filter_custom_price{padding-left: 5%;}
 form#filter_custom_price .form-control{width: 40%; margin-bottom: 2%;}
+
+/* Terms */
 
 /* Footer */
 .footer { background: none repeat scroll 0 0 #edeff1;border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}

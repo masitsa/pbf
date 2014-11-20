@@ -9,6 +9,7 @@ class Districts_model extends CI_Model
 	public function all_active_districts()
 	{
 		$this->db->where('district_status = 1');
+		$this->db->order_by('district_name');
 		$query = $this->db->get('district');
 		
 		return $query;

@@ -159,7 +159,7 @@
                     <div class="form-group">
                         <label class="col-lg-6 control-label">Trip Type</label>
                         <div class="col-lg-6">
-                            <select name="trip_type" id="destination" class="form-control" required>
+                            <select name="trip_type" class="form-control" required>
                                 <?php
                                 if($trip_type_query->num_rows() > 0)
                                 {
@@ -167,7 +167,7 @@
                                     
                                     foreach($trip_result as $res)
                                     {
-                                        if($res->trip_type_id == set_value('destination'))
+                                        if($res->trip_type_id == set_value('trip_type'))
                                         {
                                             echo '<option value="'.$res->trip_type_id.'" selected="selected">'.$res->trip_type_name.'</option>';
                                         }

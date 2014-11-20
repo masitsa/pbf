@@ -113,7 +113,7 @@
 										<div class="divider-line"></div>
 										<div class="cbp-vm-seats">'.$flight_seats.' seats available</div>
 									</div>
-									<a class="cbp-vm-icon cbp-vm-add" href="#">Book Now</a>
+									<a class="cbp-vm-icon cbp-vm-add" href="'.site_url().'flights/book-flight/'.$flight_id.'">Book Now</a>
 								</li>
 							';
 						}

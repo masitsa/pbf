@@ -9,7 +9,20 @@ class Flight_types_model extends CI_Model
 	public function all_active_flight_types()
 	{
 		$this->db->where('flight_type_status = 1');
-		$query = $this->db->get('flight_type');
+		$this->db->order_by('flight_type_name');
+		$query = $this->db->get('flight_type', 3);
+		
+		return $query;
+	}
+	/*
+	*	Retrieve all active trip_type
+	*
+	*/
+	public function all_active_trip_types()
+	{
+		$this->db->where('trip_type_status = 1');
+		$this->db->order_by('trip_type_name');
+		$query = $this->db->get('trip_type');
 		
 		return $query;
 	}

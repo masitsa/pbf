@@ -9,7 +9,23 @@ class Flights_model extends CI_Model
 	public function all_active_flights()
 	{
 		$this->db->where('flight_status = 1');
+		$this->db->order_by('flight_date');
 		$query = $this->db->get('flight');
+		
+		return $query;
+	}
+	/*
+	*	Retrieve all latest flights
+	*
+	*/
+	public function all_latest_flights()
+	{
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
+		$this->db->from('flight, airline, flight_type, airplane_type');
+		$this->db->where('flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1');
+		$this->db->order_by('created', 'DESC');
+		$this->db->limit(10);
+		$query = $this->db->get();
 		
 		return $query;
 	}
@@ -33,14 +49,23 @@ class Flights_model extends CI_Model
 	* 	@param string $where
 	*
 	*/
-	public function get_all_flights($table, $where, $per_page, $page)
+	public function get_all_flights($table, $where, $per_page, $page, $limit = NULL, $order_by, $order_method)
 	{
 		//retrieve all users
 		$this->db->from($table);
 		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
 		$this->db->where($where);
-		$this->db->order_by('flight_date, source, destination, flight_departure_time, flight_arrival_time');
-		$query = $this->db->get('', $per_page, $page);
+		$this->db->order_by($order_by, $order_method);
+		
+		if(isset($limit))
+		{
+			$query = $this->db->get('', $limit);
+		}
+		
+		else
+		{
+			$query = $this->db->get('', $per_page, $page);
+		}
 		
 		return $query;
 	}

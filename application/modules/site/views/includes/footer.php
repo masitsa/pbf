@@ -34,7 +34,7 @@
                         <ul>
                             <li><a href="#">Contact</a></li>
                             <li><a href="#">Flights</a></li>
-                            <li><a href="#">Airlines</a></li>
+                            <li><a href="<?php echo site_url().'terms';?>">Terms</a></li>
                         </ul>
                     </div><!-- End Quick Links -->
                 </div>

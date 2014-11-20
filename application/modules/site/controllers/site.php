@@ -10,6 +10,7 @@ class Site extends MX_Controller
 		$this->load->model('admin/users_model');
 		$this->load->model('admin/airports_model');
 		$this->load->model('admin/flights_model');
+		$this->load->model('admin/flight_types_model');
 		$this->load->model('admin/airlines_model');
 		$this->load->model('site_model');
 		
@@ -39,12 +40,15 @@ class Site extends MX_Controller
 	public function home_page() 
 	{
 		//get page data
-		/*$v_data['latest'] = $this->products_model->get_latest_products();
-		$v_data['featured'] = $this->products_model->get_featured_products();
-		$v_data['brands'] = $this->brands_model->all_active_brands();
-		$v_data['all_children'] = $this->categories_model->all_child_categories();
-		$v_data['parent_categories'] = $this->categories_model->all_parent_categories();*/
-		$data['content'] = $this->load->view('home/home', '', true);
+		$v_data['active_airports'] = $this->airports_model->all_active_airports();
+		$v_data['active_airlines'] = $this->airlines_model->all_active_airlines();
+		$v_data['active_flight_types'] = $this->flight_types_model->all_active_flight_types();
+		$v_data['active_trip_types'] = $this->flight_types_model->all_active_trip_types();
+		$v_data['latest_flights'] = $this->flights_model->all_latest_flights();
+		$v_data['airline_logo_location'] = $this->airlines_location;
+		$v_data['airports_query'] = $this->airports_model->all_active_airports();
+		
+		$data['content'] = $this->load->view('home/home', $v_data, true);
 		
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);
@@ -102,20 +106,24 @@ class Site extends MX_Controller
 		$table = 'flight, airline, flight_type, airplane_type';
 		
 		$limit = NULL;
+		$order = '';
 		
 		//ordering products
 		switch ($order_by)
 		{
 			case 'created':
 				$order_method = 'DESC';
+				$order = 'flight_date, source, destination, flight_departure_time, flight_arrival_time';
 			break;
 			
 			case 'price':
 				$order_method = 'ASC';
+				$order = 'flight_price, flight_date, source, destination, flight_departure_time, flight_arrival_time';
 			break;
 			
 			case 'price_desc':
 				$order_method = 'DESC';
+				$order = 'flight_price, flight_date, source, destination, flight_departure_time, flight_arrival_time';
 			break;
 		}
 		
@@ -136,8 +144,9 @@ class Site extends MX_Controller
 		//case of search
 		if($search != '__')
 		{
-			$table .= ', airport';
-			$where .= " AND flight.destination = airport.airport_id AND (airport.airport_name LIKE '%".$search."%' OR airline.airline_name LIKE '%".$search."%')";
+			//$table .= ', airport';
+			//$where .= " AND flight.destination = airport.airport_id AND (airport.airport_name LIKE '%".$search."%' OR airline.airline_name LIKE '%".$search."%')";
+			$where .= $search;
 		}
 		
 		//case of airline
@@ -210,7 +219,7 @@ class Site extends MX_Controller
 			$v_data["total"] = $config['total_rows'];
 			$v_data["last"] = $config['total_rows'];
 		}
-		$v_data['products'] = $this->flights_model->get_all_flights($table, $where, $config["per_page"], $page, $limit, $order_by, $order_method);
+		$v_data['products'] = $this->flights_model->get_all_flights($table, $where, $config["per_page"], $page, $limit, $order, $order_method);
 		$v_data['airports_query'] = $this->airports_model->all_active_airports();
 		$v_data['airline_logo_location'] = $this->airlines_location;
 		
@@ -222,7 +231,7 @@ class Site extends MX_Controller
     
 	/*
 	*
-	*	Search for a product
+	*	Search for a flight
 	*
 	*/
 	public function search()
@@ -245,24 +254,152 @@ class Site extends MX_Controller
     
 	/*
 	*
-	*	Products Page
+	*	Search for a flight from home page
 	*
 	*/
-	public function view_product($product_id)
+	public function search_flights()
 	{
-		$this->products_model->update_clicks($product_id);
-		//Required general page data
-		$v_data['all_children'] = $this->categories_model->all_child_categories();
-		$v_data['parent_categories'] = $this->categories_model->all_parent_categories();
-		$v_data['crumbs'] = $this->site_model->get_crumbs();
+		$source = $this->input->post('source');
+		$destination = $this->input->post('destination');
+		$airline_id = $this->input->post('airline_id');
+		$date_from = $this->input->post('date_from');
+		$date_to = $this->input->post('date_to');
+		$trip_type_id = $this->input->post('trip_type_id');
+		$sort_by = $this->input->post('sort_by');
 		
-		//get page data
-		$v_data['all_features'] = $this->features_model->all_features();
-		$v_data['similar_products'] = $this->products_model->get_similar_products($product_id);
-		$v_data['product_details'] = $this->products_model->get_product($product_id);
-		$v_data['product_images'] = $this->products_model->get_gallery_images($product_id);
-		$v_data['product_features'] = $this->products_model->get_features($product_id);
-		$data['content'] = $this->load->view('products/view_product', $v_data, true);
+		//flight date range
+		if(!empty($date_from) && !empty($date_to))
+		{
+			$date = ' AND flight.flight_date BETWEEN \''.date('Y-m-d', strtotime($date_from)).'\' AND \''.date('Y-m-d', strtotime($date_to)).'\'';
+		}
+		
+		else if(!empty($date_from))
+		{
+			$date = ' AND flight.flight_date = \''.date('Y-m-d', strtotime($date_from)).'\'';
+		}
+		
+		else if(!empty($date_to))
+		{
+			$date = ' AND flight.flight_date = \''.date('Y-m-d', strtotime($date_to)).'\'';
+		}
+		
+		else
+		{
+			$date = '';
+		}
+		
+		//source
+		if(!empty($source))
+		{
+			$source = ' AND flight.source = '.$source;
+		}
+		
+		//destination
+		if(!empty($destination))
+		{
+			$destination = ' AND flight.destination = '.$destination;
+		}
+		
+		//airline
+		if(!empty($airline_id))
+		{
+			$airline_id = ' AND flight.airline_id = '.$airline_id;
+		}
+		
+		//trip type
+		if(!empty($trip_type_id))
+		{
+			$trip_type_id = ' AND flight.trip_type_id = '.$trip_type_id;
+		}
+		
+		$search = $date.$source.$destination.$airline_id.$trip_type_id;
+		
+		$this->flights($search, 0, 0, $sort_by);
+	}
+	
+	public function search_flight_types($flight_type_id)
+	{
+		$flight_type_id = ' AND flight.flight_type_id = '.$flight_type_id;
+		
+		$search = $flight_type_id;
+		
+		$this->flights($search);
+	}
+    
+	/*
+	*
+	*	Booking Page
+	*
+	*/
+	public function book_flight($flight_id)
+	{
+		$v_data['flight'] = $this->flights_model->get_flight($flight_id);
+		$v_data['crumbs'] = $this->site_model->get_crumbs();
+		$v_data['price_range'] = $this->site_model->generate_price_range();
+		
+		$v_data['iframe'] = '';
+		
+		$flight_row = $v_data['flight']->row();
+		$flight_seats = $flight_row->flight_seats;
+		
+		//form validation rules
+		$this->form_validation->set_rules('amount', 'Amount', 'required|xss_clean');
+		$this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
+		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+		//$this->form_validation->set_rules('reference', 'Reference', 'xss_clean');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'valid_email|required|xss_clean');
+		$this->form_validation->set_rules('seats', 'Seat', 'less_than['.$flight_seats.']|required|xss_clean');
+		
+		//if form has been submitted
+		if ($this->form_validation->run())
+		{
+			$this->load->model('payments_model');
+			$iframe = $this->payments_model->make_pesapal_payment($flight_id);
+			
+			$v_data['iframe'] = $iframe;
+		}
+		
+		$data['content'] = $this->load->view('products/payments', $v_data, true);
+		
+		$data['title'] = $this->site_model->display_page_title();
+		$this->load->view('templates/general_page', $data);
+	}
+    
+	/*
+	*
+	*	Payment success Page
+	*
+	*/
+	public function payment()
+	{
+		//mark booking as paid in the database
+		$payment_data = $this->input->get();
+		$transaction_tracking_id = $payment_data['pesapal_transaction_tracking_id'];
+		$booking_id = $payment_data['pesapal_merchant_reference'];
+		
+		if($this->site_model->update_booking($transaction_tracking_id, $booking_id))
+		{
+			redirect('flight/payment');
+		}
+	}
+	
+	public function payment_success()
+	{
+		$v_data['crumbs'] = $this->site_model->get_crumbs();
+		$v_data['price_range'] = $this->site_model->generate_price_range();
+		
+		$data['content'] = $this->load->view('products/payment_success', $v_data, true);
+		
+		$data['title'] = $this->site_model->display_page_title();
+		$this->load->view('templates/general_page', $data);
+	}
+	
+	public function terms()
+	{
+		
+		$data['content'] = $this->load->view('terms', '', true);
 		
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);

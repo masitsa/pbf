@@ -1,4 +1,5 @@
 <?php
+	$this->load->model('site/site_model');
 	$navigation = $this->site_model->get_navigation();
 ?>
 <!-- Title -->

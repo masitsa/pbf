@@ -46,6 +46,7 @@ $route['404_override'] = '';
 */
 $route['home'] = 'site/home_page';
 $route['flights'] = 'site/flights';
+$route['terms'] = 'site/terms';
 
 /*
 *	Settings Routes
@@ -166,16 +167,22 @@ $route['airline/sign-up/user-details'] = 'airline/airline_signup2';
 $route['airline/sign-up/review'] = 'airline/airline_signup3';
 $route['airline/account'] = 'airline/account';
 $route['airline-login'] = 'login/login_airline';
+$route['airlines'] = 'login/login_airline';
 
 /*
 *	Flights Routes
 */
+$route['flights/(:any)/(:num)'] = 'site/search_flight_types/$2';
+$route['flights/advanced-search'] = 'site/search_flights';
 $route['flights/search-flights'] = 'site/search';
 $route['flights/search/(:any)'] = 'site/flights/$1';
 $route['flights/airline/(:num)'] = 'site/flights/__/$1';
 $route['flights/search'] = 'site/flights';
 $route['flights/price-range/(:any)'] = 'site/flights/__/0/0/created/$1';
 $route['flights/destination/(:num)'] = 'site/flights/__/0/$1';
+$route['flights/book-flight/(:num)'] = 'site/book_flight/$1';
+$route['payment'] = 'site/payment';
+$route['flight/payment'] = 'site/payment_success';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

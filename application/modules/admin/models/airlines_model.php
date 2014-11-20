@@ -9,6 +9,7 @@ class Airlines_model extends CI_Model
 	public function all_active_airlines()
 	{
 		$this->db->where('airline_status = 1');
+		$this->db->order_by('airline_name');
 		$query = $this->db->get('airline');
 		
 		return $query;

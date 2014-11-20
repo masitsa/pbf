@@ -182,7 +182,7 @@
                         <div class="form-group">
                             <label class="col-lg-6 control-label">Trip Type</label>
                             <div class="col-lg-6">
-                                <select name="trip_type" id="destination" class="form-control" required>
+                                <select name="trip_type" class="form-control" required>
                                     <?php
                                     if($trip_type_query->num_rows() > 0)
                                     {

@@ -9,6 +9,7 @@ class Airplane_types_model extends CI_Model
 	public function all_active_airplane_types()
 	{
 		$this->db->where('airplane_type_status = 1');
+		$this->db->order_by('airplane_type_name');
 		$query = $this->db->get('airplane_type');
 		
 		return $query;

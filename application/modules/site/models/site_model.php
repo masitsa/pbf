@@ -17,7 +17,7 @@ class Site_model extends CI_Model
 			
 			for($r = 0; $r < $total_sub; $r++)
 			{
-				$page_name .= ' '.$sub_page[$r];
+				$page_name .= ' '.str_replace('%20', ' ', $sub_page[$r]);
 			}
 			$page_url .= ' | '.ucwords(strtolower($page_name));
 			
@@ -98,7 +98,7 @@ class Site_model extends CI_Model
 			
 			for($r = 0; $r < $total_sub; $r++)
 			{
-				$page_name .= ' '.$sub_page[$r];
+				$page_name .= ' '.str_replace('%20', ' ', $sub_page[$r]);
 			}
 			$crumb[1]['name'] = ucwords(strtolower($page_name));
 			
@@ -245,13 +245,34 @@ class Site_model extends CI_Model
 		'
 			<li class="'.$home.'"><a href="'.site_url().'home'.'">Home</a></li>
 			<li class="'.$flights.'"><a href="'.site_url().'flights'.'">Flights</a></li>
-			<li class="'.$airlines.'"><a href="'.site_url().'airlines'.'">Airlines</a></li>
+			<!--<li class="'.$airlines.'"><a href="'.site_url().'airlines'.'">Airlines</a></li>-->
 			<li class="'.$charter.'"><a href="'.site_url().'charter'.'">Charter Quotes</a></li>
 			<li class="'.$contact.'"><a href="'.site_url().'contact'.'">Contact</a></li>
 			<li class="'.$about.'"><a href="'.site_url().'about'.'">About</a></li>
 		';
 		
 		return $navigation;
+	}
+	
+	public function update_booking($transaction_tracking_id, $booking_id)
+	{
+		$data = array
+		(
+			"booking_status" => 1,
+			"transaction_tracking_id" => $transaction_tracking_id
+		);
+		
+		$this->db->where('booking_id', $booking_id);
+		
+		if($this->db->update('booking', $data))
+		{
+			return TRUE;
+		}
+		
+		else
+		{
+			return FALSE;
+		}
 	}
 }
 
