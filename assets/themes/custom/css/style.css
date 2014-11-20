@@ -96,7 +96,7 @@ h2{font-size:1.5em;}
 .navbar-default .navbar-toggle:hover .icon-bar, .navbar-default .navbar-toggle:focus .icon-bar{background-color: #e7302a;}
 
 /* Header */
-.header{background:url("../../../images/giraffe plane.png")  no-repeat 0 30px fixed;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; min-height:500px; color:#fff;}
+.header{background:url('../../../images/20141006_160010.jpg')  no-repeat 0 30px fixed;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; min-height:500px; color:#fff;}
 .search-flights{background: rgba(92,160,209,.75); margin-top: 45px; padding:2%; }
 .grey-background .search-flights{background: rgba(92,160,209,1); margin-top: 45px; padding:2%; margin-bottom:2%;}
 .search-flights .btn-red{width:30%; height:50px;}

@@ -196,6 +196,63 @@ class Site_model extends CI_Model
 		
 		return $range;
 	}
+	
+	public function get_navigation()
+	{
+		$page = explode("/",uri_string());
+		$total = count($page);
+		
+		$name = ucwords(strtolower($page[0]));
+		
+		$home = '';
+		$flights = '';
+		$airlines = '';
+		$charter = '';
+		$contact = '';
+		$about = '';
+		
+		if($name == 'Home')
+		{
+			$home = 'active';
+		}
+		
+		if($name == 'Flights')
+		{
+			$flights = 'active';
+		}
+		
+		if($name == 'Airlines')
+		{
+			$airlines = 'active';
+		}
+		
+		if($name == 'Charter-quotes')
+		{
+			$charter = 'active';
+		}
+		
+		if($name == 'Contact')
+		{
+			$contact = 'active';
+		}
+		
+		if($name == 'About')
+		{
+			$about = 'active';
+		}
+		
+		$navigation = 
+		'
+			<li class="'.$home.'"><a href="'.site_url().'home'.'">Home</a></li>
+			<li class="'.$flights.'"><a href="'.site_url().'flights'.'">Flights</a></li>
+			<li class="'.$airlines.'"><a href="'.site_url().'airlines'.'">Airlines</a></li>
+			<li class="'.$charter.'"><a href="'.site_url().'charter'.'">Charter Quotes</a></li>
+			<li class="'.$contact.'"><a href="'.site_url().'contact'.'">Contact</a></li>
+			<li class="'.$about.'"><a href="'.site_url().'about'.'">About</a></li>
+		';
+		
+		return $navigation;
+	}
 }
 
 ?>
