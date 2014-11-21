@@ -119,7 +119,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="<?php echo site_url().'airline/bookings';?>"><i class="fa fa-table fa-fw"></i> Bookings</a>
+                            <a href="<?php echo site_url().'bookings';?>"><i class="fa fa-table fa-fw"></i> Bookings</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-money fa-fw"></i> Payments</a>
