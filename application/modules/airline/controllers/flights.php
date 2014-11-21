@@ -74,7 +74,7 @@ class Flights extends account
 		{
 			$data['content'] = 'There are no flights';
 		}
-		$data['title'] = 'All Flight Types';
+		$data['title'] = 'All Flight';
 		
 		$this->load->view('account_template', $data);
 	}

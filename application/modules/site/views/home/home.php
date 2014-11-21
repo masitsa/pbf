@@ -49,88 +49,6 @@
 <link rel="stylesheet" href="<?php echo base_url().'assets/themes/pickadate/';?>lib/themes/default.date.css" id="theme_date">
 <link rel="stylesheet" href="<?php echo base_url().'assets/themes/pickadate/';?>lib/themes/default.time.css" id="theme_time">
         
-        <!-- Flights -->
-        <!--<div class="section carousel grey-background div-head">-->
-        <div class="section grey-background div-head">
-            <div class="container">
-                
-                <div class="divider-line"></div>
-                <div class="center-align">
-                   <h3>Latest Flights</h3>
-                </div>
-                <div class="divider-line"></div>
-                <div class="owl-carousel" id="owl-carousel">
-                	<?php
-                    	if($latest_flights->num_rows() > 0)
-						{
-							foreach($latest_flights->result() as $row)
-							{
-								$flight_id = $row->flight_id;
-								$flight_date = $row->flight_date;
-								$flight_price = $row->flight_price;
-								$flight_departure_time = $row->flight_departure_time;
-								$flight_arrival_time = $row->flight_arrival_time;
-								$flight_type_name = $row->flight_type_name;
-								$flight_seats = $row->flight_seats;
-								$source = $row->source;
-								$destination = $row->destination;
-								$airplane_type_name = $row->airplane_type_name;
-								$flight_status = $row->flight_status;
-								$created = $row->created;
-								$last_modified = $row->last_modified;
-								$airline_thumb = $row->airline_thumb;
-								$airline_name = $row->airline_name;
-								$month = date('M',strtotime($flight_date));
-								$day = date('jS',strtotime($flight_date));
-								$flight_departure_time = date('H:i a',strtotime($flight_departure_time));
-								$flight_arrival_time = date('H:i a',strtotime($flight_arrival_time));
-							
-								//get source & destination names
-								if($airports_query->num_rows() > 0)
-								{
-									foreach($airports_query->result() as $res)
-									{
-										$airport_id = $res->airport_id;
-										
-										if($airport_id == $source)
-										{
-											$source = $res->airport_name;
-										}
-										
-										if($airport_id == $destination)
-										{
-											$destination = $res->airport_name;
-										}
-									}
-								}
-								//$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 10));
-								$price = number_format($flight_price, 2, '.', ',');
-								
-								?>
-                                	<div class="thumbnail">
-                                        <img src="<?php echo $airline_logo_location.$airline_thumb?>" alt="<?php echo $airline_name;?>">
-                                        <div class="caption">
-                                            <p><?php echo $airline_name;?></p>
-                                            <h6><?php echo $month.' '.$day;?></h6>
-                                            <p><?php echo $source;?><br/> to<br/> <?php echo $destination;?></p>
-                                            <h6>$<?php echo $price;?></h6>
-                                        </div>
-                                        <a href="<?php echo site_url().'flights/book-flight/'.$flight_id;?>" class="btn btn-red">Book</a>
-                                    </div>
-                                <?php
-							}
-						}
-					?>
-                    
-                </div>
-                <div class="center-align navigation-links">
-                    <a class="prev">PREV</a>
-                    <a class="next">NEXT</a>
-                </div>
-            </div>
-        </div>
-        <!-- End Flights -->
-        
     	<!-- Search  -->
         <div class="header">
         	<div class="container">
@@ -232,6 +150,87 @@
             </div>
         </div>
         <!-- End Search -->
+        
+        <!-- Flights -->
+        <div class="section carousel grey-background div-head">
+            <div class="container">
+                
+                <div class="divider-line"></div>
+                <div class="center-align">
+                   <h3>Latest Flights</h3>
+                </div>
+                <div class="divider-line"></div>
+                <div class="owl-carousel" id="owl-carousel">
+                	<?php
+                    	if($latest_flights->num_rows() > 0)
+						{
+							foreach($latest_flights->result() as $row)
+							{
+								$flight_id = $row->flight_id;
+								$flight_date = $row->flight_date;
+								$flight_price = $row->flight_price;
+								$flight_departure_time = $row->flight_departure_time;
+								$flight_arrival_time = $row->flight_arrival_time;
+								$flight_type_name = $row->flight_type_name;
+								$flight_seats = $row->flight_seats;
+								$source = $row->source;
+								$destination = $row->destination;
+								$airplane_type_name = $row->airplane_type_name;
+								$flight_status = $row->flight_status;
+								$created = $row->created;
+								$last_modified = $row->last_modified;
+								$airline_thumb = $row->airline_thumb;
+								$airline_name = $row->airline_name;
+								$month = date('M',strtotime($flight_date));
+								$day = date('jS',strtotime($flight_date));
+								$flight_departure_time = date('H:i a',strtotime($flight_departure_time));
+								$flight_arrival_time = date('H:i a',strtotime($flight_arrival_time));
+							
+								//get source & destination names
+								if($airports_query->num_rows() > 0)
+								{
+									foreach($airports_query->result() as $res)
+									{
+										$airport_id = $res->airport_id;
+										
+										if($airport_id == $source)
+										{
+											$source = $res->airport_name;
+										}
+										
+										if($airport_id == $destination)
+										{
+											$destination = $res->airport_name;
+										}
+									}
+								}
+								//$mini_desc = implode(' ', array_slice(explode(' ', $description), 0, 10));
+								$price = number_format($flight_price, 2, '.', ',');
+								
+								?>
+                                	<div class="thumbnail">
+                                        <img src="<?php echo $airline_logo_location.$airline_thumb?>" alt="<?php echo $airline_name;?>">
+                                        <div class="caption">
+                                            <p><?php echo $airline_name;?></p>
+                                            <h6><?php echo $month.' '.$day;?></h6>
+                                            <p><?php echo $source;?><br/> to<br/> <?php echo $destination;?></p>
+                                            <h6>$<?php echo $price;?></h6>
+                                        </div>
+                                        <a href="<?php echo site_url().'flights/book-flight/'.$flight_id;?>" class="btn btn-red">Book</a>
+                                    </div>
+                                <?php
+							}
+						}
+					?>
+                    
+                </div>
+                <div class="center-align navigation-links">
+                    <a class="prev">PREV</a>
+                    <a class="next">NEXT</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Flights -->
         
         <!-- Why Us -->
         <div class="section blue-background">

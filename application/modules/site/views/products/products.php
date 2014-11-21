@@ -17,7 +17,7 @@
     <div class="col-sm-9 col-md-9">
     	<?php echo $this->load->view('products/breadcrumbs');?>
        <div class="main">
-            <div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-grid">
+            <div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-list">
                 <div class="row" style="border-bottom: 3px solid #47A3DA;">
                 	<p class="col-md-4"> Showing <strong><?php echo $last;?></strong> flights </p>
                     <div class="col-md-4">
