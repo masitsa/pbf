@@ -32,7 +32,7 @@ class Airline extends MX_Controller
 		$v_data['airline_email_error'] = '';
 		$v_data['airline_summary_error'] = '';
 		$v_data['airline_logo_error'] = '';
-		
+		$v_data['air_operator_certificate_error'] = '';
 		//upload image if it has been selected
 		if($this->airline_model->upload_airline_image($this->airlines_path))
 		{
@@ -50,6 +50,7 @@ class Airline extends MX_Controller
 		$this->form_validation->set_rules('airline_phone', 'Phone', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('airline_email', 'Email', 'trim|valid_email|is_unique[airline.airline_email]|required|xss_clean');
 		$this->form_validation->set_rules('airline_summary', 'Summary', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('air_operator_certificate', 'Summary', 'trim|required|xss_clean');
 		
 		//if form conatins invalid data
 		if ($this->form_validation->run())
@@ -76,12 +77,14 @@ class Airline extends MX_Controller
 				$v_data['airline_phone_error'] = form_error('airline_phone');
 				$v_data['airline_email_error'] = form_error('airline_email');
 				$v_data['airline_summary_error'] = form_error('airline_summary');
+				$v_data['air_operator_certificate_error'] = form_error('air_operator_certificate');
 				
 				//repopulate fields
 				$v_data['airline_name'] = set_value('airline_name');
 				$v_data['airline_phone'] = set_value('airline_phone');
 				$v_data['airline_email'] = set_value('airline_email');
 				$v_data['airline_summary'] = set_value('airline_summary');
+				$v_data['air_operator_certificate'] = set_value('air_operator_certificate');
 			}
 			
 			//populate form data on initial load of page
@@ -96,6 +99,7 @@ class Airline extends MX_Controller
 					$v_data['airline_phone'] = $this->session->userdata('airline_phone');
 					$v_data['airline_email'] = $this->session->userdata('airline_email');
 					$v_data['airline_summary'] = $this->session->userdata('airline_summary');
+					$v_data['air_operator_certificate'] = $this->session->userdata('air_operator_certificate');
 					$v_data['airline_logo_location'] = $this->airlines_location.$this->session->userdata('airline_logo_file_name');
 				}
 				
@@ -105,6 +109,7 @@ class Airline extends MX_Controller
 					$v_data['airline_phone'] = '';
 					$v_data['airline_email'] = '';
 					$v_data['airline_summary'] = '';
+					$v_data['air_operator_certificate'] = '';
 				}
 			}
 		}

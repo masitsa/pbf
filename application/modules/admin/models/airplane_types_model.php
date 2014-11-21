@@ -51,12 +51,18 @@ class Airplane_types_model extends CI_Model
 	*	@param string $image_name
 	*
 	*/
-	public function add_airplane_type($airplane_type_image, $airplane_type_thumb)
+	public function add_airplane_type($airplane_type_image, $airplane_type_thumb,$airplane_type_image2, $airplane_type_thumb2, $airplane_type_image3, $airplane_type_thumb3,$airplane_type_image4, $airplane_type_thumb4)
 	{
 		$data = array(
 				'airplane_type_name'=>$this->input->post('airplane_type_name'),
 				'airplane_type_image'=>$airplane_type_image,
 				'airplane_type_thumb'=>$airplane_type_thumb,
+				'airplane_type_image2'=>$airplane_type_image2,
+				'airplane_type_thumb2'=>$airplane_type_thumb2,
+				'airplane_type_image3'=>$airplane_type_image3,
+				'airplane_type_thumb3'=>$airplane_type_thumb3,
+				'airplane_type_image4'=>$airplane_type_image4,
+				'airplane_type_thumb4'=>$airplane_type_thumb4,
 				'airplane_type_status'=>$this->input->post('airplane_type_status'),
 				'created'=>date('Y-m-d H:i:s'),
 				'created_by'=>$this->session->userdata('user_id'),
@@ -241,6 +247,159 @@ class Airplane_types_model extends CI_Model
 			$this->session->set_userdata('airplane_type_image_error_message', '');
 			return FALSE;
 		}
+
+
+		// send image
+		if(isset($_FILES['airplane_type_image2']['tmp_name']))
+		{
+			if(is_uploaded_file($_FILES['airplane_type_image2']['tmp_name']))
+			{
+				$image = $this->session->userdata('airplane_type_image2_file_name');
+			
+				if(!empty($image))
+				{
+					//delete any other uploaded image
+					$this->file_model->delete_file($airplane_types_path."\\".$this->session->userdata('airplane_type_image2_file_name'));
+					
+					//delete any other uploaded thumbnail
+					$this->file_model->delete_file($airplane_types_path."\\thumbnail_".$this->session->userdata('airplane_type_image2_file_name'));
+				}
+				
+				//Upload image
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image2', $resize);
+				if($response['check'])
+				{
+					$file_name2 = $response['file_name2'];
+					$thumb_name2 = $response['thumb_name2'];
+					
+					//Set sessions for the image details
+					$this->session->set_userdata('airplane_type_image2_file_name', $file_name2);
+					$this->session->set_userdata('airplane_type_image2_thumb_name', $thumb_name2);
+					
+					return TRUE;
+				}
+			
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					return FALSE;
+				}
+			}
+			
+			else{
+				$this->session->set_userdata('error_message', '');
+				return FALSE;
+			}
+		}
+		
+		else
+		{
+			$this->session->set_userdata('airplane_type_image2_error_message', '');
+			return FALSE;
+		}
+		// end of second image
+
+		// third image
+		if(isset($_FILES['airplane_type_image3']['tmp_name']))
+		{
+			if(is_uploaded_file($_FILES['airplane_type_image3']['tmp_name']))
+			{
+				$image = $this->session->userdata('airplane_type_image3_file_name');
+			
+				if(!empty($image))
+				{
+					//delete any other uploaded image
+					$this->file_model->delete_file($airplane_types_path."\\".$this->session->userdata('airplane_type_image3_file_name'));
+					
+					//delete any other uploaded thumbnail
+					$this->file_model->delete_file($airplane_types_path."\\thumbnail_".$this->session->userdata('airplane_type_image3_file_name'));
+				}
+				
+				//Upload image
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image3', $resize);
+				if($response['check'])
+				{
+					$file_name3 = $response['file_name3'];
+					$thumb_name3 = $response['thumb_name3'];
+					
+					//Set sessions for the image details
+					$this->session->set_userdata('airplane_type_image3_file_name', $file_name3);
+					$this->session->set_userdata('airplane_type_image3_thumb_name', $thumb_name3);
+					
+					return TRUE;
+				}
+			
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					return FALSE;
+				}
+			}
+			
+			else{
+				$this->session->set_userdata('error_message', '');
+				return FALSE;
+			}
+		}
+		
+		else
+		{
+			$this->session->set_userdata('airplane_type_image3_error_message', '');
+			return FALSE;
+		}
+		// end of third image
+		// fourth image
+		if(isset($_FILES['airplane_type_image4']['tmp_name']))
+		{
+			if(is_uploaded_file($_FILES['airplane_type_image4']['tmp_name']))
+			{
+				$image = $this->session->userdata('airplane_type_image4_file_name');
+			
+				if(!empty($image))
+				{
+					//delete any other uploaded image
+					$this->file_model->delete_file($airplane_types_path."\\".$this->session->userdata('airplane_type_image4_file_name'));
+					
+					//delete any other uploaded thumbnail
+					$this->file_model->delete_file($airplane_types_path."\\thumbnail_".$this->session->userdata('airplane_type_image4_file_name'));
+				}
+				
+				//Upload image
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image4', $resize);
+				if($response['check'])
+				{
+					$file_name4 = $response['file_name4'];
+					$thumb_name4 = $response['thumb_name4'];
+					
+					//Set sessions for the image details
+					$this->session->set_userdata('airplane_type_image4_file_name', $file_name4);
+					$this->session->set_userdata('airplane_type_image4_thumb_name', $thumb_name4);
+					
+					return TRUE;
+				}
+			
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					return FALSE;
+				}
+			}
+			
+			else{
+				$this->session->set_userdata('error_message', '');
+				return FALSE;
+			}
+		}
+		
+		else
+		{
+			$this->session->set_userdata('airplane_type_image4_error_message', '');
+			return FALSE;
+		}
+		// end of fourth image
 	}
 }
 ?>

@@ -97,6 +97,7 @@ class Flights_model extends CI_Model
 				'created_by'=>$this->session->userdata('airline_id'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),
 				'flight_price'=>$this->input->post('flight_price'),
+				'charter_plane_price'=>$this->input->post('charter_price'),
 				'modified_by'=>$this->session->userdata('airline_id')
 			);
 			
@@ -133,6 +134,7 @@ class Flights_model extends CI_Model
 				'created_by'=>$this->session->userdata('airline_id'),
 				'user_type_id'=>$this->session->userdata('user_type_id'),
 				'flight_price'=>$this->input->post('flight_price'),
+				'charter_plane_price'=>$this->input->post('charter_price'),
 				'modified_by'=>$this->session->userdata('airline_id')
 			);
 			

@@ -63,7 +63,8 @@ class Airline_model extends CI_Model
 				'airline_name' => $this->input->post('airline_name'),
 				'airline_phone' => $this->input->post('airline_phone'),
 				'airline_email' => $this->input->post('airline_email'),
-				'airline_summary' => $this->input->post('airline_summary')
+				'airline_summary' => $this->input->post('airline_summary'),
+				'air_operator_certificate' => $this->input->post('air_operator_certificate')
 		);
 		
 		$this->session->set_userdata($data);
@@ -97,6 +98,7 @@ class Airline_model extends CI_Model
 				'airline_user_last_name' => $this->session->userdata('airline_user_last_name'),
 				'airline_user_email' => $this->session->userdata('airline_user_email'),
 				'airline_user_phone' => $this->session->userdata('airline_user_phone'),
+				'aoc_number' => $this->session->userdata('air_operator_certificate'),
 				'airline_user_password' => md5($this->session->userdata('airline_user_password')),
 				'airline_logo' => $this->session->userdata('airline_logo_file_name'),
 				'airline_thumb' => $this->session->userdata('airline_logo_thumb_name')
