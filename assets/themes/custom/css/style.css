@@ -117,7 +117,7 @@ h2{font-size:1.5em;}
 .flight-types > ul > li:first-child:before {border-left:none;}
 
 /* Thumbnails */
-.caption{text-align: center;}
+.caption p, .caption{text-align: center;}
 
 /* Carousel */
 .section{padding: 20px;}

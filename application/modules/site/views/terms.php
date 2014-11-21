@@ -9,7 +9,7 @@
         <div class="row">
             <!--right column-->
             <div class="col-sm-12">
-                <div class="main terms">
+                <div class="main">
                 	<p>THESE TERMS AND CONDITIONS SHALL APPLY TO ALL CONTRACTS FOR THE CHARTER OF AIRCRAFT OR THE PURCHASE OF AIRCRAFT SEATS BY CLIENTS AS ARRANGED BY PRIVATE BUSH FLIGHTS ACTING AS AGENT FOR AN OPERATOR AND/OR A FLIGHT INITIATOR AND/OR CLIENTS, AS THE CASE MAY BE.
 FOR THE AVOIDANCE OF DOUBT, THESE TERMS AND CONDITIONS DO NOT CONSTITUTE A CONTRACT FOR CARRIAGE BY AIR. CARRIAGE IS ALWAYS SUBJECT TO THE CONDITIONS OF CARRIAGE OF THE OPERATOR.
 CLIENTS AND FLIGHT INITIATORS ACCEPT THAT PRIVATE BUSH FLIGHTS SHALL HAVE NO LIABILITY WITH RESPECT TO THE OPERATION OF THE ITINERARY OR AIRCRAFT AND THAT ANY CLAIMS ARISING OUT OF SUCH OPERATION MUST BE DIRECTED TO THE OPERATOR.
@@ -18,7 +18,7 @@ PRIVATE BUSH FLIGHTS MAY AT ANY TIME AMEND THESE TERMS AND CONDITIONS IN ITS ABS
 					<h4>1. DEFINITIONS AND INTERPRETATION</h4>
     <p>
         1.1 In these Terms and Conditions:
-        <ul>
+        <ul class="terms">
             <li>except where the context makes it inappropriate, the masculine gender shall include the feminine and vice versa and the plural shall include the singular and vice versa;</li>
             <li>headings are given for convenience only and shall not affect interpretation;</li>
         </ul>
@@ -54,7 +54,7 @@ PRIVATE BUSH FLIGHTS MAY AT ANY TIME AMEND THESE TERMS AND CONDITIONS IN ITS ABS
 
 <p>3.1 Aircraft charter by Flight Initiator</p>
 <p>
-<ul>
+<ul class="terms">
 <li>A Flight Initiator (or an Authorised Agent acting on behalf of a Flight Initiator or prospective Client) may submit an aircraft charter request through Private Bush Flights's website for an Itinerary specified by the Flight Initiator. Private Bush Flights shall use its reasonable endeavours to offer a Charter Price in respect of the requested Itinerary. </li>
 <li>Acceptance of the Charter Price is deemed to have occurred upon the receipt by Private Bush Flights of a deposit of no less than 20% (twenty percent) of the Charter Price or any other deposit as maybe required by the relevant Operator whichever is the greater. For the avoidance of any doubt in the event where a Flight Initiator submit an aircraft charter request through Private Bush Flights's website for an Itinerary commencing less than 14 (thirty) days from the date of the request, 100% of the Charter Price us due before Private Bush Flights shall issue a Booking Confirmation. </li>
 <li>Where the aircraft charter request was submitted directly by a Flight Initiator or by an Authorised Agent acting on behalf of a Flight Initiator, Private Bush Flights shall, upon acceptance of the Charter Price, subject to continued availability of Operator aircraft and crew, issue the Flight Initiator (or the Authorised Agent) with a Booking Confirmation in respect of the Itinerary.</li>
@@ -69,7 +69,7 @@ PRIVATE BUSH FLIGHTS MAY AT ANY TIME AMEND THESE TERMS AND CONDITIONS IN ITS ABS
 <p>4.2 Private Bush Flights shall be under no liability to any Client for any failure by Private Bush Flights to perform its obligations under these Client Conditions arising from any reason beyond Private Bush Flights's control, including force majeure which shall include but not be limited to labour disputes, strikes or lock-outs.</p>
 <p>4.3 Clients shall indemnify Private Bush Flights and keep Private Bush Flights indemnified against any claims, demands, liens, judgment, penalties, awards, remedies, debts, liabilities, damages, costs (including, but not limited to, legal costs) demanded or sought by any passenger travelling with the Client in connection with the operation of the Aircraft or Itinerary howsoever arising.</p>
 <p>4.4 Clients shall indemnify Private Bush Flights and each other and keep Private Bush Flights and each other indemnified against any claims, demands, liens, judgment, penalties, awards, remedies, debts, liabilities, damages, costs (including, but not limited to, legal costs) arising out of their conduct and/or non compliance with these Client Terms or the Operator's Terms, and where relevant, the conduct of other passengers travelling under their Booking Confirmation, during carriage on board an Aircraft. For the avoidance of doubt, such indemnity shall operate in respect of any claims brought against Private Bush Flights by an Operator in respect of cancellation fees payable under the Operator's Terms.</p>
-<ul>
+<ul class="terms">
 <li>Carriage performed under these Client Conditions shall be subject always to the Operator's Terms and Conditions of Carriage.</li>
 <li>Where a booking is effected through an Authorised Agent, Private Bush Flights shall have no liability whatsoever to a Client or prospective Client (as the case may be) arising out of or in any way connected with such Authorised Agent's failure to comply with these Client Conditions. In such circumstances a Client or prospective Client's sole recourse shall be against the Authorised Agent. For the avoidance of doubt, and by way of example only, the exclusion of liability under this clause 6.5.2. shall extend, without limitation, to loss and damage arising out of
 <p>i) cancellation of an Itinerary by Private Bush Flights on account of Authorised Agent's failure to effect payment within the timeframes set out under these Client Conditions;</p>
