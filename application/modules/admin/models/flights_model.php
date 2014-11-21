@@ -49,13 +49,17 @@ class Flights_model extends CI_Model
 	* 	@param string $where
 	*
 	*/
-	public function get_all_flights($table, $where, $per_page, $page, $limit = NULL, $order_by, $order_method)
+	public function get_all_flights($table, $where, $per_page, $page, $limit = NULL, $order_by = NULL, $order_method = NULL)
 	{
 		//retrieve all users
 		$this->db->from($table);
 		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
 		$this->db->where($where);
-		$this->db->order_by($order_by, $order_method);
+		
+		if(($order_by != NULL) && ($order_method != NULL))
+		{
+			$this->db->order_by($order_by, $order_method);
+		}
 		
 		if(isset($limit))
 		{
