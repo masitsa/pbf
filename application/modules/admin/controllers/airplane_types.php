@@ -95,6 +95,9 @@ class Airplane_types extends admin
 		//form validation rules
 		$this->form_validation->set_rules('airplane_type_name', 'Airplane Type Name', 'required|is_unique[airplane_type.airplane_type_name]|xss_clean');
 		$this->form_validation->set_rules('airplane_type_image', 'Airplane Type Image', 'xss_clean');
+		$this->form_validation->set_rules('airplane_type_image2', 'Airplane Type Image', 'xss_clean');
+		$this->form_validation->set_rules('airplane_type_image3', 'Airplane Type Image', 'xss_clean');
+		$this->form_validation->set_rules('airplane_type_image4', 'Airplane Type Image', 'xss_clean');
 		$this->form_validation->set_rules('airplane_type_status', 'Airplane Type Status', 'required|xss_clean');
 		
 		//if form has been submitted
@@ -133,8 +136,104 @@ class Airplane_types extends admin
 			else{
 				$file_name = '';
 			}
+
+			// second
+
+			if(is_uploaded_file($_FILES['airplane_type_image2']['tmp_name']))
+			{
+				$airplane_types_path = $this->airplane_types_path;
+				/*
+					-----------------------------------------------------------------------------------------
+					Upload image
+					-----------------------------------------------------------------------------------------
+				*/
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image2', $resize);
+				if($response['check'])
+				{
+					$file_name2 = $response['file_name2'];
+					$thumb_name2 = $response['thumb_name2'];
+				}
 			
-			if($this->airplane_types_model->add_airplane_type($file_name, $thumb_name))
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					$data['title'] = 'Add New Airplane Type';
+					$data['content'] = $this->load->view('airplane_types/add_airplane_type', $v_data, true);
+					$this->load->view('templates/general_admin', $data);
+					break;
+				}
+			}
+			
+			else{
+				$file_name = '';
+			}
+			// end of second
+
+			// third
+			if(is_uploaded_file($_FILES['airplane_type_image3']['tmp_name']))
+			{
+				$airplane_types_path = $this->airplane_types_path;
+				/*
+					-----------------------------------------------------------------------------------------
+					Upload image
+					-----------------------------------------------------------------------------------------
+				*/
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image3', $resize);
+				if($response['check'])
+				{
+					$file_name3 = $response['file_name3'];
+					$thumb_name3 = $response['thumb_name3'];
+				}
+			
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					$data['title'] = 'Add New Airplane Type';
+					$data['content'] = $this->load->view('airplane_types/add_airplane_type', $v_data, true);
+					$this->load->view('templates/general_admin', $data);
+					break;
+				}
+			}
+			
+			else{
+				$file_name = '';
+			}
+			// end of third
+			// forth
+			if(is_uploaded_file($_FILES['airplane_type_image4']['tmp_name']))
+			{
+				$airplane_types_path = $this->airplane_types_path;
+				/*
+					-----------------------------------------------------------------------------------------
+					Upload image
+					-----------------------------------------------------------------------------------------
+				*/
+				$response = $this->file_model->upload_file($airplane_types_path, 'airplane_type_image4', $resize);
+				if($response['check'])
+				{
+					$file_name4 = $response['file_name4'];
+					$thumb_name4 = $response['thumb_name4'];
+				}
+			
+				else
+				{
+					$this->session->set_userdata('error_message', $response['error']);
+					
+					$data['title'] = 'Add New Airplane Type';
+					$data['content'] = $this->load->view('airplane_types/add_airplane_type', $v_data, true);
+					$this->load->view('templates/general_admin', $data);
+					break;
+				}
+			}
+			
+			else{
+				$file_name = '';
+			}
+			// end of fourth
+			
+			if($this->airplane_types_model->add_airplane_type($file_name, $thumb_name,$file_name2, $thumb_name2,$file_name3, $thumb_name3,$file_name4, $thumb_name4))
 			{
 				$this->session->set_userdata('success_message', 'Airplane type added successfully');
 				redirect('administration/add-airplane-type');

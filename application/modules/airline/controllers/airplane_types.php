@@ -94,18 +94,30 @@ class Airplane_types extends account
 	public function add_airplane_type() 
 	{
 		$v_data['airplane_type_image'] = 'http://placehold.it/300x300';
+		$v_data['airplane_type_image2'] = 'http://placehold.it/300x300';
+		$v_data['airplane_type_image3'] = 'http://placehold.it/300x300';
+		$v_data['airplane_type_image4'] = 'http://placehold.it/300x300';
 		$v_data['airplane_type_name_error'] = '';
 		$v_data['airplane_type_status_error'] = '';
+
+
 		
 		//upload image if exists
 		if($this->airplane_types_model->upload_airplane_type_image($this->airplane_types_path))
 		{
 			$v_data['airplane_type_image'] = $this->airplane_types_image_path.$this->session->userdata('airplane_type_image_file_name');
+			$v_data['airplane_type_image2'] = $this->airplane_types_image_path.$this->session->userdata('airplane_type_image2_file_name');
+			$v_data['airplane_type_image3'] = $this->airplane_types_image_path.$this->session->userdata('airplane_type_image3_file_name');
+			$v_data['airplane_type_image4'] = $this->airplane_types_image_path.$this->session->userdata('airplane_type_image4_file_name');
+
 		}
 		
 		//form validation rules
 		$this->form_validation->set_rules('airplane_type_name', 'Airplane Type', 'required|is_unique[airplane_type.airplane_type_name]|xss_clean');
 		$this->form_validation->set_rules('airplane_type_image', 'Airplane Type Image', 'xss_clean');
+		$this->form_validation->set_rules('airplane_type_image2', 'Airplane Type Image', 'xss_clean');
+		$this->form_validation->set_rules('airplane_type_image3', 'Airplane Type Image', 'xss_clean');
+		$this->form_validation->set_rules('airplane_type_image4', 'Airplane Type Image', 'xss_clean');
 		$this->form_validation->set_rules('airplane_type_status', 'Airplane Type Status', 'required|xss_clean');
 		
 		//if form has been submitted
@@ -113,11 +125,30 @@ class Airplane_types extends account
 		{
 			$file_name = $this->session->userdata('airplane_type_image_file_name');
 			$thumb_name = $this->session->userdata('airplane_type_image_thumb_name');
+
+			// second
+			$file_name2 = $this->session->userdata('airplane_type_image2_file_name');
+			$thumb_name2 = $this->session->userdata('airplane_type_image2_thumb_name');
+
+			// third
+			$file_name3 = $this->session->userdata('airplane_type_image3_file_name');
+			$thumb_name3 = $this->session->userdata('airplane_type_image3_thumb_name');
+
+			// fourth
+			$file_name4 = $this->session->userdata('airplane_type_image4_file_name');
+			$thumb_name4 = $this->session->userdata('airplane_type_image4_thumb_name');
+
 			
-			if($this->airplane_types_model->add_airplane_type($file_name, $thumb_name))
+			if($this->airplane_types_model->add_airplane_type($file_name, $thumb_name,$file_name2, $thumb_name2,$file_name3, $thumb_name3,$file_name4, $thumb_name4))
 			{
 				$this->session->unset_userdata('airplane_type_image_file_name');
 				$this->session->unset_userdata('airplane_type_image_thumb_name');
+				$this->session->unset_userdata('airplane_type_image2_file_name');
+				$this->session->unset_userdata('airplane_type_image2_thumb_name');
+				$this->session->unset_userdata('airplane_type_image3_file_name');
+				$this->session->unset_userdata('airplane_type_image3_thumb_name');
+				$this->session->unset_userdata('airplane_type_image4_file_name');
+				$this->session->unset_userdata('airplane_type_image4_thumb_name');
 				
 				$this->session->set_userdata('success_message', 'Airplane type added successfully');
 				redirect('airline/all-airplane-types');
@@ -131,10 +162,16 @@ class Airplane_types extends account
 		else
 		{
 			$image = $this->session->userdata('airplane_type_image_file_name');
+			$image2 = $this->session->userdata('airplane_type_image2_file_name');
+			$image3 = $this->session->userdata('airplane_type_image3_file_name');
+			$image4 = $this->session->userdata('airplane_type_image4_file_name');
 			
 			if(!empty($image))
 			{
 				$v_data['airplane_type_image'] = $this->airplane_types_image_path.$image;
+				$v_data['airplane_type_image2'] = $this->airplane_types_image_path.$image2;
+				$v_data['airplane_type_image3'] = $this->airplane_types_image_path.$image3;
+				$v_data['airplane_type_image4'] = $this->airplane_types_image_path.$image4;
 			}
 			$validation_errors = validation_errors();
 			

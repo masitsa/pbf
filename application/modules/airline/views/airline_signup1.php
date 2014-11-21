@@ -58,6 +58,27 @@
 										?>
                                     </div>
                                 </div>
+                                 <div class="form-group">
+                                    <label for="air_operator_certificate" class="col-sm-3 control-label">Air Operator's Certificate <span class="info">*</span></label>
+                                    <div class="col-sm-9">
+                                        <?php
+                                            //case of an input error
+                                            if(!empty($air_operator_certificate_error))
+                                            {
+                                                ?>
+                                                <input type="text" class="form-control alert-danger" name="air_operator_certificate" placeholder="<?php echo $air_operator_certificate;?>" onFocus="this.value = '<?php echo $air_operator_certificate;?>';">
+                                                <?php
+                                            }
+                                            
+                                            else
+                                            {
+                                                ?>
+                                                <input type="text" class="form-control" name="air_operator_certificate" placeholder="AOC Number" value="<?php echo $air_operator_certificate;?>">
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="airline_phone" class="col-sm-3 control-label">Phone <span class="info">*</span></label>
                                     <div class="col-sm-9">

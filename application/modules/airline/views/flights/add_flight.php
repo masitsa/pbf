@@ -182,44 +182,7 @@
                         </div>
                     </div> 
                     <!-- flight Name -->
-            </div>
-            <!-- end of left -->
-            <!-- start of right -->
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="col-lg-6 control-label">Flight Date</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control fieldset__input js__datepicker" name="flight_date" placeholder="Flight Date" value="<?php echo set_value('flight_date');?>" required>
-                    </div>
-                </div>
-                <!-- flight Name -->
-                <div class="form-group">
-                    <label class="col-lg-6 control-label">Departure Time</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control fieldset__input js__timepicker" name="flight_departure_time" placeholder="Departure Time" value="<?php echo set_value('flight_departure_time');?>" required>
-                    </div>
-                </div>
-                <!-- flight Name -->
-                <div class="form-group">
-                    <label class="col-lg-6 control-label">Arrival Time</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control fieldset__input js__timepicker" name="flight_arrival_time" placeholder="Arrival Time" value="<?php echo set_value('flight_arrival_time');?>" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-6 control-label">Flight Price ($)</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control" name="flight_price" placeholder="Flight Price" value="<?php echo set_value('flight_price');?>" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-6 control-label">Seats Available</label>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control" name="flight_seats" placeholder="Seats Available" value="<?php echo set_value('flight_seats');?>" required>
-                    </div>
-                </div>
-                <!-- Activate checkbox -->
-                <div class="form-group">
+                     <div class="form-group">
                     <label class="col-lg-6 control-label">Activate Flight?</label>
                     <div class="col-lg-6">
                         <?php
@@ -250,6 +213,50 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- end of left -->
+            <!-- start of right -->
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-6 control-label">Flight Date</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control fieldset__input js__datepicker" name="flight_date" placeholder="Flight Date" value="<?php echo set_value('flight_date');?>" required>
+                    </div>
+                </div>
+                <!-- flight Name -->
+                <div class="form-group">
+                    <label class="col-lg-6 control-label">Departure Time</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control fieldset__input js__timepicker" name="flight_departure_time" placeholder="Departure Time" value="<?php echo set_value('flight_departure_time');?>" required>
+                    </div>
+                </div>
+                <!-- flight Name -->
+                <div class="form-group">
+                    <label class="col-lg-6 control-label">Arrival Time</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control fieldset__input js__timepicker" name="flight_arrival_time" placeholder="Arrival Time" value="<?php echo set_value('flight_arrival_time');?>" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-6 control-label">Charter Plane Price ($)</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" name="charter_price" placeholder="Flight Price" value="<?php echo set_value('charter_price');?>" required>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-lg-6 control-label">Flight Price per person ($)</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" name="flight_price" placeholder="Flight Price" value="<?php echo set_value('flight_price');?>" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-6 control-label">Seats Available</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" name="flight_seats" placeholder="Seats Available" value="<?php echo set_value('flight_seats');?>" required>
+                    </div>
+                </div>
+                <!-- Activate checkbox -->
+               
             </div>
             <!-- end of right -->
         </div>

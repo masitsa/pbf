@@ -17,6 +17,7 @@
             $flight_arrival_time = $flight_res->flight_arrival_time;
             $flight_price = $flight_res->flight_price;
             $flight_seats = $flight_res->flight_seats;
+            $charter_price = $flight_res->charter_plane_price;
         endforeach;
 
      }
@@ -205,6 +206,38 @@
                             </div>
                         </div> 
                         <!-- flight Name -->
+                          <!-- Activate checkbox -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Activate Flight?</label>
+                            <div class="col-lg-6">
+                                <?php
+                                  
+                                    if($flight_status == '1')
+                                    {
+                                        $yes = 'checked';
+                                        $no = '';
+                                    }
+                                    
+                                    else
+                                    {
+                                        $yes = '';
+                                        $no = 'checked';
+                                    }
+                                ?>
+                                <div class="radio">
+                                    <label>
+                                        <input id="optionsRadios1" type="radio" <?php echo $yes;?> value="1" name="flight_status">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input id="optionsRadios2" type="radio" <?php echo $no;?> value="0" name="flight_status">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 <!-- end of left -->
                 <!-- start of right -->
@@ -229,8 +262,14 @@
                             <input type="text" class="form-control fieldset__input js__timepicker" name="flight_arrival_time" placeholder="Arrival Time" value="<?php echo $flight_arrival_time;?>" required>
                         </div>
                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-6 control-label">Charter Plane Price ($)</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="charter_price" placeholder="Charter Place Price" value="<?php echo $charter_price;?>" required>
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <label class="col-lg-6 control-label">Flight Price ($)</label>
+                        <label class="col-lg-6 control-label">Flight Price per person ($)</label>
                         <div class="col-lg-6">
                             <input type="text" class="form-control" name="flight_price" placeholder="Flight Price" value="<?php echo $flight_price;?>" required>
                         </div>
@@ -241,38 +280,7 @@
                             <input type="text" class="form-control" name="flight_seats" placeholder="Seats Available" value="<?php echo $flight_seats;?>" required>
                         </div>
                     </div>
-                    <!-- Activate checkbox -->
-                    <div class="form-group">
-                        <label class="col-lg-6 control-label">Activate Flight?</label>
-                        <div class="col-lg-6">
-                            <?php
-                              
-                                if($flight_status == '1')
-                                {
-                                    $yes = 'checked';
-                                    $no = '';
-                                }
-                                
-                                else
-                                {
-                                    $yes = '';
-                                    $no = 'checked';
-                                }
-                            ?>
-                            <div class="radio">
-                                <label>
-                                    <input id="optionsRadios1" type="radio" <?php echo $yes;?> value="1" name="flight_status">
-                                    Yes
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input id="optionsRadios2" type="radio" <?php echo $no;?> value="0" name="flight_status">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
                 <!-- end of right -->
             </div>
