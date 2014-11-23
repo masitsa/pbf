@@ -7,9 +7,14 @@ class Bookings extends account {
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('users_model');
-		$this->load->model('orders_model');
-		$this->load->model('products_model');
+		$this->load->model('admin/airline_model');
+		$this->load->model('booking_model');
+		$this->load->model('admin/file_model');
+		$this->load->model('admin/flights_model');
+		$this->load->model('admin/airplane_types_model');
+		$this->load->model('admin/flight_types_model');
+		$this->load->model('admin/airports_model');
+		$this->load->model('admin/users_model');
 	}
 	
 	public function index()
@@ -52,7 +57,7 @@ class Bookings extends account {
 		
 		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
         $data["links"] = $this->pagination->create_links();
-		$query = $this->airlines_model->get_all_bookingss($table, $where, $config["per_page"], $page);
+		$query = $this->booking_model->get_all_bookings($table, $where, $config["per_page"], $page);
 		
 		if ($query->num_rows() > 0)
 		{
@@ -60,7 +65,7 @@ class Bookings extends account {
 			$v_data['page'] = $page;
 			$v_data['title'] = 'All Bookings';
 			$v_data['airports_query'] = $this->airports_model->all_airports();
-			$data['content'] = $this->load->view('flights/all_bookings', $v_data, true);
+			$data['content'] = $this->load->view('bookings/all_bookings', $v_data, true);
 		}
 		
 		else

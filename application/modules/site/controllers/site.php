@@ -333,7 +333,9 @@ class Site extends MX_Controller
 	*/
 	public function book_flight($flight_id)
 	{
-		$v_data['flight'] = $this->flights_model->get_flight($flight_id);
+		$v_data['traveller_types'] = $this->flights_model->get_traveller_types();
+		$v_data['flight'] = $this->flights_model->get_flight_details($flight_id);
+		$v_data['airports_query'] = $this->airports_model->all_active_airports();
 		$v_data['crumbs'] = $this->site_model->get_crumbs();
 		$v_data['price_range'] = $this->site_model->generate_price_range();
 		
@@ -346,10 +348,11 @@ class Site extends MX_Controller
 		$this->form_validation->set_rules('amount', 'Amount', 'required|xss_clean');
 		$this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
-		//$this->form_validation->set_rules('reference', 'Reference', 'xss_clean');
+		$this->form_validation->set_rules('traveller_type_id', 'Traveller Type', 'required|xss_clean');
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|required|xss_clean');
+		$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|xss_clean');
 		$this->form_validation->set_rules('seats', 'Seat', 'less_than['.$flight_seats.']|required|xss_clean');
 		
 		//if form has been submitted

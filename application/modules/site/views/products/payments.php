@@ -1,9 +1,18 @@
-        
+<?php
+	$options = '';
+	if($traveller_types->num_rows() > 0)
+	{
+		foreach($traveller_types->result() as $res)
+		{
+			$options .= '<option value="'.$res->traveller_type_id.'">'.$res->traveller_type_name.'</option>';
+		}
+	}
+?>
 <!-- Join  -->
 <div class="grey-background div-head">
     <div class="container">
         <div class="divider-line"></div>
-        <h1 class="center-align">All Flights</h1>
+        <h1 class="center-align">Book Flight</h1>
         <div class="divider-line" style="margin-bottom:2%;"></div>
   
         <div class="row">
@@ -38,7 +47,72 @@
 							echo form_hidden('type', 'MERCHANT');
 							//echo form_hidden('reference', '001');
 							$flight_data = $flight->row();
+							$source = $flight_data->source;
+							$destination = $flight_data->destination;
+							$flight_date = $flight_data->flight_date;
+							$flight_departure_time = $flight_data->flight_departure_time;
+							$flight_arrival_time = $flight_data->flight_arrival_time;
+							$month = date('M',strtotime($flight_date));
+							$day = date('jS',strtotime($flight_date));
+							$flight_departure_time = date('H:i a',strtotime($flight_departure_time));
+							$flight_arrival_time = date('H:i a',strtotime($flight_arrival_time));
+							echo form_hidden('amount', $flight_data->flight_price);
+							
+							//get source & destination names
+							if($airports_query->num_rows() > 0)
+							{
+								foreach($airports_query->result() as $res)
+								{
+									$airport_id = $res->airport_id;
+									
+									if($airport_id == $source)
+									{
+										$source = $res->airport_name;
+									}
+									
+									if($airport_id == $destination)
+									{
+										$destination = $res->airport_name;
+									}
+								}
+							}
 					?>
+                    	<div class="row">
+                        	<div class="col-md-4">
+                                    <label for="first_name" class="col-sm-6 control-label">Airline</label><?php echo $flight_data->airline_name;?>
+                                <div class="form-group">
+                                    <label for="first_name" class="col-sm-6 control-label">To</label>
+                                    <div class="col-sm-6">
+                                    	<?php echo $destination;?> arrives at <?php echo $flight_arrival_time;?>
+                                    </div>
+                                </div>
+                        	</div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="first_name" class="col-sm-4 control-label">Flight Price</label>
+                                    <div class="col-sm-8">
+                                    	$<?php echo $flight_data->flight_price;?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="first_name" class="col-sm-4 control-label">Available seats</label>
+                                    <div class="col-sm-8">
+                                    	<?php echo $flight_data->flight_seats;?>
+                                    </div>
+                                </div>
+							</div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="first_name" class="col-sm-4 control-label">From</label>
+                                    <div class="col-sm-8">
+                                    	<?php echo $source;?> on <?php echo $day;?> <?php echo $month;?> at <?php echo $flight_departure_time;?>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+                        
                     	<div class="row">
                         	<div class="center-align">
                             	<h4>Please fill in your details to complete your payment</h4>
@@ -47,46 +121,49 @@
                                 <div class="form-group">
                                     <label for="first_name" class="col-sm-4 control-label">First Name</label>
                                     <div class="col-sm-8">
-                                    	<input type="text" class="form-control" name="first_name" placeholder="First Name">
+                                    	<input type="text" class="form-control" name="first_name" placeholder="First Name" value="<?php echo set_value('first_name');?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="last_name" class="col-sm-4 control-label">Last Name</label>
                                     <div class="col-sm-8">
-                                    	<input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                                    	<input type="text" class="form-control" name="last_name" placeholder="Last Name" value="<?php echo set_value('last_name');?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-sm-4 control-label">Email</label>
                                     <div class="col-sm-8">
-                                    	<input type="email" class="form-control" name="email" placeholder="Email">
+                                    	<input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email');?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone_number" class="col-sm-4 control-label">Phone</label>
                                     <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="phone_number" placeholder="Phone">
+                                    <input type="text" class="form-control" name="phone_number" placeholder="Phone" value="<?php echo set_value('phone_number');?>">
                                     </div>
                                 </div>
                         	</div>
                             
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="amount" class="col-sm-4 control-label">Amount</label>
+                            	<div class="form-group">
+                                    <label for="source" class="col-sm-4 control-label">Traveller Type</label>
                                     <div class="col-sm-8">
-                                    	<input type="text" class="form-control" name="amount" placeholder="Amount" value="<?php echo $flight_data->flight_price;?>" readonly>
+                                    	<select class="form-control" name="traveller_type_id">
+                                        	<option value="">----Select Traveller Type----</option>
+                                        	<?php echo $options;?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="seats" class="col-sm-4 control-label">Seats</label>
                                     <div class="col-sm-8">
-                                    	<input type="text" class="form-control" name="seats" placeholder="Seats" value="1">
+                                    	<input type="text" class="form-control" name="seats" placeholder="Seats" value="1" value="<?php echo set_value('seats');?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-sm-4 control-label">Description</label>
                                     <div class="col-sm-8">
-                                    	<textarea class="form-control" name="description" placeholder="Description"></textarea>
+                                    	<textarea class="form-control" name="description" placeholder="Description"><?php echo set_value('description');?></textarea>
                                     </div>
                                 </div>
                             </div>

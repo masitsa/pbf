@@ -46,8 +46,6 @@
 							$flight_id = $row->flight_id;
 							$flight_date = $row->flight_date;
 							$flight_price = $row->flight_price;
-							$flight_departure_time = $row->flight_departure_time;
-							$flight_arrival_time = $row->flight_arrival_time;
 							$flight_type_name = $row->flight_type_name;
 							$flight_seats = $row->flight_seats;
 							$source = $row->source;
@@ -58,6 +56,9 @@
 							$last_modified = $row->last_modified;
 							$airline_thumb = $row->airline_thumb;
 							$airline_name = $row->airline_name;
+							$flight_date = $row->flight_date;
+							$flight_departure_time = $row->flight_departure_time;
+							$flight_arrival_time = $row->flight_arrival_time;
 							$month = date('M',strtotime($flight_date));
 							$day = date('jS',strtotime($flight_date));
 							$flight_departure_time = date('H:i a',strtotime($flight_departure_time));

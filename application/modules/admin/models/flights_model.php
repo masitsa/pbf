@@ -3,6 +3,17 @@
 class Flights_model extends CI_Model 
 {	
 	/*
+	*	Retrieve all active traveller types
+	*
+	*/
+	public function get_traveller_types()
+	{
+		$this->db->order_by('traveller_type_name');
+		$query = $this->db->get('traveller_type');
+		
+		return $query;
+	}
+	/*
 	*	Retrieve all active flights
 	*
 	*/
@@ -159,6 +170,27 @@ class Flights_model extends CI_Model
 		$this->db->from('flight');
 		$this->db->select('*');
 		$this->db->where('flight_id = '.$flight_id);
+		$query = $this->db->get();
+		
+		return $query;
+	}
+	
+	/*
+	*	Retrieve all flights
+	*	@param string $table
+	* 	@param string $where
+	*
+	*/
+	public function get_flight_details($flight_id)
+	{
+		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1 AND flight.flight_id = '.$flight_id;
+		$table = 'flight, airline, flight_type, airplane_type';
+		
+		//retrieve all users
+		$this->db->from($table);
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
+		$this->db->where($where);
+		
 		$query = $this->db->get();
 		
 		return $query;

@@ -39,12 +39,11 @@
 									<tr>
 									  <th>#</th>
 									  <th>Visitor</th>
-									  <th>Date</th>
+									  <th>Airport</th>
+									  <th>Booking Date</th>
 									  <th>Departure Day</th>
 									  <th>Departure Time</th>
-									  <th>Seats</th>
-									  <th>Unit Cost</th>
-									  <th>Total Cost</th>
+									  <th>Total Payment ($)</th>
 									  <th>Status</th>
 									  <th colspan="5">Actions</th>
 									</tr>
@@ -62,9 +61,17 @@
 								$visitor_first_name = $row->visitor_first_name;
 								$visitor_last_name = $row->visitor_last_name;
 								$booking_status = $row->booking_status;
+								$source = $row->source;
+								$destination = $row->destination;
+								$flight_departure_time = $row->flight_departure_time;
+								$flight_arrival_time = $row->flight_arrival_time;
+								$booking_date = $row->booking_date;
+								
+								$flight_departure_time = date('H:i a',strtotime($flight_departure_time));
+								$flight_arrival_time = date('H:i a',strtotime($flight_arrival_time));
 								
 								//get source & destination names
-								/*if($airports_query->num_rows() > 0)
+								if($airports_query->num_rows() > 0)
 								{
 									foreach($airports_query->result() as $res)
 									{
@@ -80,15 +87,15 @@
 											$destination = $res->airport_name;
 										}
 									}
-								}*/
+								}
 								
 								//create deactivated status display
-								if($flight_status == 0)
+								if($booking_status == 0)
 								{
 									$status = '<span class="label label-danger">Unpaid</span>';
 								}
 								//create activated status display
-								else if($flight_status == 1)
+								else if($booking_status == 1)
 								{
 									$status = '<span class="label label-success">Paid</span>';
 								}
@@ -99,11 +106,11 @@
 									<tr>
 										<td>'.$count.'</td>
 										<td>'.$visitor_first_name.' '.$visitor_last_name.'</td>
-										<td>'.date('jS M Y H:i a',strtotime($flight_date)).'</td>
+										<td>'.$source.'</td>
+										<td>'.date('jS M Y H:i:s',strtotime($booking_date)).'</td>
+										<td>'.date('jS M Y',strtotime($flight_date)).'</td>
 										<td>'.$flight_departure_time.'</td>
-										<td>'.$booking_units.'</td>
-										<td>'.$booking_amount.'</td>
-										<td>'.($booking_amount * $booking_units).'</td>
+										<td>'.number_format(($booking_amount * $booking_units), 2).'</td>
 										<td>'.$status.'</td>
 										<td>
 											
@@ -116,40 +123,70 @@
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-															<h4 class="modal-title">Flight Detail</h4>
+															<h4 class="modal-title">Booking Details</h4>
 														</div>
 														
 														<div class="modal-body">
-															<table class="table table-stripped table-condensed table-hover">
-																<tr>
-																	<td>Source</td>
-																	<td>'.$source.'</td>
-																</tr>
-																<tr>
-																	<td>Destination</td>
-																	<td>'.$destination.'</td>
-																</tr>
-																<tr >
-																	<td>Departure Time</td>
-																	<td>'.$flight_departure_time .'</td>
-																</tr>
-																<tr>
-																	<td>Arrival Time</td>
-																	<td>'.$flight_arrival_time.'</td>
-																</tr>
-																<tr>
-																	<td>Status</td>
-																	<td>'.$status.'</td>
-																</tr>
-																
-																
-																
-															</table>
+															<!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">Visitor Details</a></li>
+                                <li><a href="#profile" data-toggle="tab">Flight Details</a></li>
+                                <li><a href="#messages" data-toggle="tab">Payment Details</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="home">
+                                    <h4>Visitor Details</h4>
+                                    <table class="table table-stripped table-condensed table-hover">
+										<tr>
+											<td>First Name</td>
+											<td>'.$visitor_first_name.'</td>
+										</tr>
+										<tr>
+											<td>Last Name</td>
+											<td>'.$visitor_last_name.'</td>
+										</tr>
+										<tr >
+											<td>Email</td>
+											<td>'.$row->visitor_email .'</td>
+										</tr>
+										<tr>
+											<td>Phone</td>
+											<td>'.$row->visitor_phone.'</td>
+										</tr>
+									</table>
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+                                    <h4>Flight Details</h4>
+                                    <table class="table table-stripped table-condensed table-hover">
+										<tr>
+											<td>Source</td>
+											<td>'.$source.'</td>
+										</tr>
+										<tr>
+											<td>Destination</td>
+											<td>'.$destination.'</td>
+										</tr>
+										<tr >
+											<td>Departure Date</td>
+											<td>'.date('jS M Y',strtotime($flight_date)).' '.$flight_departure_time.'</td>
+										</tr>
+										<tr>
+											<td>Arrival Date</td>
+											<td>'.date('jS M Y',strtotime($flight_date)).' '.$flight_arrival_time.'</td>
+										</tr>
+										<tr>
+											<td>Seats</td>
+											<td>'.$row->flight_seats.'</td>
+										</tr>
+									</table>
+                            </div>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-sm btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
 															<a href="'.site_url().'airline/edit-flight/'.$flight_id.'" class="btn btn-sm btn-success">Edit</a>
-															'.$button.'
+															
 															
 														</div>
 													</div>
@@ -158,7 +195,7 @@
 										
 										</td>
 										<td><a href="'.site_url().'airline/edit-flight/'.$flight_id.'" class="btn btn-sm btn-success">Edit</a></td>
-										<td>'.$button.'</td>
+										
 										</tr> 
 								';
 							}

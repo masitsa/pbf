@@ -168,11 +168,12 @@ $route['airline/sign-up/review'] = 'airline/airline_signup3';
 $route['airline/account'] = 'airline/account';
 $route['airline-login'] = 'login/login_airline';
 $route['airlines'] = 'login/login_airline';
+$route['bookings'] = 'airline/bookings';
 
 /*
 *	Flights Routes
 */
-$route['flights/(:any)/(:num)'] = 'site/search_flight_types/$2';
+//$route['flights/(:any)/(:num)'] = 'site/search_flight_types/$2';
 $route['flights/advanced-search'] = 'site/search_flights';
 $route['flights/search-flights'] = 'site/search';
 $route['flights/search/(:any)'] = 'site/flights/$1';
