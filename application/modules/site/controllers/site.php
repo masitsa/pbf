@@ -340,6 +340,7 @@ class Site extends MX_Controller
 		$v_data['price_range'] = $this->site_model->generate_price_range();
 		$v_data['flight_id'] = $flight_id;
 		$v_data['airline_logo_location'] = $this->airlines_location;
+		$v_data['payments_error'] = '';
 		
 		$v_data['iframe'] = '';
 		
@@ -364,6 +365,11 @@ class Site extends MX_Controller
 			$iframe = $this->payments_model->make_pesapal_payment($flight_id);
 			
 			$v_data['iframe'] = $iframe;
+		}
+		
+		else
+		{
+			$v_data['payments_error'] = validation_errors();
 		}
 		
 		$data['content'] = $this->load->view('products/payments', $v_data, true);

@@ -24,11 +24,10 @@
                 <?php echo $this->load->view('products/breadcrumbs');?>
                 <div class="main">
                 	<?php
-                    	$validation_errors = validation_errors();
 						
-						if(!empty($validation_errors))
+						if(!empty($payments_error))
 						{
-							echo '<div class="alert alert-danger center-align">'.$validation_errors.'</div>';
+							echo '<div class="alert alert-danger center-align">'.$payments_error.'</div>';
 						}
 						
 						if(!empty($iframe))
@@ -50,11 +49,11 @@
 							$airline_id = $flight_data->airline_id;
 							$flight_departure_time = $flight_data->flight_departure_time;
 							$flight_arrival_time = $flight_data->flight_arrival_time;
+							$year = date('Y',strtotime($flight_date));
 							$month = date('M',strtotime($flight_date));
 							$day = date('jS',strtotime($flight_date));
 							$flight_departure_time = date('H:i a',strtotime($flight_departure_time));
 							$flight_arrival_time = date('H:i a',strtotime($flight_arrival_time));
-							echo form_hidden('amount', $flight_data->flight_price);
 							
 							//get source & destination names
 							if($airports_query->num_rows() > 0)
@@ -76,6 +75,8 @@
 							}
 							echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal', 'role' => 'form'));
 							echo form_hidden('type', 'MERCHANT');
+							echo form_hidden('amount', $flight_data->flight_price);
+							echo form_hidden('description', 'Flight from '.$source.' '.$flight_departure_time.' to '.$destination.' '.$flight_arrival_time.' on '.$day.' '.$month.' '.$year);
 					?>
                         
                     	<div class="row">
@@ -101,15 +102,15 @@
                                     	<input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email');?>">
                                     </div>
                                 </div>
+                        	</div>
+                            
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone_number" class="col-sm-4 control-label">Phone</label>
                                     <div class="col-sm-8">
                                     <input type="text" class="form-control" name="phone_number" placeholder="Phone" value="<?php echo set_value('phone_number');?>">
                                     </div>
                                 </div>
-                        	</div>
-                            
-                            <div class="col-md-6">
                             	<div class="form-group">
                                     <label for="source" class="col-sm-4 control-label">Traveller Type</label>
                                     <div class="col-sm-8">
@@ -127,12 +128,12 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label for="description" class="col-sm-4 control-label">Description</label>
                                     <div class="col-sm-8">
                                     	<textarea class="form-control" name="description" placeholder="Description"><?php echo set_value('description');?></textarea>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                 		</div>
                             
@@ -180,11 +181,11 @@
                                 <p style="text-align:justify;"><?php echo $flight_data->airline_summary;?></p>
                                 
                                 <div class="row">
-                                	<div class="col-md-6">
+                                	<div class="col-md-8">
                                     	<i class="fa fa-envelope"></i> <?php echo $flight_data->airline_email;?>
                                     </div>
                                     
-                                	<div class="col-md-6">
+                                	<div class="col-md-4">
                                     	<i class="fa fa-phone"></i> <?php echo $flight_data->airline_phone;?>
                                     </div>
                                 </div>
