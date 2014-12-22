@@ -38,7 +38,7 @@
 								  <thead>
 									<tr>
 									  <th>#</th>
-									  <th>Visitor</th>
+									  <th>Customer</th>
 									  <th>Airport</th>
 									  <th>Booking Date</th>
 									  <th>Departure Day</th>
@@ -53,11 +53,13 @@
 							
 							foreach ($query->result() as $row)
 							{
+								$booking_id = $row->booking_id;
 								$flight_id = $row->flight_id;
 								$flight_date = $row->flight_date;
 								$flight_departure_time = $row->flight_departure_time;
 								$booking_amount = $row->booking_amount;
 								$booking_units = $row->booking_units;
+								$transaction_tracking_id = $row->transaction_tracking_id;
 								$visitor_first_name = $row->visitor_first_name;
 								$visitor_last_name = $row->visitor_last_name;
 								$booking_status = $row->booking_status;
@@ -129,7 +131,7 @@
 														<div class="modal-body">
 															<!-- Nav tabs -->
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab">Visitor Details</a></li>
+                                <li class="active"><a href="#home" data-toggle="tab">Customer Details</a></li>
                                 <li><a href="#profile" data-toggle="tab">Flight Details</a></li>
                                 <li><a href="#messages" data-toggle="tab">Payment Details</a></li>
                             </ul>
@@ -137,22 +139,22 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="home">
-                                    <h4>Visitor Details</h4>
+                                    <h4>Customer Details</h4>
                                     <table class="table table-stripped table-condensed table-hover">
 										<tr>
-											<td>First Name</td>
+											<th>First Name</th>
 											<td>'.$visitor_first_name.'</td>
 										</tr>
 										<tr>
-											<td>Last Name</td>
+											<th>Last Name</th>
 											<td>'.$visitor_last_name.'</td>
 										</tr>
 										<tr >
-											<td>Email</td>
+											<th>Email</th>
 											<td>'.$row->visitor_email .'</td>
 										</tr>
 										<tr>
-											<td>Phone</td>
+											<th>Phone</th>
 											<td>'.$row->visitor_phone.'</td>
 										</tr>
 									</table>
@@ -161,31 +163,47 @@
                                     <h4>Flight Details</h4>
                                     <table class="table table-stripped table-condensed table-hover">
 										<tr>
-											<td>Source</td>
+											<th>Source</th>
 											<td>'.$source.'</td>
 										</tr>
 										<tr>
-											<td>Destination</td>
+											<th>Destination</th>
 											<td>'.$destination.'</td>
 										</tr>
 										<tr >
-											<td>Departure Date</td>
+											<th>Departure Date</th>
 											<td>'.date('jS M Y',strtotime($flight_date)).' '.$flight_departure_time.'</td>
 										</tr>
 										<tr>
-											<td>Arrival Date</td>
+											<th>Arrival Date</th>
 											<td>'.date('jS M Y',strtotime($flight_date)).' '.$flight_arrival_time.'</td>
 										</tr>
 										<tr>
-											<td>Seats</td>
+											<th>Seats on Sale</th>
 											<td>'.$row->flight_seats.'</td>
 										</tr>
 									</table>
-                            </div>
+                            	</div>
+                                <div class="tab-pane fade" id="messages">
+                                    <h4>Payment Details</h4>
+                                    <table class="table table-stripped table-condensed table-hover">
+										<tr>
+											<th>Amount</th>
+											<td>$'.$booking_amount.'</td>
+										</tr>
+										<tr>
+											<th>Seats Booked</th>
+											<td>'.$booking_units.'</td>
+										</tr>
+										<tr >
+											<th>Total</th>
+											<td>$'.number_format(($booking_amount * $booking_units), 2).'</td>
+										</tr>
+									</table>
+                            	</div>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-sm btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-															<a href="'.site_url().'airline/edit-flight/'.$flight_id.'" class="btn btn-sm btn-success">Edit</a>
 															
 															
 														</div>
@@ -194,7 +212,6 @@
 											</div>
 										
 										</td>
-										<td><a href="'.site_url().'airline/edit-flight/'.$flight_id.'" class="btn btn-sm btn-success">Edit</a></td>
 										
 										</tr> 
 								';
@@ -209,7 +226,7 @@
 						
 						else
 						{
-							$result .= "There are no flights";
+							$result .= "There are no bookings";
 						}
 
 		

@@ -188,7 +188,7 @@ class Flights_model extends CI_Model
 		
 		//retrieve all users
 		$this->db->from($table);
-		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_phone, airline.airline_email, airline.airline_summary, airline.airline_thumb, airplane_type.airplane_type_name');
 		$this->db->where($where);
 		
 		$query = $this->db->get();

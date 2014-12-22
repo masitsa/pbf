@@ -338,6 +338,8 @@ class Site extends MX_Controller
 		$v_data['airports_query'] = $this->airports_model->all_active_airports();
 		$v_data['crumbs'] = $this->site_model->get_crumbs();
 		$v_data['price_range'] = $this->site_model->generate_price_range();
+		$v_data['flight_id'] = $flight_id;
+		$v_data['airline_logo_location'] = $this->airlines_location;
 		
 		$v_data['iframe'] = '';
 		
@@ -406,6 +408,42 @@ class Site extends MX_Controller
 		
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);
+	}
+	
+	public function send_comment($airline_id)
+	{
+		$message = $this->input->post('message');
+		
+		$response = $this->vendor_model->send_account_verification_email($this->session->userdata('vendor_email'), $this->session->userdata('vendor_first_name'), $this->session->userdata('vendor_store_email'));
+	}
+    
+	/*
+	*
+	*	Booking Page
+	*
+	*/
+	public function contact_airline($flight_id)
+	{	
+		//form validation rules
+		$this->form_validation->set_rules('sender_name', 'Your Name', 'required|xss_clean');
+		$this->form_validation->set_rules('sender_email', 'Email', 'required|valid_email|xss_clean');
+		$this->form_validation->set_rules('sender_phone', 'phone', 'xss_clean');
+		$this->form_validation->set_rules('airline_message', 'Message', 'required|xss_clean');
+		
+		//if form has been submitted
+		if ($this->form_validation->run())
+		{
+			$message = $this->input->post('message');
+			
+			$response = $this->vendor_model->send_account_verification_email($this->session->userdata('vendor_email'), $this->session->userdata('vendor_first_name'), $this->session->userdata('vendor_store_email'));
+		}
+		
+		else
+		{
+			$this->session->set_userdata('contact_error', validation_errors());
+			
+			redirect('flights/book-flight/'.$flight_id);
+		}
 	}
 }
 ?>

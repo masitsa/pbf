@@ -47,6 +47,7 @@ $route['404_override'] = '';
 $route['home'] = 'site/home_page';
 $route['flights'] = 'site/flights';
 $route['terms'] = 'site/terms';
+$route['contact-airline/(:num)'] = 'site/contact_airline/$1';
 
 /*
 *	Settings Routes

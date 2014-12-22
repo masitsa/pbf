@@ -1,9 +1,8 @@
-
-<div class="row">
+	<div class="row">
                 <div class="col-lg-8">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Bookings For The Last 7 Days
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Bookings For The Last Year
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -69,76 +68,7 @@
                         <div class="panel-body">
                             
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Date</th>
-                                            <th>Flight</th>
-                                            <th>Customer</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3326</td>
-                                            <td>20/10/2014</td>
-                                            <td>BSSSC</td>
-                                            <td>Alvaro Masitsa</td>
-                                            <td>0774834466</td>
-                                            <td>amasitsa@live.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <?php echo $recent_bookings;?>
                             </div>
                             <!-- /.table-responsive -->
                         </div>

@@ -37,3 +37,4 @@
     <![endif]-->
     <!-- jQuery Version 1.11.0 -->
     <script src="<?php echo base_url();?>assets/themes/sb-admin/js/jquery-1.11.0.js"></script>
+    <input type="hidden" id="airline_id" value="<?php echo $this->session->userdata('airline_id');?>"/>

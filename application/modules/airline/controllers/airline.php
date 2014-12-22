@@ -248,7 +248,7 @@ class Airline extends MX_Controller
 		{
 			//new session array
 			$newdata = array(
-				   'login_status'   => TRUE,
+				   'airline_login_status'   => TRUE,
 				   'first_name'     => $this->session->userdata('airline_user_first_name'),
 				   'airline_name'     => $this->session->userdata('airline_name'),
 				   'email'     		=> $this->session->userdata('airline_user_email'),

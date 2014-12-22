@@ -23,7 +23,7 @@ body {font-family: 'Century Gothic', sans-serif; font-size:1.5em;}
 a{color:#e7302a;}
 a:hover, a:visited, a:active{text-decoration:none;color:#5CA0D1;}
 .div-head{padding:45px 0 20px 0;}
-p, li{text-align:justify;}
+li{text-align:justify;}
 strong{color:#e7302a;}
 
 /* Backgrounds */
@@ -191,6 +191,7 @@ form#filter_price, form#filter_custom_price{padding-left: 5%;}
 form#filter_custom_price .form-control{width: 40%; margin-bottom: 2%;}
 
 /* Terms */
+.terms p{text-align:justify;}
 
 /* Footer */
 .footer { background: none repeat scroll 0 0 #edeff1;border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}

@@ -1,6 +1,6 @@
 <?php
-	$airlines = $this->login_model->get_total_airlines();
-	$visitors = $this->login_model->get_total_visitors();
+	$airlines = $this->reports_model->get_total_airlines();
+	$visitors = $this->reports_model->get_total_visitors();
 ?>
         <!-- Page heading -->
         <div class="page-head">

@@ -1,7 +1,9 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Control extends MX_Controller {
-    
+require_once "./application/modules/admin/controllers/admin.php";
+
+class Control extends admin 
+{
 	/*
 	*
 	*	Show the admin template header

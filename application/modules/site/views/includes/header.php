@@ -11,6 +11,8 @@
         <link href="<?php echo base_url();?>assets/themes/custom/css/owl.carousel.css" rel="stylesheet">
         <!-- Custom -->
         <link href="<?php echo base_url();?>assets/themes/custom/css/style.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="<?php echo base_url();?>assets/themes/custom/css/font-awesome.min.css" rel="stylesheet">
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
