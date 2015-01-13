@@ -46,7 +46,13 @@
             }
             ?>
             
-            <?php echo form_open_multipart($this->uri->uri_string(), array("class" => "form-horizontal", "role" => "form"));?>
+            <?php 
+				echo form_open_multipart($this->uri->uri_string(), array("class" => "form-horizontal", "role" => "form"));
+				echo form_hidden('current_image', $airplane_type->airplane_type_image);
+				echo form_hidden('current_image2', $airplane_type->airplane_type_image2);
+				echo form_hidden('current_image3', $airplane_type->airplane_type_image3);
+				echo form_hidden('current_image4', $airplane_type->airplane_type_image4);
+			?>
             
             <!-- airplane_type Name -->
             <div class="form-group">
@@ -56,29 +62,6 @@
                 </div>
             </div>
             
-            <!-- Image -->
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Airplane Type Image</label>
-                <input type="hidden" value="<?php echo $image;?>" name="current_image"/>
-                <div class="col-lg-4">
-                    
-                    <div class="row">
-                    
-                    	<div class="col-md-4 col-sm-4 col-xs-4">
-                        	<div class="fileinput fileinput-new" data-provides="fileinput">
-                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width:200px; height:200px;">
-                                    <img src="<?php echo $airplane_type_image;?>">
-                                </div>
-                                <div>
-                                    <span class="btn btn-file btn-warning"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span><input type="file" name="airplane_type_image"></span>
-                                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
             <!-- Activate checkbox -->
             <div class="form-group">
                 <label class="col-lg-4 control-label">Activate Airplane Type?</label>
@@ -110,6 +93,112 @@
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <!-- Image -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Interior First Image</label>
+                            <div class="col-lg-6">
+                                
+                                <div class="row">
+                                
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width:200px; height:200px;">
+                                                <img src="<?php echo $airplane_type_image;?>">
+                                            </div>
+                                            <div>
+                                                <span class="btn btn-file btn-warning"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span><input type="file" name="airplane_type_image"></span>
+                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Image -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Interior Second Image</label>
+                            <div class="col-lg-6">
+                                
+                                <div class="row">
+                                
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width:200px; height:200px;">
+                                                <img src="<?php echo $airplane_type_image2;?>">
+                                            </div>
+                                            <div>
+                                                <span class="btn btn-file btn-warning"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span><input type="file" name="airplane_type_image2"></span>
+                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <!-- Image -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Exterior First Image (Main)</label>
+                            <div class="col-lg-6">
+                                
+                                <div class="row">
+                                
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width:200px; height:200px;">
+                                                <img src="<?php echo $airplane_type_image3;?>">
+                                            </div>
+                                            <div>
+                                                <span class="btn btn-file btn-warning"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span><input type="file" name="airplane_type_image3"></span>
+                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Image -->
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">Exterior Second Image</label>
+                            <div class="col-lg-6">
+                                
+                                <div class="row">
+                                
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width:200px; height:200px;">
+                                                <img src="<?php echo $airplane_type_image4;?>">
+                                            </div>
+                                            <div>
+                                                <span class="btn btn-file btn-warning"><span class="fileinput-new">Select Image</span><span class="fileinput-exists">Change</span><input type="file" name="airplane_type_image4"></span>
+                                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="form-actions center-align">
                 <button class="submit btn btn-primary" type="submit">

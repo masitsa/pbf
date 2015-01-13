@@ -3,6 +3,7 @@
 class Site extends MX_Controller 
 {
 	var $airlines_location;
+	var $airplane_types_image_path;
 	
 	function __construct()
 	{
@@ -16,6 +17,7 @@ class Site extends MX_Controller
 		
 		$this->load->library('cart');
 		$this->airlines_location = base_url().'assets/images/airlines/';
+		$this->airplane_types_image_path = base_url().'/assets/images/airplane_types/';
 	}
     
 	/*
@@ -102,6 +104,7 @@ class Site extends MX_Controller
 		$v_data['crumbs'] = $this->site_model->get_crumbs();
 		$v_data['price_range'] = $this->site_model->generate_price_range();
 		
+		//$where = 'flight.flight_date > \''.date('Y-m-d').'\' AND flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1';
 		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1';
 		$table = 'flight, airline, flight_type, airplane_type';
 		
@@ -221,6 +224,7 @@ class Site extends MX_Controller
 		}
 		$v_data['products'] = $this->flights_model->get_all_flights($table, $where, $config["per_page"], $page, $limit, $order, $order_method);
 		$v_data['airports_query'] = $this->airports_model->all_active_airports();
+		$v_data['airplane_types_image_path'] = $this->airplane_types_image_path;
 		$v_data['airline_logo_location'] = $this->airlines_location;
 		
 		$data['content'] = $this->load->view('products/products', $v_data, true);
@@ -333,24 +337,35 @@ class Site extends MX_Controller
 	*/
 	public function book_flight($flight_id)
 	{
-		$v_data['flight'] = $this->flights_model->get_flight($flight_id);
+		$v_data['traveller_types'] = $this->flights_model->get_traveller_types();
+		$v_data['flight'] = $this->flights_model->get_flight_details($flight_id);
+		$v_data['airports_query'] = $this->airports_model->all_active_airports();
 		$v_data['crumbs'] = $this->site_model->get_crumbs();
 		$v_data['price_range'] = $this->site_model->generate_price_range();
+		$v_data['flight_id'] = $flight_id;
+		$v_data['airline_logo_location'] = $this->airlines_location;
+		$v_data['payments_error'] = '';
+		$flight_data = $v_data['flight']->row();
+		$seats_sold = $this->site_model->calculate_seats_sold($flight_id);
+		$available_seats = ($flight_data->flight_seats - $seats_sold);
+		$v_data['available_seats'] = $available_seats;
 		
 		$v_data['iframe'] = '';
-		
-		$flight_row = $v_data['flight']->row();
-		$flight_seats = $flight_row->flight_seats;
 		
 		//form validation rules
 		$this->form_validation->set_rules('amount', 'Amount', 'required|xss_clean');
 		$this->form_validation->set_rules('type', 'Type', 'required|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
-		//$this->form_validation->set_rules('reference', 'Reference', 'xss_clean');
+		$this->form_validation->set_rules('traveller_type_id', 'Traveller Type', 'required|xss_clean');
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|required|xss_clean');
-		$this->form_validation->set_rules('seats', 'Seat', 'less_than['.$flight_seats.']|required|xss_clean');
+		$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|xss_clean');
+		$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|xss_clean');
+		$this->form_validation->set_rules('seats', 'Seat', 'less_than_equal['.$available_seats.']|required|xss_clean');
+		$this->form_validation->set_rules('additional_info', 'Additional Information', 'required|xss_clean');
+		$this->form_validation->set_rules('terms_agree', 'Terms & Conditions', 'required');
+		$this->form_validation->set_message('less_than_equal', 'Must contain not more than '.$available_seats.' seats');
 		
 		//if form has been submitted
 		if ($this->form_validation->run())
@@ -359,6 +374,11 @@ class Site extends MX_Controller
 			$iframe = $this->payments_model->make_pesapal_payment($flight_id);
 			
 			$v_data['iframe'] = $iframe;
+		}
+		
+		else
+		{
+			$v_data['payments_error'] = validation_errors();
 		}
 		
 		$data['content'] = $this->load->view('products/payments', $v_data, true);
@@ -403,6 +423,149 @@ class Site extends MX_Controller
 		
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);
+	}
+	
+	public function send_comment($airline_id)
+	{
+		$message = $this->input->post('message');
+		
+		$response = $this->vendor_model->send_account_verification_email($this->session->userdata('vendor_email'), $this->session->userdata('vendor_first_name'), $this->session->userdata('vendor_store_email'));
+	}
+    
+	/*
+	*
+	*	Booking Page
+	*
+	*/
+	public function contact_airline($flight_id)
+	{	
+		//form validation rules
+		$this->form_validation->set_rules('sender_name', 'Your Name', 'required|xss_clean');
+		$this->form_validation->set_rules('sender_email', 'Email', 'required|valid_email|xss_clean');
+		$this->form_validation->set_rules('sender_phone', 'phone', 'xss_clean');
+		$this->form_validation->set_rules('airline_message', 'Message', 'required|xss_clean');
+		
+		//if form has been submitted
+		if ($this->form_validation->run())
+		{
+			$message = $this->input->post('message');
+			
+			$response = $this->vendor_model->send_account_verification_email($this->input->post('vendor_email'), $this->input->post('vendor_first_name'), $this->input->post('vendor_store_email'));
+		}
+		
+		else
+		{
+			$this->session->set_userdata('contact_error', validation_errors());
+			
+			redirect('flights/book-flight/'.$flight_id);
+		}
+	}
+	
+	public function set_passengers($seats, $available_seats)
+	{
+		$data['seats'] = $seats;
+		$data['available_seats'] = $available_seats;
+		echo $this->load->view('products/passengers', $data, TRUE);
+	}
+	
+	public function charter_quote() 
+	{
+		$v_data['active_airports'] = $this->airports_model->all_active_airports();
+		$v_data['active_airlines'] = $this->airlines_model->all_active_airlines();
+		$v_data['active_flight_types'] = $this->flight_types_model->all_active_flight_types();
+		$v_data['active_trip_types'] = $this->flight_types_model->all_active_trip_types();
+		$v_data['latest_flights'] = $this->flights_model->all_latest_flights();
+		
+		//initialize required variables
+		$v_data['destination'] = '';
+		$v_data['source'] = '';
+		$v_data['airline_id'] = '';
+		$v_data['date_from'] = '';
+		$v_data['date_to'] = '';
+		$v_data['trip_type_id'] = '';
+		$v_data['sender_name'] = '';
+		$v_data['sender_email'] = '';
+		$v_data['sender_phone'] = '';
+		$v_data['description'] = '';
+		
+		$this->form_validation->set_error_delimiters('', '');
+		$this->form_validation->set_rules('destination', 'Destination', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('source', 'Source', 'trim|xss_clean');
+		$this->form_validation->set_rules('airline_id', 'Airline', 'trim|xss_clean');
+		$this->form_validation->set_rules('date_from', 'Departure Date', 'trim|xss_clean');
+		$this->form_validation->set_rules('date_to', 'Arrival Date', 'trim|xss_clean');
+		$this->form_validation->set_rules('trip_type_id', 'Trip Type', 'trim|xss_clean');
+		
+		$this->form_validation->set_rules('sender_name', 'Your Name', 'required|xss_clean');
+		$this->form_validation->set_rules('sender_email', 'Email', 'required|valid_email|xss_clean');
+		$this->form_validation->set_rules('sender_phone', 'phone', 'required|xss_clean');
+		$this->form_validation->set_rules('description', 'Description', 'xss_clean');
+		
+		//if form conatins invalid data
+		if ($this->form_validation->run())
+		{
+			if($this->site_model->save_charter_quote())
+			{
+				$this->session->set_userdata('charter_quote_success_message', 'Your charter quote has been sent. We will get back to you as soon as possible');
+			}
+			
+			else
+			{
+				$this->session->set_userdata('charter_quote_error_message', 'Unable to add airline details. Please try again');
+			}
+			
+			redirect('charter');
+		}
+		else
+		{
+			$validation_errors = validation_errors();
+			
+			//repopulate form data if validation errors are present
+			if(!empty($validation_errors))
+			{
+				//create errors
+				$v_data['destination_error'] = form_error('destination');
+				$v_data['sender_name_error'] = form_error('sender_name');
+				$v_data['sender_email_error'] = form_error('sender_email');
+				$v_data['sender_phone_error'] = form_error('sender_phone');
+				$v_data['description_error'] = form_error('description');
+				
+				//repopulate fields
+				$v_data['destination'] = set_value('destination');
+				$v_data['source'] = set_value('source');
+				$v_data['airline_id'] = set_value('airline_id');
+				$v_data['date_from'] = set_value('date_from');
+				$v_data['date_to'] = set_value('date_to');
+				$v_data['trip_type_id'] = set_value('trip_type_id');
+				$v_data['sender_name'] = set_value('sender_name');
+				$v_data['sender_email'] = set_value('sender_email');
+				$v_data['sender_phone'] = set_value('sender_phone');
+				$v_data['description'] = set_value('description');
+			}
+		}
+		
+		$data['content'] = $this->load->view('charter_quote', $v_data, true);
+		
+		$data['title'] = 'Charter Quotes';
+		$this->load->view('site/templates/general_page', $data);
+	}
+	
+	public function forgot_password()
+	{
+		$this->form_validation->set_rules('your_email', 'Email', 'required|valid_email|exists[airline.airline_user_email]|xss_clean');
+		$this->form_validation->set_message('exists', 'This email has not been registered. Please <a href="'.site_url().'airline/sign-up/airline-details">Sign up</a>');
+		    
+		if($this->form_validation->run())
+		{
+			$result = md5(date("Y-m-d H:i:s"));
+			$pwd2 = substr($result, 0, 6);
+			
+			$pwd = md5($pwd2);
+		}
+		
+		else
+		{
+		}
 	}
 }
 ?>

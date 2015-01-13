@@ -39,6 +39,8 @@
                             <button type="submit" class="btn btn-red">Sign In</button>
                             <p>Don't have an account?</p>
                             <a href="<?php echo site_url().'airline/sign-up/airline-details';?>">Sign Up</a>
+                            <p>Forgot your password?</p>
+                            <a href="<?php echo site_url().'reset-password';?>">Reset Password</a>
                         </div>
                     </div>
                   <?php echo form_close();?>

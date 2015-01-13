@@ -1,6 +1,6 @@
 <?php
-	$active_flights = $this->login_model->get_active_flights();
-	$total_payments = number_format($this->login_model->get_total_payments(), 0, '.', ',');
+	$active_flights = $this->reports_model->get_active_flights();
+	$total_payments = number_format($this->reports_model->get_total_payments(), 0, '.', ',');
 ?>
             <!-- Page header start -->
             <div class="page-header">

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="admin_login.php" server="23.229.204.232/public_html/development/" local="130597462880456667" remote="130595437800000000" Dst="0" />
-<file name="airline_login.php" server="23.229.204.232/public_html/development/" local="130602739896084408" remote="130602396000000000" Dst="0" />
-<file name="school_signup.php" server="23.229.204.232/public_html/development/" local="130597418404893000" remote="130602396600000000" Dst="0" />
-<file name="teacher_signup.php" server="23.229.204.232/public_html/development/" local="130597418405023007" remote="130602396600000000" Dst="0" />
+<file name="airline_login.php" server="23.229.204.232/public_html/development/" local="130648784843448298" remote="130648425600000000" Dst="0" />
 <file name="template.php" server="23.229.204.232/public_html/development/" local="130597418405033008" remote="130602396600000000" Dst="0" />
 <file name="user_login.php" server="23.229.204.232/public_html/development/" local="130597418405053009" remote="130602396600000000" Dst="0" />
+<file name="reset_airline_password.php" server="23.229.204.232/public_html/development/" local="130648786640852107" remote="130648426200000000" Dst="0" />
 </dwsync>

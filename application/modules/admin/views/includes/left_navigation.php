@@ -40,6 +40,20 @@
                 </li>
 				<!-- End: Products Menu -->
 
+                <!-- Start: Products Menu -->
+                <li class="has_submenu">
+                    <a href="#">
+                        <!-- Menu name with icon -->
+                        <i class="icon-th"></i> Accounts
+                        <!-- Icon for dropdown -->
+                    </a>
+                    <ul>
+                        <li><a href="<?php echo base_url()."admin/reports/bookings";?>">Bookings</a></li>
+                        <li><a href="<?php echo base_url()."admin/reports/payments";?>">Payments</a></li>
+                    </ul>
+                </li>
+				<!-- End: Products Menu -->
+
             </ul>
         </div>
     </div>

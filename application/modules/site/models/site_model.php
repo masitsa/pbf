@@ -226,7 +226,7 @@ class Site_model extends CI_Model
 			$airlines = 'active';
 		}
 		
-		if($name == 'Charter-quotes')
+		if($name == 'Charter')
 		{
 			$charter = 'active';
 		}
@@ -265,6 +265,94 @@ class Site_model extends CI_Model
 		$this->db->where('booking_id', $booking_id);
 		
 		if($this->db->update('booking', $data))
+		{
+			return TRUE;
+		}
+		
+		else
+		{
+			return FALSE;
+		}
+	}
+    
+	/*
+	*
+	*	Send airline contact Email
+	*
+	*/
+	public function send_account_verification_email($receiver_email, $receiver_name, $cc) 
+	{
+		$this->load->library('Mandrill', 'yPN5McI91NQbs7spbOUpPA');
+		$this->load->model('site/email_model');
+		
+		$subject = "Thanks for registering your shop";
+		$message = '
+				<p>Thank you for registering at In Store Look.</p> <p>Please activate your account here</p>
+				';
+		$sender_email = "info@instorelook.com.au";
+		$shopping = "";
+		$from = "In Store Look";
+		$encrypted_email = $this->encrypt_vendor_email($receiver_email);
+		
+		$button = '<a class="mcnButton " title="Confirm Account" href="'.site_url().'confirm-account/'.$encrypted_email.'" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Confirm My Account</a>';
+		$response = $this->email_model->send_mandrill_mail($receiver_email, "Hi ".$receiver_name, $subject, $message, $sender_email, $shopping, $from, $button, $cc);
+		
+		//echo var_dump($response);
+		
+		return $response;
+	}
+	
+	public function calculate_seats_sold($flight_id)
+	{
+		$this->db->select('SUM(booking_units) AS total_bookings');
+		$this->db->where('booking.flight_id = '.$flight_id);
+		$query = $this->db->get('booking');
+		
+		if($query->num_rows > 0)
+		{
+			$row = $query->row();
+			
+			$total = $row->total_bookings;
+		}
+		
+		else
+		{
+			$total = 0;
+		}
+		
+		return $total;
+	}
+	
+	public function save_charter_quote()
+	{
+		$source = $this->input->post('source');
+		$destination = $this->input->post('destination');
+		$airline_id = $this->input->post('airline_id');
+		$date_from = date('Y-m-d', strtotime($this->input->post('date_from')));
+		$date_to = date('Y-m-d', strtotime($this->input->post('date_to')));
+		$trip_type_id = $this->input->post('trip_type_id');
+		$sender_name = $this->input->post('sender_name');
+		$sender_email = $this->input->post('sender_email');
+		$sender_phone = $this->input->post('sender_phone');
+		$description = $this->input->post('description');
+		$email_alert = $this->input->post('email_alert');
+		
+		$data = array(
+			'source' => $source,
+			'destination' => $destination,
+			'airline_id' => $airline_id,
+			'date_from' => $date_from,
+			'date_to' => $date_to,
+			'trip_type_id' => $trip_type_id,
+			'sender_name' => $sender_name,
+			'sender_email' => $sender_email,
+			'sender_phone' => $sender_phone,
+			'description' => $description,
+			'email_alert' => $email_alert,
+			'charter_quote_date' => date('Y-m-d H:i:s')
+		);
+		
+		if($this->db->insert('charter_quote', $data))
 		{
 			return TRUE;
 		}

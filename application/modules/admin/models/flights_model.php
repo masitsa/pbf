@@ -3,6 +3,17 @@
 class Flights_model extends CI_Model 
 {	
 	/*
+	*	Retrieve all active traveller types
+	*
+	*/
+	public function get_traveller_types()
+	{
+		$this->db->order_by('traveller_type_name');
+		$query = $this->db->get('traveller_type');
+		
+		return $query;
+	}
+	/*
 	*	Retrieve all active flights
 	*
 	*/
@@ -53,7 +64,7 @@ class Flights_model extends CI_Model
 	{
 		//retrieve all users
 		$this->db->from($table);
-		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
+		$this->db->select('flight.*, flight_type.flight_type_name, airplane_type.airplane_type_thumb3, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
 		$this->db->where($where);
 		
 		if(($order_by != NULL) && ($order_method != NULL))
@@ -100,9 +111,48 @@ class Flights_model extends CI_Model
 				'charter_plane_price'=>$this->input->post('charter_price'),
 				'modified_by'=>$this->session->userdata('airline_id')
 			);
-			
 		if($this->db->insert('flight', $data))
 		{
+			$flight_id = $this->db->insert_id();
+			
+			//check for charter quote email alerts
+			$this->db->where('email_alert = 1 AND destination = '.$this->input->post('destination'));
+			$query = $this->db->get('charter_quote');
+			
+			if($query->num_rows() > 0)
+			{
+				//get destination name
+				$this->db->where('airport_id = '.$this->input->post('destination'));
+				$query2 = $this->db->get('airport');
+				$row = $query2->row();
+				$destination = $row->airport_name;
+				
+				//get airline name
+				$this->db->where('airline_id = '.$this->session->userdata('airline_id'));
+				$query2 = $this->db->get('airline');
+				$row = $query2->row();
+				$airline = $row->airline_name;
+				$airline_email = $row->airline_email;
+				
+				//send email
+				$this->load->model('site/email_model');
+				foreach($query->result() as $res)
+				{
+					$email = $res->sender_email;
+					$name = $res->sender_name;
+					$subject = 'Flight Alert';
+					$message = '<p>You had created an alert on Private Bush Flights for flights to '.$destination.'</p>
+					<p>Recently there has been a booking by '.$airline.' to this destination. Please view more details about this flight by clicking here:</p>';
+					$button = '<p><a class="mcnButton " title="View flight" href="'.site_url().'flights/book-flight/'.$flight_id.'" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">View Flight</a></p>';
+					$shopping = '<p>If you have any queries do not hesitate to get in touch with '.$airline.' at <a href="mailto:'.$airline_email.'">'.$airline_email.'</a> </p>';
+					$sender_email = 'info@privatebushflights.com';
+					$from = 'Private Bush Flights';
+				
+					$response = $this->email_model->send_mandrill_mail($email, $name, $subject, $message, $sender_email, $shopping, $from, $button);
+					
+					//var_dump($response); die();
+				}
+			}
 			return TRUE;
 		}
 		else{
@@ -159,6 +209,27 @@ class Flights_model extends CI_Model
 		$this->db->from('flight');
 		$this->db->select('*');
 		$this->db->where('flight_id = '.$flight_id);
+		$query = $this->db->get();
+		
+		return $query;
+	}
+	
+	/*
+	*	Retrieve all flights
+	*	@param string $table
+	* 	@param string $where
+	*
+	*/
+	public function get_flight_details($flight_id)
+	{
+		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1 AND flight.flight_id = '.$flight_id;
+		$table = 'flight, airline, flight_type, airplane_type';
+		
+		//retrieve all users
+		$this->db->from($table);
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_phone, airline.airline_email, airline.airline_summary, airline.airline_thumb, airplane_type.airplane_type_name');
+		$this->db->where($where);
+		
 		$query = $this->db->get();
 		
 		return $query;
@@ -251,6 +322,102 @@ class Flights_model extends CI_Model
 		}
 		
 		return $max_price;
+	}
+	
+	public function get_flight_passengers($flight_id)
+	{
+		$this->db->select('booking_passenger.*');
+		$this->db->where('booking.booking_id = booking_passenger.booking_id AND booking.flight_id = flight.flight_id AND flight.flight_id = '.$flight_id);
+		$query = $this->db->get('flight, booking, booking_passenger');
+		
+		return $query;
+	}
+	
+	public function export_passengers($flight_id)
+	{
+		$this->load->library('excel');
+		
+		//get flight data
+		$flight_data = $this->get_flight($flight_id);
+		
+		$flight = $flight_data->row();
+		$title = date('jS M Y',strtotime($flight->flight_date)).' Passengers';
+		
+		//get passengers
+		$passengers_query = $this->get_flight_passengers($flight_id);
+		$total_passengers = $passengers_query->num_rows();
+		$passengers = '';
+		
+		$airports_query = $this->airports_model->all_airports();
+		//get source & destination names
+		if($airports_query->num_rows() > 0)
+		{
+			foreach($airports_query->result() as $res)
+			{
+				$airport_id = $res->airport_id;
+				
+				if($airport_id == $flight->source)
+				{
+					$source = $res->airport_name;
+				}
+				
+				if($airport_id == $flight->destination)
+				{
+					$destination = $res->airport_name;
+				}
+			}
+		}
+		
+		$count = 0;
+		$row_count = 0;
+		$report[$row_count][0] = 'Flight Date';
+		$report[$row_count][1] = date('jS M Y',strtotime($flight->flight_date));
+		$report[$row_count][4] = 'Source';
+		$report[$row_count][5] = $source;
+		$row_count = 1;
+		$report[$row_count][0] = 'Departs at';
+		$report[$row_count][1] = date('H:i',strtotime($flight->flight_departure_time));
+		$report[$row_count][4] = 'Destination';
+		$report[$row_count][5] = $destination;
+		$row_count = 2;
+		$report[$row_count][0] = 'Arrives at';
+		$report[$row_count][1] = date('H:i',strtotime($flight->flight_arrival_time));
+		$report[$row_count][4] = 'Total Passengers';
+		$report[$row_count][5] = $flight_data->num_rows();
+		$row_count = 5;
+		$report[$row_count][0] = '#';
+		$report[$row_count][1] = 'First Name';
+		$report[$row_count][2] = 'Last Name';
+		$report[$row_count][3] = 'Passport';
+		$report[$row_count][4] = 'Nationality';
+		
+		if(empty($total_passengers))
+		{
+			$total_passengers = 0;
+		}
+		
+		else
+		{
+			foreach($passengers_query->result() as $pas_res)
+			{
+				$row_count++;
+				$count++;
+				$passenger_fname = $pas_res->booking_passenger_first_name;
+				$passenger_lname = $pas_res->booking_passenger_last_name;
+				$passenger_passport = $pas_res->booking_passenger_passport;
+				$passenger_nationality = $pas_res->booking_passenger_nationality;
+				
+				$report[$row_count][0] = $count;
+				$report[$row_count][1] = $passenger_lname;
+				$report[$row_count][2] = $passenger_lname;
+				$report[$row_count][3] = $passenger_passport;
+				$report[$row_count][4] = $passenger_nationality;
+			}
+		}
+		
+		//create the excel document
+		$this->excel->addArray ($report);
+		$this->excel->generateXML ($title);
 	}
 }
 ?>

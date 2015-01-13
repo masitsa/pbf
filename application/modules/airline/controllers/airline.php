@@ -10,6 +10,11 @@ class Airline extends MX_Controller
 		parent:: __construct();
 		$this->load->model('airline_model');
 		$this->load->model('admin/file_model');
+		$this->load->model('admin/flights_model');
+		$this->load->model('admin/airplane_types_model');
+		$this->load->model('admin/flight_types_model');
+		$this->load->model('admin/airports_model');
+		$this->load->model('admin/users_model');
 		
 		$this->load->library('image_lib');
 		
@@ -243,7 +248,7 @@ class Airline extends MX_Controller
 		{
 			//new session array
 			$newdata = array(
-				   'login_status'   => TRUE,
+				   'airline_login_status'   => TRUE,
 				   'first_name'     => $this->session->userdata('airline_user_first_name'),
 				   'airline_name'     => $this->session->userdata('airline_name'),
 				   'email'     		=> $this->session->userdata('airline_user_email'),

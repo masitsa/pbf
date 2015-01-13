@@ -47,6 +47,7 @@ $route['404_override'] = '';
 $route['home'] = 'site/home_page';
 $route['flights'] = 'site/flights';
 $route['terms'] = 'site/terms';
+$route['contact-airline/(:num)'] = 'site/contact_airline/$1';
 
 /*
 *	Settings Routes
@@ -148,6 +149,7 @@ $route['airline/edit-flight-type/(:num)'] = 'airline/flight_types/edit_flight_ty
 $route['airline/activate-flight-type/(:num)/(:num)'] = 'airline/flight_types/activate_flight_type/$1/$2';
 $route['airline/deactivate-flight-type/(:num)/(:num)'] = 'airline/flight_types/deactivate_flight_type/$1/$2';
 $route['airline/delete-flight-type/(:num)/(:num)'] = 'airline/flight_types/delete_flight_type/$1/$2';
+$route['airline/export-passengers/(:num)'] = 'airline/flights/export_passengers/$1';
 
 //flight: airline
 $route['airline/all-flights'] = 'airline/flights/index';
@@ -157,6 +159,10 @@ $route['airline/edit-flight/(:num)'] = 'airline/flights/edit_flight/$1';
 $route['airline/activate-flight/(:num)/(:num)'] = 'airline/flights/activate_flight/$1/$2';
 $route['airline/deactivate-flight/(:num)/(:num)'] = 'airline/flights/deactivate_flight/$1/$2';
 $route['airline/delete-flight/(:num)/(:num)'] = 'airline/flights/delete_flight/$1/$2';
+
+//payments: airline
+$route['airline/my-bank'] = 'airline/account/bank_details';
+$route['airline/my-payments'] = 'airline/account/payments';
 
 /*
 *	Airline Routes
@@ -168,11 +174,13 @@ $route['airline/sign-up/review'] = 'airline/airline_signup3';
 $route['airline/account'] = 'airline/account';
 $route['airline-login'] = 'login/login_airline';
 $route['airlines'] = 'login/login_airline';
+$route['bookings'] = 'airline/bookings';
+$route['airline/charter-quotes'] = 'airline/flights/charter_quotes';
 
 /*
 *	Flights Routes
 */
-$route['flights/(:any)/(:num)'] = 'site/search_flight_types/$2';
+//$route['flights/(:any)/(:num)'] = 'site/search_flight_types/$2';
 $route['flights/advanced-search'] = 'site/search_flights';
 $route['flights/search-flights'] = 'site/search';
 $route['flights/search/(:any)'] = 'site/flights/$1';
@@ -183,6 +191,8 @@ $route['flights/destination/(:num)'] = 'site/flights/__/0/$1';
 $route['flights/book-flight/(:num)'] = 'site/book_flight/$1';
 $route['payment'] = 'site/payment';
 $route['flight/payment'] = 'site/payment_success';
+$route['charter'] = 'site/charter_quote';
+$route['reset-password'] = 'login/reset_airline_password';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

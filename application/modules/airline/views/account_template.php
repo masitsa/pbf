@@ -5,6 +5,7 @@
     </head>
 
 	<body>
+    	<input type="hidden" id="config_url" value="<?php echo site_url()?>"/>
 
     	<div id="wrapper">
             <!-- Top Navigation -->

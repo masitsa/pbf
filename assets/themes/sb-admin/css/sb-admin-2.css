@@ -18,7 +18,8 @@ body {
     background-color: #fff;
 }
 
-.center-align{margin:0 auto; text-align:center;}
+.center-align, .tab-pane h4{margin:0 auto; text-align:center;}
+.tab-pane h4{margin-top: 10px; margin-bottom:10px;}
 
 @media(min-width:768px) {
     #page-wrapper {

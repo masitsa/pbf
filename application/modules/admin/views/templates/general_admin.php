@@ -12,7 +12,7 @@
         
         <!-- Main bar -->
         <div class="mainbar">
-            <?php echo modules::run('admin/control/crumbs'); ?>
+            <?php echo $this->load->view("includes/crumbs", '', TRUE); ?>
             
             <!-- Matter -->
             

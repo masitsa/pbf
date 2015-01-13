@@ -3,9 +3,9 @@
         <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">		
         <script type="text/javascript" src="<?php echo base_url();?>assets/jasny/jasny-bootstrap.js"></script> 
         <!-- Join  -->
-        <div class="grey-background">
+        <div class="grey-background div-head">
         	<div class="container">
-        		<div class="search-flights">
+        		<div class="">
                 	<div class="divider-line"></div>
                 	<h1 class="center-align">Airline Sign Up</h1>
                 	<div class="divider-line" style="margin-bottom:2%;"></div>
@@ -38,8 +38,8 @@
                     	<div class="row">
                         	<div class="col-md-6 first">
                             	<div class="form-group">
-                                    <label for="airline_name" class="col-sm-3 control-label">Airline <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <label for="airline_name" class="col-sm-4 control-label">Airline <span class="info">*</span></label>
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_name_error))
@@ -59,8 +59,8 @@
                                     </div>
                                 </div>
                                  <div class="form-group">
-                                    <label for="air_operator_certificate" class="col-sm-3 control-label">Air Operator's Certificate <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <label for="air_operator_certificate" class="col-sm-4 control-label">Air Operator's Certificate <span class="info">*</span></label>
+                                    <div class="col-sm-8">
                                         <?php
                                             //case of an input error
                                             if(!empty($air_operator_certificate_error))
@@ -80,8 +80,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="airline_phone" class="col-sm-3 control-label">Phone <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <label for="airline_phone" class="col-sm-4 control-label">Phone <span class="info">*</span></label>
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_phone_error))
@@ -102,8 +102,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="airline_email" class="col-sm-3 control-label">Email <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <label for="airline_email" class="col-sm-4 control-label">Email <span class="info">*</span></label>
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_email_error))
@@ -124,9 +124,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="airline_summary" class="col-sm-3 control-label">Summary
+                                    <label for="airline_summary" class="col-sm-4 control-label">Summary
                                         <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_summary_error))
@@ -149,9 +149,9 @@
                             
                         	<div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="airline_logo" class="col-sm-3 control-label">Logo</label>
+                                    <label for="airline_logo" class="col-sm-4 control-label">Logo</label>
                                     <?php echo $airline_logo_error;?>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="">
                                                 <img src="<?php echo $airline_logo_location;?>" class="img-responsive">

@@ -148,7 +148,7 @@
                     <div class="col-lg-6">
                         <!-- Image -->
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">Exterior First Image</label>
+                            <label class="col-lg-6 control-label">Exterior First Image (Main)</label>
                             <div class="col-lg-6">
                                 
                                 <div class="row">

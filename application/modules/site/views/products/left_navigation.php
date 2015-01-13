@@ -84,7 +84,7 @@
     	<?php
         	$validation_errors = validation_errors();
 			
-			if(!empty($validation_errors))
+			if(!empty($validation_errors) && (empty($payments_error)))
 			{
 				echo
 				'
