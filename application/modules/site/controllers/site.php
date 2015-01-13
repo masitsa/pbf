@@ -506,7 +506,7 @@ class Site extends MX_Controller
 		{
 			if($this->site_model->save_charter_quote())
 			{
-				$this->session->set_userdata('charter_quote_success_message', 'Your charter quote has been sent. We will get back to you as soon as possible');
+				$this->session->set_userdata('charter_quote_success_message', 'Your  charter quote has been sent. We will get back to you in no more than 3 hours');
 			}
 			
 			else
@@ -547,6 +547,14 @@ class Site extends MX_Controller
 		$data['content'] = $this->load->view('charter_quote', $v_data, true);
 		
 		$data['title'] = 'Charter Quotes';
+		$this->load->view('site/templates/general_page', $data);
+	}
+	public function contact() 
+	{
+		
+		$data['content'] = $this->load->view('contact_us', '' , true);
+		
+		$data['title'] = 'Contact Us';
 		$this->load->view('site/templates/general_page', $data);
 	}
 	

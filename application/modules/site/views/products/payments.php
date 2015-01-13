@@ -49,6 +49,18 @@
 							$airline_id = $flight_data->airline_id;
 							$flight_departure_time = $flight_data->flight_departure_time;
 							$flight_arrival_time = $flight_data->flight_arrival_time;
+
+                            $airplane_type_image = $flight_data->airplane_type_image;
+                            $airplane_type_image2 = $flight_data->airplane_type_image2;
+                            $airplane_type_thumb = $flight_data->airplane_type_thumb;
+                            $airplane_type_image3 = $flight_data->airplane_type_image3;
+                            $airplane_type_thumb2 = $flight_data->airplane_type_thumb2;
+                            $airplane_type_image4 = $flight_data->airplane_type_image4;
+                            $airplane_type_thumb3 = $flight_data->airplane_type_thumb3;
+                            $airplane_type_thumb4 = $flight_data->airplane_type_thumb4;
+                            $airplane_type_name = $flight_data->airplane_type_name;
+
+
 							$year = date('Y',strtotime($flight_date));
 							$month = date('M',strtotime($flight_date));
 							$day = date('jS',strtotime($flight_date));
@@ -212,32 +224,75 @@
                         
                     	<div class="row">
                         	<div class="col-md-6">
-                                <div class="center-align">
-                                    <h4>About Flight</h4>
+                                <div class="row">
+                                    <div class="center-align">
+                                        <h4>About Flight</h4>
+                                    </div>
+                                    
+                                    <table class="table table-condensed table-striped">
+                                    	<tr>
+                                        	<th>Source:</th>
+                                        	<td><?php echo $source;?></td>
+                                        </tr>
+                                    	<tr>
+                                        	<th>Destination:</th>
+                                        	<td><?php echo $destination;?></td>
+                                        </tr>
+                                    	<tr>
+                                        	<th>Departure Time:</th>
+                                        	<td><?php echo $day;?> <?php echo $month;?> at <?php echo $flight_departure_time;?></td>
+                                        </tr>
+                                    	<tr>
+                                        	<th>Arrival Time:</th>
+                                        	<td><?php echo $day;?> <?php echo $month;?> at <?php echo $flight_arrival_time;?></td>
+                                        </tr>
+                                    	<tr>
+                                        	<th>Available Seats:</th>
+                                        	<td><?php echo $available_seats;?></td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                
-                                <table class="table table-condensed table-striped">
-                                	<tr>
-                                    	<th>Source:</th>
-                                    	<td><?php echo $source;?></td>
-                                    </tr>
-                                	<tr>
-                                    	<th>Destination:</th>
-                                    	<td><?php echo $destination;?></td>
-                                    </tr>
-                                	<tr>
-                                    	<th>Departure Time:</th>
-                                    	<td><?php echo $day;?> <?php echo $month;?> at <?php echo $flight_departure_time;?></td>
-                                    </tr>
-                                	<tr>
-                                    	<th>Arrival Time:</th>
-                                    	<td><?php echo $day;?> <?php echo $month;?> at <?php echo $flight_arrival_time;?></td>
-                                    </tr>
-                                	<tr>
-                                    	<th>Available Seats:</th>
-                                    	<td><?php echo $available_seats;?></td>
-                                    </tr>
-                                </table>
+                                <div class="row">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                      <!-- Indicators -->
+                                      <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                      </ol>
+
+                                      <!-- Wrapper for slides -->
+                                      <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                          <img src="<?php echo site_url()?>assets/images/airplane_types/<?php echo $airplane_type_image;?>" alt="...">
+                                         
+                                        </div>
+                                        <div class="item">
+                                          <img src="<?php echo site_url()?>assets/images/airplane_types/<?php echo $airplane_type_image2;?>" alt="...">
+                                          
+                                        </div>
+                                        <div class="item">
+                                          <img src="<?php echo site_url()?>assets/images/airplane_types/<?php echo $airplane_type_image3;?>" alt="...">
+                                          
+                                        </div>
+                                        <div class="item">
+                                          <img src="<?php echo site_url()?>assets/images/airplane_types/<?php echo $airplane_type_image4;?>" alt="...">
+                                          
+                                        </div>
+                                        <?php echo $airplane_type_name;?>
+                                      </div>
+
+                                      <!-- Controls -->
+                                      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                      </a>
+                                      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                      </a>
+                                    </div>
+                                </div>
                         	</div>
                             
                             <div class="col-md-6">

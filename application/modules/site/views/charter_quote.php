@@ -104,38 +104,13 @@
                             	<div class="form-group">
                                     <label for="destination" class="col-sm-4 control-label">Destination <span class="info">*</span></label>
                                     <div class="col-sm-8">
-                                    	<?php
-											//case of an input error
-                                        	if(!empty($destination_error))
-											{
-												echo '<span class="info">'.$destination_error.'</span>';
-												?>
-                                                <select class="form-control alert-danger" name="destination">
-                                                    <option value="">----Select Destination----</option>
-                                                    <?php echo $destinations;?>
-                                                </select>
-                                                <?php
-											}
-											
-											else
-											{
-												?>
-                                                <select class="form-control" name="destination">
-                                                    <option value="">----Select Destination----</option>
-                                                    <?php echo $destinations;?>
-                                                </select>
-                                                <?php
-											}
-										?>
+                                    	 <input type="text" class="form-control" name="destination" placeholder="Destination" value="">
                                     </div>
                                 </div>
                             	<div class="form-group">
                                     <label for="airline_name" class="col-sm-4 control-label">Source</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" name="source">
-                                            <option value="">----Select Source----</option>
-                                            <?php echo $sources;?>
-                                        </select>
+                                         <input type="text" class="form-control" name="source" placeholder="Source" value="">
                                     </div>
                                 </div>
                                	<div class="form-group">

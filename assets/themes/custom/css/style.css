@@ -163,7 +163,7 @@ legend{border-bottom: medium none; margin-bottom: 0; padding: 0 0.1em; text-alig
 fieldset .review-text{color:#fff;}
 
 /* product list */
-.glyphicon { margin-right:10px; }
+.glyphicon { margin-right:10px; margin-top: 3px;}
 .panel-body { padding:0px; }
 .panel-body table tr td { padding-left: 15px }
 .panel-body .table {margin-bottom: 0px; }
@@ -277,4 +277,24 @@ and (min-width : 1824px) {
 @media (max-width: 321px){
 	h1{font-size:1.3em;}
 	body {font-size:1.2em;}
+}
+.contact-info {
+text-align: left;
+margin-bottom: 50px;
+margin-top: 20px;
+margin-left: 100px;
+}
+
+.navigation-subscription-bar
+{
+	background: rgba(92,160,209,.2);
+	z-index: 1000;
+	float: right;
+	position: absolute;
+	z-index: 1000;
+	display: block;
+}
+#subscribe-button
+{
+	width:140px;
 }

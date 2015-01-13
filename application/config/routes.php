@@ -192,6 +192,7 @@ $route['flights/book-flight/(:num)'] = 'site/book_flight/$1';
 $route['payment'] = 'site/payment';
 $route['flight/payment'] = 'site/payment_success';
 $route['charter'] = 'site/charter_quote';
+$route['contact'] = 'site/contact';
 $route['reset-password'] = 'login/reset_airline_password';
 
 /* End of file routes.php */

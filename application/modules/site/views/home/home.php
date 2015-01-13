@@ -263,6 +263,20 @@
             </div>
         </div>
         <!-- End Why Us -->
+         <!-- Subscribe for alerts -->
+        <div class="section carousel airline-join">
+            <div class="container">
+                
+                <div class="divider-line"></div>
+                <div class="center-align">
+                    <h3>Are you an Airline?</h3>
+                </div>
+                <div class="divider-line"></div>
+                
+                <a href="" class="btn btn-airline-join">Join Here</a>
+            </div>
+        </div>
+        <!-- End Alerts subscription -->
         
         <!-- Airlines -->
         <div class="section carousel grey-background">
