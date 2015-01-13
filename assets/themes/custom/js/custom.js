@@ -61,3 +61,13 @@ $("textarea.alert-danger").keyup(function() {
 	$(this).removeClass('alert-danger');
 });
 
+$("a.cbp-vm-grid").click(function() {
+	$('.list-title').css('display', 'none');
+	$('.grid-title').css('display', 'block');
+});
+
+$("a.cbp-vm-list").click(function() {
+	$('.list-title').css('display', 'block');
+	$('.grid-title').css('display', 'none');
+});
+

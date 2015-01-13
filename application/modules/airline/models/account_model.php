@@ -157,4 +157,36 @@ class Account_model extends CI_Model
 		$this->db->where("flight.flight_type_id = '".$flight_type_id."' AND booking.flight_id = flight.flight_id AND flight.airline_id = ".$airline_id);
 		return $this->db->count_all_results('booking, flight');
 	}
+	
+	public function get_bank_details($airline_id)
+	{
+		$this->db->select('bank_name, account_name, account_number, bank_city, bank_country, swift_code');
+		$this->db->where('airline_id', $airline_id);
+		return $this->db->get('airline');
+	}
+	
+	public function update_airline_bank_details($airline_id)
+	{
+		$data = array
+		(
+			'bank_name' => $this->input->post('bank_name'),
+			'account_name' => $this->input->post('account_name'),
+			'account_number' => $this->input->post('account_number'),
+			'bank_city' => $this->input->post('bank_city'),
+			'bank_country' => $this->input->post('bank_country'),
+			'swift_code' => $this->input->post('swift_code'),
+		);
+		
+		$this->db->where('airline_id', $airline_id);
+		
+		if($this->db->update('airline', $data))
+		{
+			return TRUE;
+		}
+		
+		else
+		{
+			return FALSE;
+		}
+	}
 }

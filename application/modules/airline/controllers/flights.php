@@ -21,7 +21,7 @@ class Flights extends account
 	*/
 	public function index() 
 	{
-		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id';
+		$where = 'flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.airline_id = '.$this->airline_id;
 		$table = 'flight, airline, flight_type, airplane_type';
 		$segment = 3;
 		//pagination
@@ -248,6 +248,71 @@ class Flights extends account
 			$this->session->set_userdata('error_message', 'Flight Type could not be disabled');
 		}
 		redirect('airline/all-flights/'.$page);
+	}
+	
+	public function export_passengers($flight_id)
+	{
+		$this->flights_model->export_passengers($flight_id);
+	}
+	
+	public function charter_quotes() 
+	{
+		$where = 'charter_quote.airline_id = 0 OR charter_quote.airline_id = '.$this->airline_id;
+		$table = 'charter_quote';
+		$segment = 3;
+		//pagination
+		$this->load->library('pagination');
+		$config['base_url'] = base_url().'airline/charter-quotes';
+		$config['total_rows'] = $this->users_model->count_items($table, $where);
+		$config['uri_segment'] = $segment;
+		$config['per_page'] = 20;
+		$config['num_links'] = 5;
+		
+		
+		$config['full_tag_open'] = '<ul class="pagination pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		
+		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = 'Next';
+		$config['next_tag_close'] = '</span>';
+		
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['cur_tag_open'] = '<li class="active">';
+		$config['cur_tag_close'] = '</li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+        $data["links"] = $this->pagination->create_links();
+		$query = $this->airline_model->get_all_charter_quotes($table, $where, $config["per_page"], $page);
+		
+		if ($query->num_rows() > 0)
+		{
+			$v_data['query'] = $query;
+			$v_data['page'] = $page;
+			$v_data['title'] = 'Charter Quotes Requests';
+			$v_data['airports_query'] = $this->airports_model->all_airports();
+			$data['content'] = $this->load->view('charter_quotes', $v_data, true);
+		}
+		
+		else
+		{
+			$data['content'] = 'There are no charter quotes requests';
+		}
+		$data['title'] = 'Charter Quotes Requests';
+		
+		$this->load->view('account_template', $data);
 	}
 }
 ?>

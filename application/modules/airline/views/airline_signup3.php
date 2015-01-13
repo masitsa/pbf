@@ -1,7 +1,7 @@
 		<!-- Join  -->
-        <div class="grey-background">
+        <div class="grey-background div-head">
         	<div class="container">
-        		<div class="search-flights">
+        		<div class="">
                 	<div class="divider-line"></div>
                 	<h1 class="center-align">Airline Sign Up</h1>
                 	<div class="divider-line" style="margin-bottom:2%;"></div>

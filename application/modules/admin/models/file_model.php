@@ -109,9 +109,10 @@ class File_model extends CI_Model
 			$image_upload_data = $this->upload->data();
 			
 			$file_name = $image_upload_data['file_name'];
+			$create = $this->resize_image($image_upload_data['full_path'], $image_upload_data['file_path'].$file_name, $resize['width'], $resize['height']);
 			
 			// set the resize config
-			$resize_conf = array(
+			/*$resize_conf = array(
 					'source_image'  => $image_upload_data['full_path'], 
 					'width' => $resize['width'],
 					'height' => $resize['height'],
@@ -123,6 +124,12 @@ class File_model extends CI_Model
 
 			// do it!
 			if ( ! $this->image_lib->resize())
+			{
+				$response['check'] = FALSE;
+				$response['error'] =  $this->image_lib->display_errors();
+			}*/
+				
+			if(!$create)
 			{
 				$response['check'] = FALSE;
 				$response['error'] =  $this->image_lib->display_errors();

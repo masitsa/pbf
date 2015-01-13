@@ -1,7 +1,7 @@
 		<!-- Join  -->
-        <div class="grey-background">
+        <div class="grey-background div-head">
         	<div class="container">
-        		<div class="search-flights">
+        		<div class="">
                 	<div class="divider-line"></div>
                 	<h1 class="center-align">Airline Sign Up</h1>
                 	<div class="divider-line" style="margin-bottom:2%;"></div>
@@ -36,7 +36,7 @@
                         	<div class="col-md-6 first">
                             	<div class="form-group">
                                     <label for="airline_user_first_name" class="col-sm-3 control-label">First Name <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_user_first_name_error))
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="airline_user_last_name" class="col-sm-3 control-label">Last Name <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_user_last_name_error))
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="airline_user_phone" class="col-sm-3 control-label">Phone <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_user_phone_error))
@@ -102,7 +102,7 @@
                         	<div class="col-md-6">
                                 <div class="form-group">
                                     <label for="airline_user_email" class="col-sm-3 control-label">Email <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_user_email_error))
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="airline_user_password" class="col-sm-3 control-label">Password <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($airline_user_password_error))
@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="confirm_password" class="col-sm-3 control-label">Confirm Password <span class="info">*</span></label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                     	<?php
 											//case of an input error
                                         	if(!empty($confirm_password_error))

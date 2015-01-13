@@ -228,6 +228,8 @@
                     <a class="prev">PREV</a>
                     <a class="next">NEXT</a>
                 </div>
+                
+                <div class="center-align" style="padding-top:2%;"><a href="<?php echo site_url().'flights';?>" style="font-size:1.5em;">View All Flights</a></div>
             </div>
         </div>
         <!-- End Flights -->

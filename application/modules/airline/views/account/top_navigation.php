@@ -122,7 +122,19 @@
                             <a href="<?php echo site_url().'bookings';?>"><i class="fa fa-table fa-fw"></i> Bookings</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Payments</a>
+                            <a href="<?php echo site_url().'airline/charter-quotes';?>"><i class="fa fa-table fa-fw"></i> Charter Quotes</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-money fa-fw"></i> Payments<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo site_url().'airline/my-bank';?>">My Bank</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url().'airline/my-payments';?>">My Payments</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>

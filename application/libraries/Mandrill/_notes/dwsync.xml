@@ -75,4 +75,19 @@
 <file name="Users.php" server="ftp.instorelook.com.au//public_html/development/" local="130567070676529198" remote="130597719000000000" Dst="0" />
 <file name="Whitelists.php" server="ftp.instorelook.com.au//public_html/development/" local="130567070676559199" remote="130597719000000000" Dst="0" />
 <file name="Webhooks.php" server="ftp.instorelook.com.au//public_html/development/" local="130567070676549199" remote="130597719000000000" Dst="0" />
+<file name="Exceptions.php" server="23.229.204.232/public_html/development/" local="130567070676339187" remote="130648399200000000" Dst="0" />
+<file name="Exports.php" server="23.229.204.232/public_html/development/" local="130567070676359188" remote="130648399200000000" Dst="0" />
+<file name="Inbound.php" server="23.229.204.232/public_html/development/" local="130567070676379189" remote="130648399200000000" Dst="0" />
+<file name="Internal.php" server="23.229.204.232/public_html/development/" local="130567070676389190" remote="130648399200000000" Dst="0" />
+<file name="Ips.php" server="23.229.204.232/public_html/development/" local="130567070676409191" remote="130648399200000000" Dst="0" />
+<file name="Messages.php" server="23.229.204.232/public_html/development/" local="130567070676429192" remote="130648399200000000" Dst="0" />
+<file name="Senders.php" server="23.229.204.232/public_html/development/" local="130567070676459194" remote="130648399200000000" Dst="0" />
+<file name="Subaccounts.php" server="23.229.204.232/public_html/development/" local="130567070676469194" remote="130648399200000000" Dst="0" />
+<file name="Tags.php" server="23.229.204.232/public_html/development/" local="130567070676489195" remote="130648399200000000" Dst="0" />
+<file name="Rejects.php" server="23.229.204.232/public_html/development/" local="130567070676439192" remote="130648399200000000" Dst="0" />
+<file name="Templates.php" server="23.229.204.232/public_html/development/" local="130567070676509196" remote="130648399200000000" Dst="0" />
+<file name="Urls.php" server="23.229.204.232/public_html/development/" local="130567070676519197" remote="130648399200000000" Dst="0" />
+<file name="Users.php" server="23.229.204.232/public_html/development/" local="130567070676529198" remote="130648399200000000" Dst="0" />
+<file name="Webhooks.php" server="23.229.204.232/public_html/development/" local="130567070676549199" remote="130648399200000000" Dst="0" />
+<file name="Whitelists.php" server="23.229.204.232/public_html/development/" local="130567070676559199" remote="130648399200000000" Dst="0" />
 </dwsync>

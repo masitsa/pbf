@@ -47,7 +47,7 @@
 				$airplane_type_id = $row->airplane_type_id;
 				$airplane_type_name = $row->airplane_type_name;
 				$airplane_type_status = $row->airplane_type_status;
-				$thumb = $row->airplane_type_thumb;
+				$thumb = $row->airplane_type_thumb3;
 				$created = $row->created;
 				$created_by = $row->created_by;
 				$user_type_id = $row->user_type_id;

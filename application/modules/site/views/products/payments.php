@@ -76,6 +76,7 @@
 							echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal', 'role' => 'form'));
 							echo form_hidden('type', 'MERCHANT');
 							echo form_hidden('amount', $flight_data->flight_price);
+							echo form_hidden('traveller_type_id', 2);
 							echo form_hidden('description', 'Flight from '.$source.' '.$flight_departure_time.' to '.$destination.' '.$flight_arrival_time.' on '.$day.' '.$month.' '.$year);
 					?>
                         
@@ -111,7 +112,7 @@
                                     <input type="text" class="form-control" name="phone_number" placeholder="Phone" value="<?php echo set_value('phone_number');?>">
                                     </div>
                                 </div>
-                            	<div class="form-group">
+                            	<!--<div class="form-group">
                                     <label for="source" class="col-sm-4 control-label">Traveller Type</label>
                                     <div class="col-sm-8">
                                     	<select class="form-control" name="traveller_type_id">
@@ -119,25 +120,92 @@
                                         	<?php echo $options;?>
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
                                 
                                 <div class="form-group">
-                                    <label for="seats" class="col-sm-4 control-label">Seats</label>
+                                    <label for="seats" class="col-sm-4 control-label">Book</label>
                                     <div class="col-sm-8">
-                                    	<input type="text" class="form-control" name="seats" placeholder="Seats" value="1" value="<?php echo set_value('seats');?>">
+                                    	<input id="book_seats" type="radio" value="1" name="booking_type" checked="checked"/> Seats
+                                    	<input id="charter_plane" type="radio" value="2" name="booking_type"/> Charter Plane
                                     </div>
                                 </div>
                                 
-                                <!--<div class="form-group">
-                                    <label for="description" class="col-sm-4 control-label">Description</label>
+                                <div class="form-group book_seats">
+                                    <label for="seats" class="col-sm-4 control-label">Seats</label>
                                     <div class="col-sm-8">
-                                    	<textarea class="form-control" name="description" placeholder="Description"><?php echo set_value('description');?></textarea>
+                                    	<input type="text" class="form-control" id="seats" name="seats" placeholder="Seats" value="1" value="<?php echo set_value('seats');?>">
+                                        <span class="info">You can book up to <?php echo $available_seats;?> seats</span>
                                     </div>
-                                </div>-->
+                                </div>
+                                
+                                <div class="form-group charter_plane">
+                                    <label for="seats" class="col-sm-4 control-label">Seats</label>
+                                    <div class="col-sm-8">
+                                    	<input type="hidden" id="seats" name="seats" placeholder="Seats" value="<?php echo $available_seats;?>">
+                                        <span class="info">You will book <?php echo $available_seats;?> seats</span>
+                                    </div>
+                                </div>
                             </div>
                 		</div>
-                            
+                        
+                        <div class="row">
+                        	<div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="additional_info" class="col-lg-2 control-label">Additional Information</label>
+                                    <div class="col-lg-10">
+                                    	<textarea class="form-control" rows="5" name="additional_info" placeholder="Additional Information"><?php echo set_value('additional_info');?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="center-align">
+                            <h4>Please enter the details of the passengers</h4>
+                        </div>
+                        
+                        <div id="passengers">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                     <div class="form-group">
+                                        <label for="first_name" class="col-sm-12 control-label">First Name</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="passenger_first_name[]" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                     <div class="form-group">
+                                        <label for="last_name" class="col-sm-12 control-label">Last Name</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="passenger_last_name[]" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                     <div class="form-group">
+                                        <label for="nationality" class="col-sm-12 control-label">Nationality</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="passenger_nationality[]" placeholder="Nationality">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                     <div class="form-group">
+                                        <label for="passport_no" class="col-sm-12 control-label">Passport/ ID No.</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" name="passenger_passport_no[]" placeholder="Passport/ ID No.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                        </div>
+                         
+                        <div class="center-align">
+                            <input type="checkbox" name="terms_agree" value="1"/> I agree to the <a href="<?php echo site_url().'terms';?>" target="_blank">Terms & Conditions</a> specified by Private Bush Flights
+                        </div>
+                         
+                        <div class="center-align" style="margin-top:10px;">
                             <button class="btn btn-primary" type="submit">Confirm Booking</button>
                         </div>
                         <?php echo form_close();?>
@@ -167,7 +235,7 @@
                                     </tr>
                                 	<tr>
                                     	<th>Available Seats:</th>
-                                    	<td><?php echo $flight_data->flight_seats;?></td>
+                                    	<td><?php echo $available_seats;?></td>
                                     </tr>
                                 </table>
                         	</div>
@@ -364,4 +432,48 @@
 		
 		return false;
 	});
+	
+	$("input#book_seats").click(function() {
+		$('.charter_plane').fadeOut("slow").css('display', 'none');
+		$('.book_seats').fadeIn("slow").css('display', 'block');
+		
+		var booked_seats = $('#seats').val();
+		change_passengers(booked_seats);
+	});
+	
+	$("input#charter_plane").click(function() {
+		$('.book_seats').fadeOut("slow").css('display', 'none');
+		$('.charter_plane').fadeIn("slow").css('display', 'block');
+		var seats = '<?php echo $available_seats;?>';
+		change_passengers(seats);
+	});
+	
+	$("input#seats").change(function() {
+		var booked_seats = $('#seats').val();
+		change_passengers(booked_seats);
+	});
+	
+	function change_passengers(seats)
+	{
+		var booked_seats = seats;
+		var available_seats = '<?php echo $available_seats;?>';
+		
+		var data_url = config_url+'site/set_passengers/'+booked_seats+'/'+available_seats;
+					
+		$.ajax({
+			type:'POST',
+			url: data_url,
+			dataType: 'text',
+			data: { seats: booked_seats},
+			success:function(data)
+			{
+				//on success
+				$('#passengers').fadeIn("slow").html(data);
+			},
+			error: function(xhr, status, error) {
+				//alert("XMLHttpRequest=" + xhr.responseText + "\ntextStatus=" + status + "\nerrorThrown=" + error);
+				$('#passengers').fadeIn("slow").html(error);
+			}
+		});
+	}
 </script>

@@ -125,4 +125,19 @@ class Login_model extends CI_Model
 		
 		return $new_password;
 	}
+	/*
+	*	Reset a airline's password
+	*
+	*/
+	public function reset_airline_password()
+	{
+		$airline_email = $this->input->post('email');
+		$new_password = substr(md5(date('Y-m-d H:i:s')), 0, 6);
+		
+		$data['airline_user_password'] = md5($new_password);
+		$this->db->where('airline_user_email', $airline_email);
+		$this->db->update('airline', $data); 
+		
+		return $new_password;
+	}
 }

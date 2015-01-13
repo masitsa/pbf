@@ -37,12 +37,29 @@ class Payments_model extends CI_Model
 		$this->db->insert('visitor', $data);
 		$visitor_id = $this->db->insert_id();
 		
+		if($_POST['booking_type'] == 1)
+		{
+			$amount = $_POST['amount'];
+			$seats = $_POST['seats'];
+		}
+		
+		else
+		{
+			//get charter plane price
+			$this->db->where('flight_id = '.$flight_id);
+			$query = $this->db->get('flight');
+			$row = $query->row();
+			$amount = $row->charter_plane_price;
+			$seats = 1;
+		}
+		
 		//save booking
 		$data2 = array
 		(
 			'visitor_id' => $visitor_id,
-			'booking_amount' => $_POST['amount'],
-			'booking_units' => $_POST['seats'],
+			'booking_amount' => $amount,
+			'booking_units' => $seats,
+			'additional_info' => $this->input->post('additional_info'),
 			'flight_id' => $flight_id,
 			'traveller_type_id' => 1
 		);
@@ -50,7 +67,36 @@ class Payments_model extends CI_Model
 		$this->db->insert('booking', $data2);
 		$booking_id = $this->db->insert_id();
 		
-		$amount = $_POST['amount'] * $_POST['seats'];
+		//save passengers
+		$total_passengers = count($this->input->post('passenger_first_name'));
+		
+		for($r = 0; $r < $total_passengers; $r++)
+		{
+			$passenger_first_name = $this->input->post('passenger_first_name');
+			$passenger_last_name = $this->input->post('passenger_last_name');
+			$passenger_nationality = $this->input->post('passenger_nationality');
+			$passenger_passport_no = $this->input->post('passenger_passport_no');
+			
+			$passenger_data = array
+			(
+				'booking_id' => $booking_id,
+				'booking_passenger_first_name' => $passenger_first_name[$r],
+				'booking_passenger_last_name' => $passenger_last_name[$r],
+				'booking_passenger_nationality' => $passenger_nationality[$r],
+				'booking_passenger_passport' => $passenger_passport_no[$r]
+			);
+			$this->db->insert('booking_passenger', $passenger_data);	
+		}
+		/*if (is_array($ownerNames)) {
+			foreach ($ownerNames as $ownerName => $k) {
+				echo "Owner Name is : " . $k . "<br/>";
+			}
+		}
+		else {
+			echo "Owner is not array";
+		}*/
+		
+		$amount = $amount * $seats;
 		
 		$amount 		= str_replace(',','',$amount); // remove thousands seperator if included
 		$amount 		= number_format($amount, 2); //format amount to 2 decimal places

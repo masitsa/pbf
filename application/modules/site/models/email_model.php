@@ -38,20 +38,22 @@ class Email_model extends CI_Model
 	*/
 	function send_mandrill_mail($user_email, $user_name, $subject, $message, $sender_email = NULL, $shopping = NULL, $from = NULL, $button = NULL, $cc = NULL)
 	{
+		$this->load->library('Mandrill', 'yjFJ6K54RN6qZillqrUXXg');
 		if(!isset($sender_email)){
-			$sender_email = "brynhaggarty@gmail.com";
+			$sender_email = "privatebushflights@gmail.com";
 		}
 		if(!isset($shopping)){
 			$shopping = "";
 		}
 		if(!isset($from)){
-			$from = "In Store Look";
+			$from = "Private Bush Flights";
 		}
 		if($cc == NULL){
 			$cc = "amasitsa@live.com";
 		}
 		if(!isset($button)){
-			$button = '<a class="mcnButton " title="Confirm Account" href="http://www.intorelook.com.au" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Shop Now</a>';
+			//$button = '<a class="mcnButton " title="Confirm Account" href="http://www.intorelook.com.au" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Shop Now</a>';
+			$button = '';
 		}
 		
 		$template_name = 'basic';
@@ -118,11 +120,11 @@ class Email_model extends CI_Model
 				)
 			)
 		),
-		'tags' => array('password-resets'),
+		'tags' => array('mandrill-mail'),
 		'subaccount' => NULL, //'customer-123',
-		'google_analytics_domains' => array('www.instorelook.com.au'),
-		'google_analytics_campaign' => 'alvaromasitsa104@@gmail.com',
-		'metadata' => array('website' => 'www.instorelook.com.au'),
+		'google_analytics_domains' => array('www.privatebushflights.com'),
+		'google_analytics_campaign' => 'alvaromasitsa104@gmail.com',
+		'metadata' => array('website' => 'www.privatebushflights.com'),
 		'recipient_metadata' => array(
 			array(
 				'rcpt' => $sender_email,

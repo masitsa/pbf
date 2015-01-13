@@ -125,4 +125,35 @@ class Airline_model extends CI_Model
 		$this->db->where('airline_id', $airline_id);
 		$this->db->update('airline', $data); 
 	}
+	
+	/*
+	*	Retrieve all flights
+	*	@param string $table
+	* 	@param string $where
+	*
+	*/
+	public function get_all_charter_quotes($table, $where, $per_page, $page, $limit = NULL, $order_by = NULL, $order_method = NULL)
+	{
+		//retrieve all users
+		$this->db->from($table);
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		if(($order_by != NULL) && ($order_method != NULL))
+		{
+			$this->db->order_by($order_by, $order_method);
+		}
+		
+		if(isset($limit))
+		{
+			$query = $this->db->get('', $limit);
+		}
+		
+		else
+		{
+			$query = $this->db->get('', $per_page, $page);
+		}
+		
+		return $query;
+	}
 }
