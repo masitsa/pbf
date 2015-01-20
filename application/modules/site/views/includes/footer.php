@@ -32,9 +32,10 @@
                     <div class="col-md-4">
                         <h3>Quick Links</h3>
                         <ul>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Flights</a></li>
+                            <li><a href="<?php echo site_url().'terms';?>">Contact</a></li>
+                            <li><a href="<?php echo site_url().'flights';?>">Flights</a></li>
                             <li><a href="<?php echo site_url().'terms';?>">Terms</a></li>
+                            <li><a href="<?php echo site_url().'faqs';?>">FAQs for flight operators</a></li>
                         </ul>
                     </div><!-- End Quick Links -->
                 </div>

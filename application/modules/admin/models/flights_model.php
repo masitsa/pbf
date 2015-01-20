@@ -31,7 +31,7 @@ class Flights_model extends CI_Model
 	*/
 	public function all_latest_flights()
 	{
-		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name');
+		$this->db->select('flight.*, flight_type.flight_type_name, airline.airline_name, airline.airline_thumb, airplane_type.airplane_type_name, airline.airline_logo');
 		$this->db->from('flight, airline, flight_type, airplane_type');
 		$this->db->where('flight.airline_id = airline.airline_id AND flight.flight_type_id = flight_type.flight_type_id AND flight.airplane_type_id = airplane_type.airplane_type_id AND flight.flight_status = 1');
 		$this->db->order_by('created', 'DESC');

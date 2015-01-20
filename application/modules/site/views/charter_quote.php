@@ -1,4 +1,22 @@
 <?php
+	
+	$airplane_options = '';
+	if($airplane_types->num_rows() > 0)
+	{
+		foreach($airplane_types->result() as $res)
+		{
+			if($res->airplane_type_id == $airplane_type_id)
+			{
+				$airplane_options .= '<option value="'.$res->airplane_type_id.'" selected>'.$res->airplane_type_name.'</option>';
+			}
+			
+			else
+			{
+				$airplane_options .= '<option value="'.$res->airplane_type_id.'">'.$res->airplane_type_name.'</option>';
+			}
+		}
+	}
+	
 	//destinations
 	$destinations = '';
 	if($active_airports->num_rows() > 0)
@@ -59,7 +77,15 @@
 	{
 		foreach($active_trip_types->result() as $res)
 		{
-			$trip_type_options .= '<option value="'.$res->trip_type_id.'">'.$res->trip_type_name.'</option>';
+			if($res->trip_type_id == $trip_type_id)
+			{
+				$trip_type_options .= '<option value="'.$res->trip_type_id.'" selected>'.$res->trip_type_name.'</option>';
+			}
+			
+			else
+			{
+				$trip_type_options .= '<option value="'.$res->trip_type_id.'">'.$res->trip_type_name.'</option>';
+			}
 		}
 	}
 ?>
@@ -102,30 +128,51 @@
                     	<div class="row">
                         	<div class="col-md-6 first">
                             	<div class="form-group">
-                                    <label for="destination" class="col-sm-4 control-label">Destination <span class="info">*</span></label>
+                                    <label for="destination" class="col-sm-4 control-label">Arrival <span class="info">*</span></label>
                                     <div class="col-sm-8">
-                                    	 <input type="text" class="form-control" name="destination" placeholder="Destination" value="">
+                                    	<?php
+											//case of an input error
+                                        	if(!empty($destination_error))
+											{
+												?>
+                                                <input type="text" class="form-control alert-danger" name="destination" placeholder="<?php echo $destination_error;?>" onFocus="this.value = '<?php echo $destination;?>';">
+                                                <?php
+											}
+											
+											else
+											{
+												?>
+                                    	 		<input type="text" class="form-control" name="destination" placeholder="Destination" value="<?php echo $destination;?>">
+                                                <?php
+											}
+										?>
                                     </div>
                                 </div>
                             	<div class="form-group">
-                                    <label for="airline_name" class="col-sm-4 control-label">Source</label>
+                                    <label for="airline_name" class="col-sm-4 control-label">Departure</label>
                                     <div class="col-sm-8">
-                                         <input type="text" class="form-control" name="source" placeholder="Source" value="">
+                                         <input type="text" class="form-control" name="source" placeholder="Source" value="<?php echo $source;?>">
                                     </div>
                                 </div>
-                               	<div class="form-group">
+                               	<!--<div class="form-group">
                                     <label for="air_operator_certificate" class="col-sm-4 control-label">Airline</label>
                                     <div class="col-sm-8">
                                     	<select class="form-control" name="airline_id">
-                                        	<option value="">----Select Airline----</option>
+                                        	<option value="">-Select Airline-</option>
                                         	<?php echo $airline_options;?>
                                         </select>
+                                    </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <label for="air_operator_certificate" class="col-sm-4 control-label">Passengers</label>
+                                    <div class="col-sm-8">
+                                    	<input type="text" class="form-control" name="passengers" placeholder="Passengers" value="<?php echo $passengers;?>">
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label class="col-sm-4 control-label">Departure Date</label>
                                     <div class="col-sm-4">
-                                    	<input type="text" class="form-control fieldset__input js__datepicker" name="date_from" placeholder="Departure">
+                                    	<input type="text" class="form-control fieldset__input js__datepicker" name="date_from" placeholder="Departure" value="<?php echo $date_from;?>">
                                     </div>
                                     <div class="col-sm-4">
                                     	<input type="text" class="form-control fieldset__input js__datepicker" name="date_to" placeholder="Arrival">
@@ -137,8 +184,17 @@
                                     <label for="air_operator_certificate" class="col-sm-4 control-label">Trip Type</label>
                                     <div class="col-sm-8">
                                     	<select class="form-control" name="trip_type_id">
-                                        	<option value="">----Select Trip Type----</option>
+                                        	<option value="">-Select Trip Type-</option>
                                         	<?php echo $trip_type_options;?>
+                                        </select>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="air_operator_certificate" class="col-sm-4 control-label">Plane Type</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="airplane_type_id">
+                                            <option value="">-Select Plane Type-</option>
+                                            <?php echo $airplane_options;?>
                                         </select>
                                     </div>
                                 </div>

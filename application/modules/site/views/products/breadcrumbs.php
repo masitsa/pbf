@@ -1,7 +1,7 @@
 
   <!-- Main component call to action -->
   
-  <div class="row">
+  <div class="row" style="margin:0;">
     <div class="breadcrumbDiv col-lg-12">
       <ul class="breadcrumb">
       	<?php

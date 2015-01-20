@@ -9,7 +9,7 @@
         <h1 class="center-align">All Flights</h1>
         <div class="divider-line" style="margin-bottom:2%;"></div>
   
-  <div class="row">
+  <div class="row" style="margin:0;">
   
   	<?php echo $this->load->view('products/left_navigation');?>
     
@@ -18,8 +18,8 @@
     	<?php echo $this->load->view('products/breadcrumbs');?>
        <div class="main">
             <div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-list">
-                <div class="row" style="border-bottom: 3px solid #47A3DA;">
-                	<p class="col-md-4"> Showing <strong><?php echo $last;?></strong> flights </p>
+                <div class="row" style="border-bottom: 3px solid #47A3DA; background-color:#F5F5F5; margin:0;">
+                	<p class="col-md-4" style="padding-top: 2%;"> Showing <strong><?php echo $last;?></strong> flights </p>
                     <div class="col-md-4">
                         <select id="" class="form-control">
                             <option>Default Sorting (Newness)</option>

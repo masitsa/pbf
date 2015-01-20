@@ -327,7 +327,7 @@ class Site_model extends CI_Model
 	{
 		$source = $this->input->post('source');
 		$destination = $this->input->post('destination');
-		$airline_id = $this->input->post('airline_id');
+		//$airline_id = $this->input->post('airline_id');
 		$date_from = date('Y-m-d', strtotime($this->input->post('date_from')));
 		$date_to = date('Y-m-d', strtotime($this->input->post('date_to')));
 		$trip_type_id = $this->input->post('trip_type_id');
@@ -336,11 +336,14 @@ class Site_model extends CI_Model
 		$sender_phone = $this->input->post('sender_phone');
 		$description = $this->input->post('description');
 		$email_alert = $this->input->post('email_alert');
+		$passengers = $this->input->post('passengers');
+		$airplane_type_id = $this->input->post('airplane_type_id');
 		
 		$data = array(
 			'source' => $source,
 			'destination' => $destination,
-			'airline_id' => $airline_id,
+			'passengers' => $passengers,
+			'airplane_type_id' => $airplane_type_id,
 			'date_from' => $date_from,
 			'date_to' => $date_to,
 			'trip_type_id' => $trip_type_id,
