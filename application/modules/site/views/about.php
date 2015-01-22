@@ -2,9 +2,9 @@
 <!-- Join  -->
 <div class="grey-background div-head">
     <div class="container">
-        <div class="divider-line"></div>
+       <!--  <div class="divider-line"></div>
         <h1 class="center-align">About Us</h1>
-        <div class="divider-line" style="margin-bottom:2%;"></div>
+        <div class="divider-line" style="margin-bottom:2%;"></div> -->
   
         <div class="row">
             <!--right column-->

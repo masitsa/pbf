@@ -94,7 +94,7 @@
 		?>
         <form class="form-inline left-search" role="form" action="<?php echo site_url().'flights/search-flights';?>" method="post">
             <input type="text" class="form-control" placeholder="Search" name="search_item">
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">

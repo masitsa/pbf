@@ -83,6 +83,7 @@
                 echo form_hidden('amount', $flight_data->flight_price);
                 echo form_hidden('traveller_type_id', 2);
                 echo form_hidden('description', 'Flight from '.$source.' '.$flight_departure_time.' to '.$destination.' '.$flight_arrival_time.' on '.$day.' '.$month.' '.$year);
+                
         ?>
           <div class="row transitionfx">
               <div class="product-info">
@@ -155,7 +156,14 @@
                                         <span class="hidden-phone">About Airline</span>
                                     </a>
                                 </li>
-            
+                                <li class="">
+                                    <a href="#shipping" data-toggle="tab">
+                                  
+                                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                        
+                                        <span class="hidden-phone">Shipping</span>
+                                    </a>
+                                </li>
                                 <li class="">
                                     <a href="#book-flight" data-toggle="tab">
                                   
@@ -278,6 +286,15 @@
                                         </div>
                                     </div>
                                     <?php echo form_close();?> -->					
+                                </div>
+                                <!-- End id="shipping" -->
+                                <!-- Shipping tab -->
+                                <div class="tab-pane" id="shipping">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                    <p><img class="img-polaroid" src="http://www.tfingi.com/repo/royal-mail.png" alt=""><img class="img-polaroid" src="http://www.tfingi.com/repo/ups-logo.png" alt=""></p>
+                                    <p>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                    <h6><em class="icon-gift"></em> Giftwrap?</h6>
+                                    <p>Let us take care of giftwrapping your presents by selecting <strong>Giftwrap</strong> in the order process. Eligible items can be giftwrapped for as little as £0.99, and larger items may be presented in gift bags.</p>                        
                                 </div>
                                 <!-- End id="shipping" -->
             

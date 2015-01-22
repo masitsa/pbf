@@ -6,9 +6,9 @@
                     <div class="col-md-4">
                         <h3>Contacts</h3>
                         <ul>
-                            <li><a href="mailto:info@pbf.com"><span class="glyphicon glyphicon-envelope"></span> info@pbf.com</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> 123456, Nairobi, 00200</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-phone"></span> (214) 616 886</a></li>
+                            <li><a href="mailto:info@privatebushflights.com"><span class="glyphicon glyphicon-envelope"></span> info@privatebushflights.com</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-phone"></span> +254 721 991 399</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span> P.O BOX 331 - 00621 <br> Village Market Nairobi.</a></li>
                         </ul>
                         <div>
                             
@@ -35,7 +35,7 @@
                             <li><a href="<?php echo site_url().'terms';?>">Contact</a></li>
                             <li><a href="<?php echo site_url().'flights';?>">Flights</a></li>
                             <li><a href="<?php echo site_url().'terms';?>">Terms</a></li>
-                            <li><a href="<?php echo site_url().'faqs';?>">FAQs for flight operators</a></li>
+                            <!-- <li><a href="<?php echo site_url().'faqs';?>">FAQs for flight operators</a></li> -->
                         </ul>
                     </div><!-- End Quick Links -->
                 </div>
@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Copyright -->
-                    <div class="col-xs-6 col-sm-6 col-md-6 pull-left">
+                    <div class="col-xs-6 col-sm-6 col-md-6" style="padding-top: 13px;">
                         &copy; <?php echo date('Y');?> privatebushflights.com. All Rights Reserved.
                     </div>
                     <!-- Payment -->

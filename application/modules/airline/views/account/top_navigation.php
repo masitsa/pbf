@@ -10,8 +10,11 @@
                 <a class="navbar-brand" href="#"><h4>PRIVATE BUSH FLIGHTS</h4></a>
             </div>
             <!-- /.navbar-header -->
-
+            
             <ul class="nav navbar-top-links navbar-right">
+                <li id="panel-green">
+                    <a href="<?php echo base_url();?>airline/add-flight" class="btn btn-success btn-sm">Add a new Flight</a>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -135,6 +138,9 @@
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url().'airline/faqs';?>" target="_blank"><i class="fa fa-money fa-fw"></i> FAQ's</a>
                         </li>
                     </ul>
                 </div>

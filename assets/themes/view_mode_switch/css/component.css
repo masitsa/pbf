@@ -30,7 +30,7 @@
 
 .cbp-vm-options a:hover,
 .cbp-vm-options a.cbp-vm-selected {
-	color: #47a3da;
+	color: #e7302a;
 }
 
 .cbp-vm-options a:before {
@@ -100,7 +100,7 @@
 
 .cbp-vm-add:hover {
 	color: #fff;
-	background: #5CA0D1;
+	background: #e7302a;
 }
 
 .cbp-vm-add:before {

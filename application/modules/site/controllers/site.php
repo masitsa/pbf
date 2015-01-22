@@ -373,9 +373,16 @@ class Site extends MX_Controller
 		if ($this->form_validation->run())
 		{
 			$this->load->model('payments_model');
-			$iframe = $this->payments_model->make_pesapal_payment($flight_id);
+			if ($_POST['seats'] == 0)
+			{
+				$v_data['payments_error'] = "there are no seats available";
+			}else
+			{
+				$iframe = $this->payments_model->make_pesapal_payment($flight_id);
+				$v_data['iframe'] = $iframe;
+			}
 			
-			$v_data['iframe'] = $iframe;
+			
 		}
 		
 		else

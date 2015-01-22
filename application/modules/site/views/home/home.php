@@ -88,7 +88,7 @@
                                                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                                             </span>
                                                             <select class="form-control" name="source">
-                                                                <option value="">-Departure-</option>
+                                                                <option value="">- From -</option>
                                                                 <?php echo $options;?>
                                                             </select>
                                                         </div>
@@ -104,7 +104,7 @@
                                                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                                             </span>
                                                             <select class="form-control" name="destination">
-                                                                <option value="">-Arrival-</option>
+                                                                <option value="">- To -</option>
                                                                 <?php echo $options;?>
                                                             </select>
                                                         </div>
@@ -174,7 +174,7 @@
                                                             <span class="input-group-addon">
                                                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                                             </span>
-                                                            <input type="text" class="form-control" name="source" placeholder="Departure">
+                                                            <input type="text" class="form-control" name="source" placeholder="From">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,7 +187,7 @@
                                                             <span class="input-group-addon">
                                                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                                             </span>
-                                                            <input type="text" class="form-control" name="destination" placeholder="Arrival">
+                                                            <input type="text" class="form-control" name="destination" placeholder="To">
                                                         </div>
                                                     </div>
                                                 </div>

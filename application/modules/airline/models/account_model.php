@@ -165,6 +165,7 @@ class Account_model extends CI_Model
 		return $this->db->get('airline');
 	}
 	
+	
 	public function update_airline_bank_details($airline_id)
 	{
 		$data = array

@@ -98,7 +98,7 @@ class Payments_model extends CI_Model
 		
 		$amount = $amount * $seats;
 		
-		$amount 		= str_replace(',','',$amount); // remove thousands seperator if included
+		//$amount 		= str_replace(',','',$amount); // remove thousands seperator if included
 		$amount 		= number_format($amount, 2); //format amount to 2 decimal places
 		$desc 			= $_POST['description'];
 		$type 			= 'MERCHANT';	

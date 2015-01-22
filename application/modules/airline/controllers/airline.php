@@ -22,6 +22,15 @@ class Airline extends MX_Controller
 		$this->airlines_path = realpath(APPPATH . '../assets/images/airlines');
 		$this->airlines_location = base_url().'assets/images/airlines/';
 	}
+	public function faqs()
+	{
+		
+		$data['content'] = $this->load->view('site/faqs', '', true);
+		
+		
+		$data['title'] = 'Sign Up';
+		$this->load->view('site/templates/general_page', $data);
+	}
     
 	/*
 	*
@@ -56,6 +65,7 @@ class Airline extends MX_Controller
 		$this->form_validation->set_rules('airline_email', 'Email', 'trim|valid_email|is_unique[airline.airline_email]|required|xss_clean');
 		$this->form_validation->set_rules('airline_summary', 'Summary', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('air_operator_certificate', 'Summary', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('country_id', 'Country ', 'trim|required|xss_clean');
 		
 		//if form conatins invalid data
 		if ($this->form_validation->run())
@@ -118,7 +128,7 @@ class Airline extends MX_Controller
 				}
 			}
 		}
-		
+		$v_data['country'] = $this->airline_model->get_active_countries();
 		$data['content'] = $this->load->view('airline_signup1', $v_data, true);
 		
 		$data['title'] = 'Sign Up';

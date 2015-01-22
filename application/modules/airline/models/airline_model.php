@@ -64,7 +64,9 @@ class Airline_model extends CI_Model
 				'airline_phone' => $this->input->post('airline_phone'),
 				'airline_email' => $this->input->post('airline_email'),
 				'airline_summary' => $this->input->post('airline_summary'),
+				'country_id' => $this->input->post('country_id'),
 				'air_operator_certificate' => $this->input->post('air_operator_certificate')
+				
 		);
 		
 		$this->session->set_userdata($data);
@@ -153,6 +155,14 @@ class Airline_model extends CI_Model
 		{
 			$query = $this->db->get('', $per_page, $page);
 		}
+		
+		return $query;
+	}
+	public function get_active_countries()
+	{
+		$this->db->where('country_status = 1');
+		$this->db->order_by('country_id');
+		$query = $this->db->get('country');
 		
 		return $query;
 	}

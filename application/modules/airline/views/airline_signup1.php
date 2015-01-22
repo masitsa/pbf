@@ -1,4 +1,16 @@
-
+<?php
+    $country_options = '';
+    if($country->num_rows() > 0)
+    {
+        foreach($country->result() as $res)
+        {
+            
+                $country_options .= '<option value="'.$res->country_id.'">'.$res->country_name.'</option>';
+            
+        }
+    }
+    
+?>
         <!-- Jasny -->
         <link href="<?php echo base_url();?>assets/jasny/jasny-bootstrap.css" rel="stylesheet">		
         <script type="text/javascript" src="<?php echo base_url();?>assets/jasny/jasny-bootstrap.js"></script> 
@@ -52,7 +64,7 @@
 											else
 											{
 												?>
-                                                <input type="text" class="form-control" name="airline_name" placeholder="Airline" value="<?php echo $airline_name;?>">
+                                                <input type="text" class="form-control" name="airline_name" placeholder="Airline" value="">
                                                 <?php
 											}
 										?>
@@ -148,6 +160,15 @@
                             </div>
                             
                         	<div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="air_operator_certificate" class="col-sm-4 control-label">Country </label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="country_id">
+                                            <option value="">-Select a country-</option>
+                                            <?php echo $country_options;?>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="airline_logo" class="col-sm-4 control-label">Logo</label>
                                     <?php echo $airline_logo_error;?>

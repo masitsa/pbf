@@ -48,7 +48,7 @@ $route['home'] = 'site/home_page';
 $route['flights'] = 'site/flights';
 $route['terms'] = 'site/terms';
 $route['about'] = 'site/about';
-$route['faqs'] = 'site/faqs';
+
 $route['charter/get-quote'] = 'site/charter_quote2';
 $route['contact-airline/(:num)'] = 'site/contact_airline/$1';
 
@@ -179,6 +179,7 @@ $route['airline-login'] = 'login/login_airline';
 $route['airlines'] = 'login/login_airline';
 $route['bookings'] = 'airline/bookings';
 $route['airline/charter-quotes'] = 'airline/flights/charter_quotes';
+$route['aireline/faqs'] = 'airline/faqs';
 
 /*
 *	Flights Routes

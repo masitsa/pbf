@@ -2,9 +2,9 @@
 <!-- Join  -->
 <div class="grey-background div-head">
     <div class="container">
-        <div class="divider-line"></div>
+       <!--  <div class="divider-line"></div>
         <h1 class="center-align">Terms & Conditions</h1>
-        <div class="divider-line" style="margin-bottom:2%;"></div>
+        <div class="divider-line" style="margin-bottom:2%;"></div> -->
   
         <div class="row">
             <!--right column-->
@@ -56,7 +56,7 @@ PRIVATE BUSH FLIGHTS MAY AT ANY TIME AMEND THESE TERMS AND CONDITIONS IN ITS ABS
 <p>
 <ul class="terms">
 <li>A Flight Initiator (or an Authorised Agent acting on behalf of a Flight Initiator or prospective Client) may submit an aircraft charter request through Private Bush Flights's website for an Itinerary specified by the Flight Initiator. Private Bush Flights shall use its reasonable endeavours to offer a Charter Price in respect of the requested Itinerary. </li>
-<li>Acceptance of the Charter Price is deemed to have occurred upon the receipt by Private Bush Flights of a deposit of no less than 20% (twenty percent) of the Charter Price or any other deposit as maybe required by the relevant Operator whichever is the greater. For the avoidance of any doubt in the event where a Flight Initiator submit an aircraft charter request through Private Bush Flights's website for an Itinerary commencing less than 14 (thirty) days from the date of the request, 100% of the Charter Price us due before Private Bush Flights shall issue a Booking Confirmation. </li>
+<li>Acceptance of the Charter Price is deemed to have occurred upon the receipt by Private Bush Flights of a deposit of no less than 20% (twenty percent) of the Charter Price or any other deposit as maybe required by the relevant Operator whichever is the greater. For the avoidance of any doubt in the event where a Flight Initiator submit an aircraft charter request through Private Bush Flights's website for an Itinerary commencing less than 14 (fourteen) days from the date of the request, 100% of the Charter Price us due before Private Bush Flights shall issue a Booking Confirmation. </li>
 <li>Where the aircraft charter request was submitted directly by a Flight Initiator or by an Authorised Agent acting on behalf of a Flight Initiator, Private Bush Flights shall, upon acceptance of the Charter Price, subject to continued availability of Operator aircraft and crew, issue the Flight Initiator (or the Authorised Agent) with a Booking Confirmation in respect of the Itinerary.</li>
 <li>Where the aircraft charter request was submitted by Authorised Agent acting on behalf of a prospective Client, Private Bush Flights shall, upon acceptance of the Charter Price, issue Authorised Agent with a payment receipt. Only upon the prospective Client becoming a Client of the Private Bush Flights programme shall Private Bush Flights issue the Authorised Agent with a Booking Confirmation in respect of the Itinerary. </li>
 <li>The balance of the total Charter Price is payable no less than 14 (thirty) days prior to the commencement of the Itinerary.</li>

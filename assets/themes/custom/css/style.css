@@ -21,7 +21,7 @@ body {font-family: 'Century Gothic', sans-serif; font-size:1.5em;}
 .center-align{margin:0 auto; text-align:center;}
 .divider-line {margin: auto; z-index: 1; width: 165px; height: 1px; background-color:#5CA0D1; margin-top:10px; margin-bottom:10px;}
 a{color:#e7302a;}
-a:hover, a:visited, a:active{text-decoration:none;color:#5CA0D1;}
+a:hover, a:visited, a:active{text-decoration:none;/*color:#5CA0D1;*/ color: #e7302a;}
 .div-head{padding:45px 0 20px 0;}
 li{text-align:justify;}
 strong{color:#e7302a;}
@@ -31,18 +31,21 @@ strong{color:#e7302a;}
 /* Backgrounds */
 .grey-background{background-color:#F9F8F8;}
 .grey-background .divider-line {background-color:#e7302a;}
-.blue-background{background-color:#5CA0D1;}
+.blue-background{background-color:#e7302a;}
 .blue-background .divider-line{background-color:#fff;}
 .blue-background h3{color:#fff;}
 
 /* Form Elements */
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control, .form-control{ background-color:transparent; color:#fff; border:none; border-radius:0px;border: 2px solid #fff;}
-select.form-control { color: #5CA0D1; font-weight: bold;
+select.form-control { 
+  color: #000; 
+  /*font-weight: bold;*/
 	-webkit-appearance: none;  
 	-moz-appearance: none; 
 	background: url(../../../images/select-arrow.png) no-repeat 90% center;
 	text-indent: 0.01px; 
-	text-overflow: "";}
+	text-overflow: "";
+}
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{cursor: pointer;}
 .col-sm-9 .alert-danger, .div-head .col-sm-8 .alert-danger{background-color: #F2DEDE; border-color: #EBCCD1; color: #A94442;}
 .form-control::-webkit-input-placeholder {color: #fff;}
@@ -64,7 +67,7 @@ select.form-control { color: #5CA0D1; font-weight: bold;
 .search-flights textarea{min-height:110px;}
 .form-group span.info{color:#fff; font-style:italic; font-size:0.8em;}
 
-.div-head .form-control{border:none; border-radius:0px; border: 2px solid #D4D4D4; background-color:transparent; color:#A5A5A5;}
+.div-head .form-control{border:none; border-radius:0px; border: 2px solid #D4D4D4; background-color:transparent; color:#000;}
 .div-head .form-control::-webkit-input-placeholder {color: #A5A5A5;}
  /* Firefox 18- */
 .div-head .form-control:-moz-placeholder {color: #A5A5A5;}
@@ -76,7 +79,7 @@ select.form-control { color: #5CA0D1; font-weight: bold;
 .div-head .form-group span.info{color:#E7302A; font-style:italic; font-size:0.8em;}
 
 /* HEADERS */
-h1, h2, h3, h4, h5, h6{color:#5CA0D1; text-transform:capitalize; font-weight:bold;}
+h1, h2, h3, h4, h5, h6{color:#5CA0D1;  text-transform:capitalize; font-weight:bold;}
 h1{font-size:2em;}
 h2{font-size:1.5em;}
 .clear-both{clear:both;}
@@ -94,8 +97,12 @@ h2{font-size:1.5em;}
 /* Navigation */
 .navigation{position: relative; top:45px;}
 .navbar {border-radius: 0px;}
-.navbar-default {background-color: #5ca0d1; border-color: #5ca0d1;}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {background-color: #e7302a;color: #fff;}
+.navbar-default {
+  /*background-color: #5ca0d1; border-color: #5ca0d1;*/
+  background-color: #e7302a;
+  border-color: #e7302a;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {background-color: #F9F8F8;color: #000;}
 .navbar-default .navbar-nav > li > a { color: #fff; font-weight:bold;}
 .navbar-default .navbar-nav > li > a:hover { background-color: #e7302a;color: #fff;}
 .navbar-nav > li {padding:4px;}
@@ -238,7 +245,7 @@ fieldset .review-text{color:#fff;}
 .panel-body table tr td { padding-left: 15px }
 .panel-body .table {margin-bottom: 0px; }
 .panel-body .badge{float: right; background-color:#cecece;}
-.panel-default > .panel-heading {background-color: #5CA0D1; border:none; border-radius:0px; color: #fff;}
+.panel-default > .panel-heading {/*background-color: #5CA0D1;*/ background-color: #e7302a; border:none; border-radius:0px; color: #fff;}
 .panel-title a:hover, .panel-title a:visited, .panel-title a:active{text-decoration:none;color:#fff;}
 .panel-body a{text-decoration:none;color:#E7302A;}
 .panel-body a:hover, .panel-title a:visited, .panel-title a:active{text-decoration:none;color:#5CA0D1;}
@@ -261,7 +268,7 @@ fieldset .review-text{color:#fff;}
 .list-title h3.depature, h3.arrival{width:25%;}
 .clear-both{clear:both;}
 
-.left-search{margin-bottom: 10px;}
+.left-search{margin-bottom: 25px;}
 .left-search .form-control{width: 78%;}
 .left-search .btn{width: 20%;}
 .left-search .btn .glyphicon{margin:0 auto; text-align:center;}
@@ -273,11 +280,11 @@ form#filter_custom_price .form-control{width: 40%; margin-bottom: 2%;}
 .terms p{text-align:justify;}
 
 /* Footer */
-.footer { background: none repeat scroll 0 0 #edeff1;border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}
-.footer ul{list-style:none;}
+.footer { background: none repeat scroll 0 0 #edeff1;margin-top: 5px; border-bottom: 1px solid #cccccc;border-top: 1px solid #dddddd; height: auto;padding-bottom: 30px;position: relative;width: 100%;}
+.footer ul{list-style:none;margin-left: -35px;}
 
 /* Footer Bottom */
-.footer-bottom {background: none repeat scroll 0 0 #e3e3e3; border-top: 1px solid #dddddd; padding-bottom: 10px; padding-top: 10px;}
+.footer-bottom {background: none repeat scroll 0 0 #fff; border-top: 1px solid #dddddd; padding-bottom: 10px; padding-top: 10px;}
 
 .divider {
   background-color:#E5E5E5;
@@ -860,6 +867,7 @@ box-shadow: 0 1px 2px rgba(71, 73, 72, 0.25);
   border: none;
   font-size: 12px;
   color: #797d7b;
+  font-weight: bold;
   text-transform: uppercase;
   background-color: #ffffff;
   outline: 0 none;
@@ -903,6 +911,7 @@ box-shadow: 0 1px 2px rgba(71, 73, 72, 0.25);
   border: none;
   background-color: #E7302A;
   color: #ffffff;
+  font-weight: bold;
 }
 .nav-tabs + .box {
   position: relative;
@@ -1181,3 +1190,25 @@ margin-left: 100px;
 {
 	width:140px;
 }
+
+
+/*flight details css*/
+
+#flight-details, #your-details, #contact-us
+{
+  padding: 30px;
+  background-color: #fff;
+  margin-top:-8px;
+}
+#your-details-heading h4, #flight-details-heading h4 {
+background: none repeat scroll 0 0 #e7302a;
+border: 1px solid #e7302a;
+color: #fff;
+font-size: 0.9em;
+padding: 15px 15px;
+text-transform: uppercase;
+font-weight: normal;
+letter-spacing: 1px;
+margin-top: 10px;
+}
+/*flight*/
